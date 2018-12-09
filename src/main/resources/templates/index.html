@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html >
+<head>
+  <meta charset="utf-8">
+  <title >自娱自乐</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="keywords" content="fly,layui,前端社区">
+  <meta name="description" content="Fly社区是模块化前端UI框架Layui的官网社区，致力于为web开发提供强劲动力">
+  <link rel="stylesheet" href="/layui/css/layui.css">
+  <link rel="stylesheet" href="/css/global.css">
+</head>
+<body>
+    <!--头部 -->
+    <div style="width:100%;height:60px" id="head"></div>
+    <div class="layui-container">
+        <div class="layui-row layui-col-space15">
+            <div class="layui-col-md8">
+                <!--置顶帖-->
+                <div class="fly-panel" id="setTop">
+                </div>
+                <!-- 新帖列表 -->
+                <div class="fly-panel" style="margin-bottom: 0;" id="primary">
+                </div>
+            </div>
+            <div class="layui-col-md4">
+                <!-- 温馨通道 -->
+                <div class="fly-panel">
+                    <h3 class="fly-panel-title">温馨通道</h3>
+                    <ul class="fly-panel-main fly-list-static" id="fastpassway">
+                    </ul>
+                </div>
+
+                <!-- 签到 -->
+                <div class="fly-panel fly-signin" id="attendance">
+                </div>
+
+                <!-- 回帖周榜 -->
+                <div class="fly-panel fly-rank fly-rank-reply" id="LAY_replyRank">
+                </div>
+
+                <!--本周热议-->
+                <dl class="fly-panel fly-list-one" id="currWeekTopic">
+                </dl>
+
+                <!--广告栏-->
+                <div class="fly-panel" id="advert">
+                </div>
+
+                <!--友情链接-->
+                <div class="fly-panel fly-link" >
+                    <h3 class="fly-panel-title">友情链接</h3>
+                    <dl class="fly-panel-main" id="friendlink">
+                    </dl>
+                </div>
+            </div>
+      </div>
+    </div>
+
+    <div class="fly-footer" id="footer">
+    </div>
+ 
+    <script src="/layui/layui.js"></script>
+    <script src="/plugins/JQuery/jquery-3.3.1.min.js"></script>
+
+    <script>
+    layui.cache.page = '';
+    layui.cache.user = {
+      username: '游客'
+      ,uid: -1
+      ,avatar: '/images/avatar/00.jpg'
+      ,experience: 83
+      ,sex: '男'
+    };
+    layui.config({
+      version: "3.0.0"
+      ,base: '/mods/' //这里实际使用时，建议改成绝对路径
+    }).extend({
+      fly: 'index'
+    }).use('fly');
+    </script>
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $("#head").load("head");
+            $("#advert").load("advert");
+            $("#footer").load("footer");
+            $("#friendlink").load("friendlink");
+            $("#fastpassway").load("fastpassway");
+            $("#currWeekTopic").load("currWeekTopic");
+            $("#setTop").load("setTop");
+            $("#LAY_replyRank").load("LAY_replyRank");
+            $("#attendance").load("attendance");
+            $("#primary").load("primary");
+
+        });
+    </script>
+
+</body>
+</html>
+
