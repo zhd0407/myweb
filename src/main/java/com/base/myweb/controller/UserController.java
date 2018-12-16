@@ -1,9 +1,12 @@
 package com.base.myweb.controller;
 
 
+import com.baomidou.mybatisplus.core.conditions.Wrapper;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.base.myweb.Tools.Charset;
 import com.base.myweb.mapper.UserMapper;
 import com.base.myweb.pojo.User;
+import com.sun.org.apache.xerces.internal.util.EntityResolverWrapper;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -42,15 +46,21 @@ public class UserController {
         return "user/regisiter";
     }
 
-    @RequestMapping(value = "/user/regInfo" , method = RequestMethod.POST)
+    @RequestMapping(value = "/user/regInfo" , method = RequestMethod.POST , produces="application/json;charset=utf-8")
     public ModelAndView regInfo(@RequestParam(name = "email",required = true)String email, @RequestParam(name = "username",required = true)String username,
-                                @RequestParam(name = "pass",required = true)String pass, @RequestParam(name = "repass",required = true)String repass,
-                                @RequestParam(name = "vercode",required = true)String vercode){
+                                @RequestParam(name = "pass",required = true)String pass, @RequestParam(name = "repass",required = true)String repass){
         User user = new User();
-        user.setUser_nam(username);
         user.setEmail(email);
-        user.setPassword(pass);
-        usermapper.insert(user);
+        QueryWrapper qw = new QueryWrapper();
+        qw.eq("EMAIL", user.getEmail());
+        int mailCount = usermapper.selectCount(qw);
+        if (mailCount<=0){
+            user.setUser_nam(username);
+            user.setPassword(pass);
+            usermapper.insert(user);
+        }else{
+         System.out.println("该邮箱已经被使用");
+        }
         return  new ModelAndView("user/personcenter","User",user);
     }
 
