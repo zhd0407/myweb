@@ -11,9 +11,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.Date;
@@ -44,6 +42,21 @@ public class UserController {
     public String regisiter(Map<String ,Object> map){
         log.info("------------>regisiter------------>" + new Date());
         return "user/regisiter";
+    }
+
+    @RequestMapping(value = "/user/checkMailExist" , method = RequestMethod.GET , produces="application/json;charset=utf-8")
+    @ResponseBody
+    public String checkMailExist(@RequestParam(name = "email",required = true)String email){
+        String msg = "true";
+        User user = new User();
+        user.setEmail(email);
+        QueryWrapper qw = new QueryWrapper();
+        qw.eq("EMAIL", user.getEmail());
+        int mailCount = usermapper.selectCount(qw);
+        if (mailCount>0){
+            msg = "该邮箱已经被使用";
+        }
+        return msg;
     }
 
     @RequestMapping(value = "/user/regInfo" , method = RequestMethod.POST , produces="application/json;charset=utf-8")

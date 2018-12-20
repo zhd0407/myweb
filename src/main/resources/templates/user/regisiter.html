@@ -31,7 +31,7 @@
                 <div class="layui-form-item">
                   <label for="L_email" class="layui-form-label">邮箱</label>
                   <div class="layui-input-inline">
-                    <input type="text" id="L_email" name="email" required lay-verify="email" autocomplete="off" class="layui-input">
+                    <input type="text" id="L_email" name="email" required lay-verify="email" autocomplete="off" class="layui-input" onblur="checkMailExist()">
                   </div>
                   <div class="layui-form-mid layui-word-aux">将会成为您唯一的登入名</div>
                 </div>
@@ -78,57 +78,74 @@
     <a href="http://fly.layui.com/jie/2461/" target="_blank">微信公众号</a>
   </p>
 </div>
+    <script src="/layui/layui.js"></script>
+     <script src="/plugins/JQuery/jquery-3.3.1.min.js"></script>
+    <script>
+        layui.cache.page = 'user';
+        layui.cache.user = {
+            username: '游客'
+            ,uid: -1
+            ,avatar: '/images/avatar/00.jpg'
+            ,experience: 83
+            ,sex: '男'
+        };
+        layui.config({
+            version: "3.0.0"
+            ,base: '/mods/'
+        }).extend({
+            fly: 'index'
+        }).use('fly');
+        layui.use(['form'], function() {
+            var form = layui.form;
+            //监听提交
+            form.on('submit(subUserInfo)', function(data){
+                /* layer.alert(JSON.stringify(data.field), {
+                     title: '最终的提交信息'
+                 })*/
+                // return false;
+                /* var usrNam = document.getElementById("L_username").value;
+                 if(usrNam==null||usrNam==""||usrNam==undefined){
+                     layer.msg("请填写昵称");
+                     return false;
+                 }*/
 
-  <script src="/layui/layui.js"></script>
-  <script src="/plugins/JQuery/jquery-3.3.1.min.js"></script>
-
-  <script>
-    layui.cache.page = 'user';
-    layui.cache.user = {
-      username: '游客'
-      ,uid: -1
-      ,avatar: '/images/avatar/00.jpg'
-      ,experience: 83
-      ,sex: '男'
-    };
-    layui.config({
-      version: "3.0.0"
-      ,base: '/mods/'
-    }).extend({
-      fly: 'index'
-    }).use('fly');
-    layui.use(['form'], function() {
-        var form = layui.form;
-        //监听提交
-        form.on('submit(subUserInfo)', function(data){
-           /* layer.alert(JSON.stringify(data.field), {
-                title: '最终的提交信息'
-            })*/
-           // return false;
-           /* var usrNam = document.getElementById("L_username").value;
-            if(usrNam==null||usrNam==""||usrNam==undefined){
-                layer.msg("请填写昵称");
-                return false;
-            }*/
-
-            var pass  = document.getElementById("L_pass").value;
-            var repass = document.getElementById("L_repass").value;
-            if(pass==null||pass==""||pass==undefined){
-                layer.msg('请填写密码');
-            }
-            if(repass==null||repass==""||repass==undefined){
-                layer.msg('请填写确认密码');
-            }
-            if(pass!=repass){
-                layer.msg("两次密码必须一致");
-                return false;
-            }
+                var pass  = document.getElementById("L_pass").value;
+                var repass = document.getElementById("L_repass").value;
+                if(pass==null||pass==""||pass==undefined){
+                    layer.msg('请填写密码');
+                }
+                if(repass==null||repass==""||repass==undefined){
+                    layer.msg('请填写确认密码');
+                }
+                if(pass!=repass){
+                    layer.msg("两次密码必须一致");
+                    return false;
+                }
+            });
         });
-    });
         $(document).ready(function() {
-        $("#header").load("../header");
-    });
-  </script>
+            $("#header").load("../header");
+        });
+
+        function checkMailExist() {
+            var email = document.getElementById("L_email").value;alert(email);
+            if (email!=null&&email!=""&&email!=undefined){
+                $.ajax({
+                    type : "POST",//提交方式
+                    url  : "/page/user/checkMailExist",//提交地址 
+                    data : email,//提交的数据
+                    dataType : "json",
+                    success  : function(data){  //返回结果
+                        alert(data);
+                    },
+                    error : function(data){
+                        alert("错误");
+                    }
+                });
+            }
+        }
+
+    </script>
 
 </body>
 </html>
