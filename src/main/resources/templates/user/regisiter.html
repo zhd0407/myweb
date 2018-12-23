@@ -128,15 +128,18 @@
         });
 
         function checkMailExist() {
-            var email = document.getElementById("L_email").value;alert(email);
+            var email = document.getElementById("L_email").value;
             if (email!=null&&email!=""&&email!=undefined){
                 $.ajax({
                     type : "POST",//提交方式
                     url  : "/page/user/checkMailExist",//提交地址 
-                    data : email,//提交的数据
+                    data : {"email":email},//提交的数据
                     dataType : "json",
                     success  : function(data){  //返回结果
-                        alert(data);
+                        if(data.result=="fail"){
+                            layer.alert(data.msg);
+                            return false;
+                        }
                     },
                     error : function(data){
                         alert("错误");

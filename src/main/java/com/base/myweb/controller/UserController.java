@@ -1,6 +1,7 @@
 package com.base.myweb.controller;
 
 
+import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.base.myweb.Tools.Charset;
@@ -44,19 +45,25 @@ public class UserController {
         return "user/regisiter";
     }
 
-    @RequestMapping(value = "/user/checkMailExist" , method = RequestMethod.GET , produces="application/json;charset=utf-8")
+    @RequestMapping(value = "/user/checkMailExist" , method = RequestMethod.POST , produces="application/json;charset=utf-8")
     @ResponseBody
     public String checkMailExist(@RequestParam(name = "email",required = true)String email){
-        String msg = "true";
         User user = new User();
         user.setEmail(email);
         QueryWrapper qw = new QueryWrapper();
         qw.eq("EMAIL", user.getEmail());
         int mailCount = usermapper.selectCount(qw);
+
+        JSONObject ja = new JSONObject();
+        String result = "success";
+        String msg = "";
         if (mailCount>0){
-            msg = "该邮箱已经被使用";
+         result = "fail";
+         msg = "该邮箱已经被使用";
         }
-        return msg;
+        ja.put("result",result);
+        ja.put("msg",msg);
+        return ja.toString();
     }
 
     @RequestMapping(value = "/user/regInfo" , method = RequestMethod.POST , produces="application/json;charset=utf-8")
@@ -74,7 +81,13 @@ public class UserController {
         }else{
          System.out.println("该邮箱已经被使用");
         }
-        return  new ModelAndView("user/personcenter","User",user);
+
+        return  new ModelAndView("user/personcenter","username",username);
+    }
+
+    @RequestMapping(value = "/user/personcenter" , method = RequestMethod.POST , produces="application/json;charset=utf-8")
+    public ModelAndView personcenter(){
+        return  new ModelAndView("user/personcenter");
     }
 
     @RequestMapping("/user/index")
