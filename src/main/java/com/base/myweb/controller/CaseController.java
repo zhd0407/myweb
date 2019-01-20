@@ -14,7 +14,7 @@ public class CaseController {
 
     @RequestMapping("/case")
     public String toCase(Map<String ,Object> map){
-        log.info("------------>case------------>"+ new Date());
+
         return "case/case";
     }
 

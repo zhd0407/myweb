@@ -1,22 +1,16 @@
 package com.base.myweb.controller;
 
-
 import com.alibaba.fastjson.JSONObject;
-import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.base.myweb.Tools.Charset;
 import com.base.myweb.mapper.UserMapper;
 import com.base.myweb.pojo.User;
-import com.sun.org.apache.xerces.internal.util.EntityResolverWrapper;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.Date;
-import java.util.List;
+import javax.servlet.http.HttpSession;
 import java.util.Map;
 
 /**
@@ -33,18 +27,33 @@ public class UserController {
     @Autowired
     private UserMapper usermapper;
 
+    /**
+     * 登录界面
+     *
+     */
+
     @RequestMapping("/user/login")
     public String login(Map<String ,Object> map){
-        log.info("------------>login------------>"+new Date());
+
         return "user/login";
     }
 
+    /**
+     * 注册界面
+     *
+     */
+
     @RequestMapping("/user/regisiter")
     public String regisiter(Map<String ,Object> map){
-        log.info("------------>regisiter------------>" + new Date());
+
         return "user/regisiter";
     }
 
+    /**
+     * @param email 邮箱
+     * 校验邮箱是否被使用，一个邮箱被使用一次
+     *
+     */
     @RequestMapping(value = "/user/checkMailExist" , method = RequestMethod.POST , produces="application/json;charset=utf-8")
     @ResponseBody
     public String checkMailExist(@RequestParam(name = "email",required = true)String email){
@@ -66,9 +75,15 @@ public class UserController {
         return ja.toString();
     }
 
+    /**
+     * @param email 邮箱，登录标志
+     * @param username  用户名
+     * @param pass 密码
+     * */
+    @ResponseBody
     @RequestMapping(value = "/user/regInfo" , method = RequestMethod.POST , produces="application/json;charset=utf-8")
     public ModelAndView regInfo(@RequestParam(name = "email",required = true)String email, @RequestParam(name = "username",required = true)String username,
-                                @RequestParam(name = "pass",required = true)String pass, @RequestParam(name = "repass",required = true)String repass){
+                                @RequestParam(name = "pass",required = true)String pass ){
         User user = new User();
         user.setEmail(email);
         QueryWrapper qw = new QueryWrapper();
@@ -77,12 +92,37 @@ public class UserController {
         if (mailCount<=0){
             user.setUser_nam(username);
             user.setPassword(pass);
+            user.setIdentity_type("customer");
             usermapper.insert(user);
         }else{
          System.out.println("该邮箱已经被使用");
         }
 
-        return  new ModelAndView("user/personcenter","username",username);
+        return  new ModelAndView("user/index","username",username);
+    }
+
+    /**
+     * @param email 邮箱，登录标志
+     * @param pass 密码
+     * */
+    @ResponseBody
+    @RequestMapping(value = "/user/auth" , method = RequestMethod.POST , produces="application/json;charset=utf-8")
+    public ModelAndView auth(@RequestParam(name = "email",required = true)String email, @RequestParam(name = "pass",required = true)String pass,HttpSession session){
+        QueryWrapper qw = new QueryWrapper();
+        qw.eq("EMAIL", email);
+        User user = usermapper.selectOne(qw);
+        JSONObject jo = new JSONObject();
+        if(user!=null&&user.getPassword().equals(pass)){
+            jo.put("result","success");
+            jo.put("userInfo",user);
+            session.setAttribute("userInfo",user);
+            session.setAttribute("userId",user.getUser_no()+"");
+            return  new ModelAndView("index","userInfo",jo);
+        }else{
+            jo.put("result","fail");
+            jo.put("msg","用户名或密码错误");
+            return  new ModelAndView("user/login","userInfo",jo);
+        }
     }
 
     @RequestMapping(value = "/user/personcenter" , method = RequestMethod.POST , produces="application/json;charset=utf-8")
@@ -92,25 +132,25 @@ public class UserController {
 
     @RequestMapping("/user/index")
     public String userIndex(Map<String ,Object> map){
-        log.info("------------>user/index------------>" + new Date());
-        return "user/index";
+
+        return "index";
     }
 
     @RequestMapping("/user/index/collection")
     public String userCollection(Map<String ,Object> map){
-        log.info("------------>/user/index/collection------------>" + new Date());
+
         return "/user/index/collection";
     }
 
     @RequestMapping("/user/message")
     public String message(Map<String ,Object> map){
-        log.info("------------>/user/message------------>" + new Date());
+        ;
         return "/user/message";
     }
 
     @RequestMapping("/user/home")
     public String home(Map<String ,Object> map){
-        log.info("------------>/user/home------------>" + new Date());
+
         return "/user/home";
     }
 

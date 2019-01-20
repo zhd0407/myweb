@@ -26,7 +26,7 @@
       <div class="layui-form layui-tab-content" id="LAY_ucm" style="padding: 20px 0;">
         <div class="layui-tab-item layui-show">
           <div class="layui-form layui-form-pane">
-            <form method="post">
+            <form method="post" action="/page/user/auth">
               <div class="layui-form-item">
                 <label for="L_email" class="layui-form-label">邮箱</label>
                 <div class="layui-input-inline">
@@ -40,16 +40,7 @@
                 </div>
               </div>
               <div class="layui-form-item">
-                <label for="L_vercode" class="layui-form-label">人类验证</label>
-                <div class="layui-input-inline">
-                  <input type="text" id="L_vercode" name="vercode" required lay-verify="required" placeholder="请回答后面的问题" autocomplete="off" class="layui-input">
-                </div>
-                <div class="layui-form-mid">
-                  <span style="color: #c00;">{{d.vercode}}</span>
-                </div>
-              </div>
-              <div class="layui-form-item">
-                <button class="layui-btn" lay-filter="*" lay-submit>立即登录</button>
+                <button class="layui-btn" lay-filter="login" lay-submit>立即登录</button>
                 <span style="padding-left:20px;">
                   <a href="forget">忘记密码？</a>
                 </span>
@@ -89,6 +80,25 @@
     }).extend({
         fly: 'index'
     }).use('fly');
+
+    layui.use(['form'], function() {
+        var form = layui.form;
+        //监听提交
+        form.on('submit(login)', function(data){
+            var email  = document.getElementById("L_email").value;
+            var password = document.getElementById("L_pass").value;
+            if(email==null||email==""||email==undefined){
+                layer.msg('请输入邮箱');
+                return;
+            }
+            if(repass==null||repass==""||repass==undefined){
+                layer.msg('请输入密码');
+                return;
+            }
+
+        });
+    });
+
 
     $(document).ready(function() {
         $("#header").load("../header");
