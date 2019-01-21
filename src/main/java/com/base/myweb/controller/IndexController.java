@@ -96,7 +96,6 @@ public class IndexController {
     @RequestMapping("/header")
     public String header(Model model, HttpSession session){
         String userId = (String) session.getAttribute("userId");
-
         if (!"".equals(Charset.nullToEmpty(userId))){
             user = (User) session.getAttribute("userInfo");
             model.addAttribute("userId",userId);

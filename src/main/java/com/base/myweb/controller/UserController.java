@@ -9,8 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-
 import javax.servlet.http.HttpSession;
+import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -90,9 +91,10 @@ public class UserController {
         qw.eq("EMAIL", user.getEmail());
         int mailCount = usermapper.selectCount(qw);
         if (mailCount<=0){
-            user.setUser_nam(username);
+            user.setUsernam(username);
             user.setPassword(pass);
-            user.setIdentity_type("customer");
+            user.setIdentitytype("customer");
+            user.setCreatedate(new Date());
             usermapper.insert(user);
         }else{
          System.out.println("该邮箱已经被使用");
@@ -116,7 +118,7 @@ public class UserController {
             jo.put("result","success");
             jo.put("userInfo",user);
             session.setAttribute("userInfo",user);
-            session.setAttribute("userId",user.getUser_no()+"");
+            session.setAttribute("userId",user.getUserno()+"");
             return  new ModelAndView("index","userInfo",jo);
         }else{
             jo.put("result","fail");
