@@ -9,7 +9,7 @@ import java.util.Map;
 
 @Slf4j
 @Controller
-@RequestMapping("/page")
+@RequestMapping("")
 public class QuestionController {
 
 

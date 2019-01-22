@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpSession;
 import java.util.Date;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -23,7 +22,7 @@ import java.util.Map;
 
 @Controller
 @Slf4j
-@RequestMapping("/page")
+@RequestMapping("")
 public class UserController {
     @Autowired
     private UserMapper usermapper;
@@ -84,23 +83,27 @@ public class UserController {
     @ResponseBody
     @RequestMapping(value = "/user/regInfo" , method = RequestMethod.POST , produces="application/json;charset=utf-8")
     public ModelAndView regInfo(@RequestParam(name = "email",required = true)String email, @RequestParam(name = "username",required = true)String username,
-                                @RequestParam(name = "pass",required = true)String pass ){
+                                @RequestParam(name = "pass",required = true)String pass,HttpSession session ){
         User user = new User();
         user.setEmail(email);
         QueryWrapper qw = new QueryWrapper();
         qw.eq("EMAIL", user.getEmail());
         int mailCount = usermapper.selectCount(qw);
+        User currUser = null;
         if (mailCount<=0){
             user.setUsernam(username);
             user.setPassword(pass);
             user.setIdentitytype("customer");
             user.setCreatedate(new Date());
             usermapper.insert(user);
+            currUser = usermapper.selectOne(qw);
+            session.setAttribute("userInfo",user);
+            session.setAttribute("userId",user.getUserno()+"");
         }else{
          System.out.println("该邮箱已经被使用");
         }
 
-        return  new ModelAndView("user/index","username",username);
+        return  new ModelAndView("user/index","userInfo",currUser);
     }
 
     /**
@@ -133,9 +136,9 @@ public class UserController {
     }
 
     @RequestMapping("/user/index")
-    public String userIndex(Map<String ,Object> map){
+        public String userIndex(Map<String ,Object> map){
 
-        return "index";
+        return "user/index";
     }
 
     @RequestMapping("/user/index/collection")

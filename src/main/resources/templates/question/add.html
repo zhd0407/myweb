@@ -118,6 +118,7 @@
 </div>
 
 <script src="/layui/layui.js"></script>
+<script src="/plugins/JQuery/jquery-3.3.1.min.js"></script>
 <script>
     layui.cache.page = 'jie';
     layui.cache.user = {
@@ -135,8 +136,8 @@
     }).use('fly');
 
     $(document).ready(function() {
-        $("#header").load("../header");
-        $("#footer").load("../footer");
+        $("#head").load("/head");
+        $("#footer").load("/footer");
     });
 </script>
 </body>

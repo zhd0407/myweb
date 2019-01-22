@@ -18,7 +18,7 @@ import java.util.Map;
 
 @Slf4j
 @Controller
-@RequestMapping("/page")
+@RequestMapping("")
 public class IndexController {
     @Autowired
     public UserMapper usermapper;
@@ -36,7 +36,7 @@ public class IndexController {
     public String head(Map<String,Object> map){
 
 
-        return "head";
+        return "common/column";
     }
 
     @RequestMapping("/advert")
@@ -50,7 +50,7 @@ public class IndexController {
     public String footer(Map<String,Object> map){
 
 
-        return "footer";
+        return "common/footer";
     }
 
     @RequestMapping("/friendlink")
@@ -101,7 +101,7 @@ public class IndexController {
             model.addAttribute("userId",userId);
             model.addAttribute("userInfo",user);
         }
-        return "header";
+        return "common/header";
     }
 
     @RequestMapping("/currWeekTopic")
