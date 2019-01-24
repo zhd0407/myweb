@@ -2,8 +2,8 @@ package com.base.myweb.controller;
 
 
 import com.base.myweb.Tools.Charset;
-import com.base.myweb.mapper.UserMapper;
-import com.base.myweb.pojo.User;
+import com.base.myweb.mapper.UserInfoMapper;
+import com.base.myweb.pojo.UserInfo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,8 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
-import java.util.Date;
-import java.util.List;
 import java.util.Map;
 
 @Slf4j
@@ -21,9 +19,9 @@ import java.util.Map;
 @RequestMapping("")
 public class IndexController {
     @Autowired
-    public UserMapper usermapper;
+    public UserInfoMapper usermapper;
 
-    private User user;
+    private UserInfo user;
 
     @RequestMapping("/index")
     public ModelAndView index(Map<String,Object> map){
@@ -97,7 +95,7 @@ public class IndexController {
     public String header(Model model, HttpSession session){
         String userId = (String) session.getAttribute("userId");
         if (!"".equals(Charset.nullToEmpty(userId))){
-            user = (User) session.getAttribute("userInfo");
+            user = (UserInfo) session.getAttribute("userInfo");
             model.addAttribute("userId",userId);
             model.addAttribute("userInfo",user);
         }

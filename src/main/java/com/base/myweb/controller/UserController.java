@@ -2,8 +2,8 @@ package com.base.myweb.controller;
 
 import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.base.myweb.mapper.UserMapper;
-import com.base.myweb.pojo.User;
+import com.base.myweb.mapper.UserInfoMapper;
+import com.base.myweb.pojo.UserInfo;
 import com.base.myweb.service.UserServiceImpl;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +11,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpSession;
-import java.util.Date;
 import java.util.Map;
 
 /**
@@ -29,7 +28,7 @@ public class UserController {
     @Autowired
     UserServiceImpl userService;
     @Autowired
-    private UserMapper usermapper;
+    private UserInfoMapper usermapper;
     /**
      * 登录界面
      *
@@ -72,7 +71,7 @@ public class UserController {
     @RequestMapping(value = "/user/regInfo" , method = RequestMethod.POST , produces="application/json;charset=utf-8")
     public ModelAndView regInfo(@RequestParam(name = "email",required = true)String email, @RequestParam(name = "username",required = true)String username,
                                 @RequestParam(name = "pass",required = true)String pass,HttpSession session ){
-        User currUser = userService.regInfo(email,username,pass,session);
+        UserInfo currUser = userService.regInfo(email,username,pass,session);
         return  new ModelAndView("user/index","userInfo",currUser);
     }
 
@@ -85,7 +84,7 @@ public class UserController {
     public ModelAndView auth(@RequestParam(name = "email",required = true)String email, @RequestParam(name = "pass",required = true)String pass,HttpSession session){
         QueryWrapper qw = new QueryWrapper();
         qw.eq("EMAIL", email);
-        User user = usermapper.selectOne(qw);
+        UserInfo user = usermapper.selectOne(qw);
         JSONObject jo = new JSONObject();
         if(user!=null&&user.getPassword().equals(pass)){
             jo.put("result","success");
@@ -127,6 +126,12 @@ public class UserController {
     public String home(Map<String ,Object> map){
 
         return "/user/home";
+    }
+
+    @RequestMapping("/user/set")
+    public String set(Map<String ,Object> map){
+
+        return "/user/set";
     }
 
 }

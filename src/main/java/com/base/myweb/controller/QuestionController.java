@@ -31,4 +31,10 @@ public class QuestionController {
         return "question/detail";
     }
 
+    @RequestMapping("/question/index")
+    public String index(Map<String ,Object> map){
+
+        return "question/index";
+    }
+
 }

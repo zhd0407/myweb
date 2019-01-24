@@ -3,8 +3,8 @@ package com.base.myweb.service;
 
 import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.base.myweb.mapper.UserMapper;
-import com.base.myweb.pojo.User;
+import com.base.myweb.mapper.UserInfoMapper;
+import com.base.myweb.pojo.UserInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,10 +14,10 @@ import java.util.Date;
 @Service
 public class UserServiceImpl {
     @Autowired
-    private UserMapper usermapper;
+    private UserInfoMapper usermapper;
 
     public String checkEmailIsExist(String email){
-        User user = new User();
+        UserInfo user = new UserInfo();
         user.setEmail(email);
         QueryWrapper qw = new QueryWrapper();
         qw.eq("EMAIL", user.getEmail());
@@ -35,18 +35,18 @@ public class UserServiceImpl {
         return ja.toString();
     }
 
-    public  User regInfo(String email, String username, String pass, HttpSession session){
-        User user = new User();
+    public UserInfo regInfo(String email, String username, String pass, HttpSession session){
+        UserInfo user = new UserInfo();
         user.setEmail(email);
         QueryWrapper qw = new QueryWrapper();
         qw.eq("EMAIL", user.getEmail());
         int mailCount = usermapper.selectCount(qw);
-        User currUser = null;
+        UserInfo currUser = null;
         if (mailCount<=0){
             user.setUsernam(username);
             user.setPassword(pass);
-            user.setIdentitytype("customer");
-            user.setCreatedate(new Date());
+            user.setIdentityType("customer");
+            user.setCreateTime(new Date());
             usermapper.insert(user);
             currUser = usermapper.selectOne(qw);
             session.setAttribute("userInfo",user);
