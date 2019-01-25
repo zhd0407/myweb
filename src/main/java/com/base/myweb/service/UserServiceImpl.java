@@ -36,6 +36,8 @@ public class UserServiceImpl {
     }
 
     public UserInfo regInfo(String email, String username, String pass, HttpSession session){
+
+
         UserInfo user = new UserInfo();
         user.setEmail(email);
         QueryWrapper qw = new QueryWrapper();
