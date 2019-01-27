@@ -5,7 +5,7 @@ import lombok.Data;
 import java.util.Date;
 
 @Data
-public class NoteInfo {
+public class Noteinfo {
 
     private Integer noteNo;     //主键值
     private String noteId;      //编号
@@ -22,7 +22,7 @@ public class NoteInfo {
     private String draft;       //草稿
     private String originType;  //创作性质（原创/转载/收藏）
     private String oldNoteId;   //原贴编号
-    private String canComment;  //可以评论
+    private String cancomment;  //可以评论
     private Integer integrate;  //积分
 
 }

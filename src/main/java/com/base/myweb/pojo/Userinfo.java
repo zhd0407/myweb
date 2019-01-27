@@ -4,10 +4,10 @@ import lombok.Data;
 import java.util.Date;
 
 @Data
-public class UserInfo {
-    private  Integer userno;
-    private String userid;
-    private String usernam;
+public class Userinfo {
+    private  Integer userNo;
+    private String userId;
+    private String userNam;
     private String sex;
     private Integer age;
     private String phone;

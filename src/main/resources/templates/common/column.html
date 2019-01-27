@@ -1,6 +1,10 @@
+<html xmlns:th="http://www.thymeleaf.org">
 <div class="fly-header layui-bg-black" id="header">
 </div>
-
+<div style="display: none;">
+  <input id="column_user_id" th:value="${userId}" ></input>
+  <input id="column_user_nam" th:value="${userNam}"> </input>
+</div>
 <div class="fly-panel fly-column">
   <div class="layui-container">
     <ul class="layui-clear">
@@ -20,16 +24,26 @@
     
     <div class="fly-column-right layui-hide-xs"> 
       <span class="fly-search"><i class="layui-icon"></i></span> 
-      <a href="/question/add" class="layui-btn">发表新帖</a>
+      <a href="javascript:void(0);" class="layui-btn" onclick="checkLoginSta();">发表新帖</a>
     </div> 
-    <div class="layui-hide-sm layui-show-xs-block" style="margin-top: -10px; padding-bottom: 10px; text-align: center;"> 
+   <!-- <div class="layui-hide-sm layui-show-xs-block" style="margin-top: -10px; padding-bottom: 10px; text-align: center;">
       <a href="/question/add" class="layui-btn">发表新帖</a>
-    </div> 
+    </div> -->
   </div>
 </div>
 <script src="/plugins/JQuery/jquery-3.3.1.min.js"></script>
-<script type="text/javascript">
+<script >
     $(document).ready(function() {
         $("#header").load("/header");
     });
+
+    function checkLoginSta(){
+      var userId = document.getElementById("column_user_id").value;
+      if(userId!='-1'){
+          window.open("/question/add","_self");
+      }else{
+          layer.alert("请先登录");
+      }
+    }
+
 </script>

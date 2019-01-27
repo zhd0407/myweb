@@ -2,8 +2,9 @@ package com.base.myweb.controller;
 
 
 import com.base.myweb.Tools.Charset;
+import com.base.myweb.core.SessionInfo;
 import com.base.myweb.mapper.UserInfoMapper;
-import com.base.myweb.pojo.UserInfo;
+import com.base.myweb.pojo.Userinfo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,7 +22,7 @@ public class IndexController {
     @Autowired
     public UserInfoMapper usermapper;
 
-    private UserInfo user;
+    private Userinfo user;
 
     @RequestMapping("/index")
     public ModelAndView index(Map<String,Object> map){
@@ -31,9 +32,8 @@ public class IndexController {
     }
 
     @RequestMapping("/head")
-    public String head(Map<String,Object> map){
-
-
+    public String head(Model model,HttpSession session){
+        SessionInfo.setUserInfoToModelBySession(model,session);
         return "common/column";
     }
 
@@ -93,12 +93,7 @@ public class IndexController {
 
     @RequestMapping("/header")
     public String header(Model model, HttpSession session){
-        String userId = (String) session.getAttribute("userId");
-        if (!"".equals(Charset.nullToEmpty(userId))){
-            user = (UserInfo) session.getAttribute("userInfo");
-            model.addAttribute("userId",userId);
-            model.addAttribute("userInfo",user);
-        }
+        SessionInfo.setUserInfoToModelBySession(model,session);
         return "common/header";
     }
 

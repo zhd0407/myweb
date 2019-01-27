@@ -1,10 +1,9 @@
 package com.base.myweb.controller;
 
 import com.alibaba.fastjson.JSONObject;
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.base.myweb.mapper.UserInfoMapper;
-import com.base.myweb.pojo.UserInfo;
-import com.base.myweb.service.UserServiceImpl;
+import com.base.myweb.Tools.Charset;
+import com.base.myweb.pojo.Userinfo;
+import com.base.myweb.service.serviceImpl.UserInfoServiceImpl;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -26,9 +25,7 @@ import java.util.Map;
 public class UserController {
 
     @Autowired
-    UserServiceImpl userService;
-    @Autowired
-    private UserInfoMapper usermapper;
+    UserInfoServiceImpl userService;
     /**
      * 登录界面
      *
@@ -71,7 +68,7 @@ public class UserController {
     @RequestMapping(value = "/user/regInfo" , method = RequestMethod.POST , produces="application/json;charset=utf-8")
     public ModelAndView regInfo(@RequestParam(name = "email",required = true)String email, @RequestParam(name = "username",required = true)String username,
                                 @RequestParam(name = "pass",required = true)String pass,HttpSession session ){
-        UserInfo currUser = userService.regInfo(email,username,pass,session);
+        Userinfo currUser = userService.regInfo(email,username,pass,session);
         return  new ModelAndView("user/index","userInfo",currUser);
     }
 
@@ -82,21 +79,13 @@ public class UserController {
     @ResponseBody
     @RequestMapping(value = "/user/auth" , method = RequestMethod.POST , produces="application/json;charset=utf-8")
     public ModelAndView auth(@RequestParam(name = "email",required = true)String email, @RequestParam(name = "pass",required = true)String pass,HttpSession session){
-        QueryWrapper qw = new QueryWrapper();
-        qw.eq("EMAIL", email);
-        UserInfo user = usermapper.selectOne(qw);
-        JSONObject jo = new JSONObject();
-        if(user!=null&&user.getPassword().equals(pass)){
-            jo.put("result","success");
-            jo.put("userInfo",user);
-            session.setAttribute("userInfo",user);
-            session.setAttribute("userId",user.getUserno()+"");
-            return  new ModelAndView("index","userInfo",jo);
+        JSONObject authJo = userService.LoginAuth(email,pass,session);
+        if(authJo!=null&&!"".equals(Charset.nullToEmpty((String) authJo.get("result")))){
+            return  new ModelAndView("index","userInfo",authJo);
         }else{
-            jo.put("result","fail");
-            jo.put("msg","用户名或密码错误");
-            return  new ModelAndView("user/login","userInfo",jo);
+            return  new ModelAndView("user/login","userInfo",authJo);
         }
+
     }
 
     @RequestMapping(value = "/user/personcenter" , method = RequestMethod.POST , produces="application/json;charset=utf-8")

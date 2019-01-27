@@ -128,7 +128,7 @@
             if (email!=null&&email!=""&&email!=undefined){
                 $.ajax({
                     type : "POST",//提交方式
-                    url  : "/page/user/checkMailExist",//提交地址 
+                    url  : "/user/checkMailExist",//提交地址 
                     data : {"email":email},//提交的数据
                     dataType : "json",
                     success  : function(data){  //返回结果
