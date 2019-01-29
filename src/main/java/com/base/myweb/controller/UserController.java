@@ -3,6 +3,7 @@ package com.base.myweb.controller;
 import com.alibaba.fastjson.JSONObject;
 import com.base.myweb.Tools.Charset;
 import com.base.myweb.pojo.Userinfo;
+import com.base.myweb.service.serviceImpl.SubjectServiceImpl;
 import com.base.myweb.service.serviceImpl.UserInfoServiceImpl;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +27,8 @@ public class UserController {
 
     @Autowired
     UserInfoServiceImpl userService;
+    @Autowired
+    SubjectServiceImpl subjectService;
     /**
      * 登录界面
      *
@@ -121,6 +124,19 @@ public class UserController {
     public String set(Map<String ,Object> map){
 
         return "/user/set";
+    }
+
+    @RequestMapping("/user/model")
+    public String model(Map<String ,Object> map){
+
+        return "/user/model";
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/user/table/subject" , method = RequestMethod.GET , produces="application/json;charset=utf-8")
+    public JSONObject getModelInfo(){
+        JSONObject subjectJo = subjectService.getSubjectInfoFormatTable();
+        return subjectJo;
     }
 
 }
