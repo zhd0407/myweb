@@ -23,17 +23,17 @@ public class SubjectServiceImpl implements SubjectService {
         JSONArray dataArr = new JSONArray();
         for (Subject subject:subjectList ) {
             JSONObject subJo = new JSONObject();
-            subJo.put("subjectNo",String.valueOf(subject.getSubjectNo()));
-            subJo.put("subjectCode",subject.getSubjectCode());
-            subJo.put("subjectNam",subject.getSubjectNam());
-            subJo.put("userType",subject.getUserType());
-            subJo.put("seqNum",String.valueOf(subject.getSeqNum()));
+            subJo.put("subject_no",String.valueOf(subject.getSubjectNo()));
+            subJo.put("subject_code",subject.getSubjectCode());
+            subJo.put("subject_nam",subject.getSubjectNam());
+            subJo.put("user_type",subject.getUserType());
+            subJo.put("seq_num",String.valueOf(subject.getSeqNum()));
             dataArr.add(subJo);
         }
         subjectJo.put("data",dataArr);
         subjectJo.put("count",subjectList.size());
         subjectJo.put("msg","");
-        subjectJo.put("code","0");
+        subjectJo.put("code",0);
         return subjectJo;
     }
 }

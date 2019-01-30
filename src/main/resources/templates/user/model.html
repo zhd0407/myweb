@@ -1,4 +1,4 @@
-
+<html xmlns:th="http://www.thymeleaf.org">
 <!DOCTYPE html>
 <html>
 <head>
@@ -104,17 +104,7 @@
             </ul>
             <div class="layui-tab-content" style="padding: 20px 0;">
                 <div class="layui-form layui-form-pane layui-tab-item layui-show">
-                    <table class="layui-table" lay-data="{height:315, url:'/user/table/subject', page:true, id:'test'}" lay-filter="test">
-                        <thead>
-                        <tr>
-                            <th lay-data="{field:'subjectNo', width:80, sort: true}">主键值</th>
-                            <th lay-data="{field:'subjectCode', width:80}">编号</th>
-                            <th lay-data="{field:'subjectNam', width:80, sort: true}">名称</th>
-                            <th lay-data="{field:'userType'}">用户类型</th>
-                            <th lay-data="{field:'seqNum'}">排序</th>
-                        </tr>
-                        </thead>
-                    </table>
+                    <table class="layui-hide" id="subTable" lay-filter="subTableEvent"></table>
                 </div>
 
                 <div class="layui-form layui-form-pane layui-tab-item">
@@ -146,22 +136,91 @@
 </div>
 
 <script src="/layui/layui.js"></script>
-<script>
-    layui.cache.page = 'user';
-    layui.cache.user = {
-        username: '游客'
-        ,uid: -1
-        ,avatar: '/images/avatar/00.jpg'
-        ,experience: 83
-        ,sex: '男'
-    };
-    layui.config({
-        version: "2.0.0"
-        ,base: '/mods/'
-    }).extend({
-        fly: 'index'
-    }).use('fly');
+<script  th:inline="none">
+    layui.use(['table','element'], function(){
+        var table = layui.table,element = layui.element;
+        //监听Tab切换
+        element.on('tab(demo)', function(data){
+            layer.tips('切换了 '+ data.index +'：'+ this.innerHTML, this, {
+                tips: 1
+            });
+        });
+
+        table.render({
+            elem: '#subTable'   //html中要绑定table的id
+            ,height: 420       //设置表格高度
+            ,url: '/user/table/subject'         //后台接口
+            ,title: '用户表'                   //表名
+            ,page: true                     //开启分页
+            ,toolbar:'default'              //表头工具栏，default用了默认的，可以自定义工具栏模板，如下面的toolbar
+             ,cols: [[ //表头
+                {type: 'checkbox', fixed: 'left'},          //设置复选框
+                {field:'subject_no', title:'主键值'}           //字段值
+                ,{field:'subject_code', title:'编号',width:150}
+                ,{field:'subject_nam', title: '名称'}
+                ,{field:'user_type', title: '用户类型'}
+                ,{field:'seq_num', title:'排序'}
+                ,{fixed: 'right', width: 165, title: '操作', align:'center', toolbar: '#bar'} //最后加了工具栏一列，绑定了下面的bar模板
+            ]]
+
+        });
+
+        //监听行工具事件
+        table.on('tool(subTableEvent)', function(obj){ //注：tool 是工具条事件名（固定），subTableEvent 是 table 原始容器的属性 lay-filter="对应的值"
+            var data = obj.data                 //获得当前行数据
+                ,layEvent = obj.event;          //获得 lay-event 对应的值
+            if(layEvent === 'detail'){
+                layer.msg('查看操作');
+            } else if(layEvent === 'del'){
+                layer.confirm('真的删除行么', function(index){
+                    obj.del();              //删除对应行（tr）的DOM结构
+                    layer.close(index);
+                                            //向服务端发送删除指令
+                });
+            } else if(layEvent === 'edit'){
+                layer.msg('编辑操作');
+            }
+        });
+        //监听头工具栏事件
+        table.on('toolbar(subTableEvent)', function(obj){ //注：toolbar 是工具条事件名（固定），subTableEvent 是 table 原始容器的属性 lay-filter="对应的值"
+            var checkStatus = table.checkStatus(obj.config.id)
+                ,data = checkStatus.data; //获取选中的数据
+            switch(obj.event){
+                case 'add':
+                    layer.msg('添加');
+                    break;
+                case 'update':
+                    if(data.length === 0){
+                        layer.msg('请选择一行');
+                    } else if(data.length > 1){
+                        layer.msg('只能同时编辑一个');
+                    } else {
+                        layer.alert('编辑 [id]：'+ checkStatus.data[0].id);
+                    }
+                    break;
+                case 'delete':
+                    if(data.length === 0){
+                        layer.msg('请选择一行');
+                    } else {
+                        layer.msg('删除');
+                    }
+                    break;
+            };
+        });
+    });
+</script>
+<script type="text/html" id="bar">
+    <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>
+    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
 </script>
 
+<script type="text/html" id="toolbar">
+    <div class="layui-btn-container">
+        <button class="layui-btn layui-btn-sm" lay-event="add">添加</button>
+        <button class="layui-btn layui-btn-sm" lay-event="delete">删除</button>
+        <button class="layui-btn layui-btn-sm" lay-event="update">编辑</button>
+    </div>
+</script>
 </body>
 </html>
