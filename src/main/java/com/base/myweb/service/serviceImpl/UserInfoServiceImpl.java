@@ -3,7 +3,7 @@ package com.base.myweb.service.serviceImpl;
 
 import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.base.myweb.Tools.UserIdBuilder;
+import com.base.myweb.core.codeBuilder.UserIdBuilder;
 import com.base.myweb.core.SessionInfo;
 import com.base.myweb.mapper.LoginhistoryMapper;
 import com.base.myweb.mapper.UserInfoMapper;

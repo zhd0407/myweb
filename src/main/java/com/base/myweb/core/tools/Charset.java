@@ -1,4 +1,4 @@
-package com.base.myweb.Tools;
+package com.base.myweb.core.tools;
 
 public class Charset {
 

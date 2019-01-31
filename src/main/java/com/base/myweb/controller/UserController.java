@@ -1,7 +1,7 @@
 package com.base.myweb.controller;
 
 import com.alibaba.fastjson.JSONObject;
-import com.base.myweb.Tools.Charset;
+import com.base.myweb.core.tools.Charset;
 import com.base.myweb.pojo.Userinfo;
 import com.base.myweb.service.serviceImpl.SubjectServiceImpl;
 import com.base.myweb.service.serviceImpl.UserInfoServiceImpl;
@@ -67,7 +67,7 @@ public class UserController {
      * @param username  用户名
      * @param pass 密码
      * */
-    @ResponseBody
+
     @RequestMapping(value = "/user/regInfo" , method = RequestMethod.POST , produces="application/json;charset=utf-8")
     public ModelAndView regInfo(@RequestParam(name = "email",required = true)String email, @RequestParam(name = "username",required = true)String username,
                                 @RequestParam(name = "pass",required = true)String pass,HttpSession session ){
@@ -79,7 +79,6 @@ public class UserController {
      * @param email 邮箱，登录标志
      * @param pass 密码
      * */
-    @ResponseBody
     @RequestMapping(value = "/user/auth" , method = RequestMethod.POST , produces="application/json;charset=utf-8")
     public ModelAndView auth(@RequestParam(name = "email",required = true)String email, @RequestParam(name = "pass",required = true)String pass,HttpSession session){
         JSONObject authJo = userService.LoginAuth(email,pass,session);

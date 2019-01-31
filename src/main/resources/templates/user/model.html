@@ -136,16 +136,10 @@
 </div>
 
 <script src="/layui/layui.js"></script>
+<script src="/plugins/JQuery/jquery-3.3.1.min.js"></script>
 <script  th:inline="none">
     layui.use(['table','element'], function(){
-        var table = layui.table,element = layui.element;
-        //监听Tab切换
-        element.on('tab(demo)', function(data){
-            layer.tips('切换了 '+ data.index +'：'+ this.innerHTML, this, {
-                tips: 1
-            });
-        });
-
+        var table = layui.table;
         table.render({
             elem: '#subTable'   //html中要绑定table的id
             ,height: 420       //设置表格高度
@@ -153,7 +147,7 @@
             ,title: '用户表'                   //表名
             ,page: true                     //开启分页
             ,toolbar:'default'              //表头工具栏，default用了默认的，可以自定义工具栏模板，如下面的toolbar
-             ,cols: [[ //表头
+            ,cols: [[ //表头
                 {type: 'checkbox', fixed: 'left'},          //设置复选框
                 {field:'subject_no', title:'主键值'}           //字段值
                 ,{field:'subject_code', title:'编号',width:150}
@@ -162,7 +156,6 @@
                 ,{field:'seq_num', title:'排序'}
                 ,{fixed: 'right', width: 165, title: '操作', align:'center', toolbar: '#bar'} //最后加了工具栏一列，绑定了下面的bar模板
             ]]
-
         });
 
         //监听行工具事件
@@ -172,10 +165,23 @@
             if(layEvent === 'detail'){
                 layer.msg('查看操作');
             } else if(layEvent === 'del'){
-                layer.confirm('真的删除行么', function(index){
-                    obj.del();              //删除对应行（tr）的DOM结构
-                    layer.close(index);
-                                            //向服务端发送删除指令
+                layer.confirm('确定删除？', function(index){
+                    $.ajax({
+                        type : "POST",//提交方式
+                        url  : "/admin/delSubjectInfo",//提交地址
+                        data : {"subject_no":data.subject_no},//提交的数据
+                        dataType : "json",
+                        success  : function(data){  //返回结果
+                            if(data.result=="true"){
+                                obj.del();              //删除对应行（tr）的DOM结构
+                                layer.close(index);//向服务端发送删除指令
+                            }
+                        },
+                        error : function(data){
+                            alert("错误");
+                        }
+                    });
+
                 });
             } else if(layEvent === 'edit'){
                 layer.msg('编辑操作');
@@ -187,7 +193,45 @@
                 ,data = checkStatus.data; //获取选中的数据
             switch(obj.event){
                 case 'add':
-                    layer.msg('添加');
+                    layer.open({
+                        type: 1,
+                        title:'新增栏目',
+                        skin: 'layui-layer-demo', //样式类名
+                        closeBtn: 0, //不显示关闭按钮
+                        id:'addSubject',
+                        anim: 2,
+                        shadeClose: true, //开启遮罩关闭
+                        content:  '<div style="width: 90%;height: 250px;margin-top: 15px;">' +
+                            '  <div class="layui-form-item">\n' +
+                            '    <label class="layui-form-label">编码：</label>\n' +
+                            '    <div class="layui-input-block">\n' +
+                            '      <input type="text" id="subject_code" lay-verify="required" placeholder="请输入" class="layui-input">\n' +
+                            '    </div>\n' +
+                            '  </div>' +
+                            '  <div class="layui-form-item">\n' +
+                            '    <label class="layui-form-label">名称：</label>\n' +
+                            '    <div class="layui-input-block">\n' +
+                            '      <input type="text" id="subject_nam" lay-verify="required" placeholder="请输入" class="layui-input">\n' +
+                            '    </div>\n' +
+                            '  </div>' +
+                            '  <div class="layui-form-item">\n' +
+                            '    <label class="layui-form-label">用户类型：</label>\n' +
+                            '    <div class="layui-input-block">\n' +
+                            '      <input type="text" id="user_type" lay-verify="required" placeholder="请输入" class="layui-input">\n' +
+                            '    </div>\n' +
+                            '  </div>' +
+                            '  <div class="layui-form-item">\n' +
+                            '    <label class="layui-form-label">排序：</label>\n' +
+                            '    <div class="layui-input-block">\n' +
+                            '      <input type="text" id="seq_num" lay-verify="required" placeholder="请输入数字" class="layui-input">\n' +
+                            '    </div>\n' +
+                            '  </div>' +
+                            '</div>' +
+                            '<div class="layui-form-item" align="center">\n' +
+                            '    <button class="layui-btn" onclick="suer_onclick();">确定</button>\n' +
+                            '    <button class="layui-btn layui-btn-primary" onclick="cancel_onclick();">取消</button>\n' +
+                            '  </div>'
+                        });
                     break;
                 case 'update':
                     if(data.length === 0){
@@ -208,10 +252,57 @@
             };
         });
     });
+
+    function suer_onclick(){
+        var subject_code = $("#subject_code").val(),
+            subject_nam = $("#subject_nam").val(),
+            user_type = $("#user_type").val(),
+            seq_num = $("#seq_num").val();
+        if(subject_code==null||subject_code==''||subject_code==undefined){
+            layer.msg('请输入编码');
+            return;
+        }
+        if(subject_nam==null||subject_nam==''||subject_nam==undefined){
+            layer.msg('请输入名称');
+            return;
+        }
+        if(user_type==null||user_type==''||user_type==undefined){
+            layer.msg('请输入用户类型');
+            return;
+        }
+
+        $.ajax({
+            type : "POST",//提交方式
+            url  : "/admin/setSubjectInfo",//提交地址
+            data : {"subject_code":subject_code,"subject_nam":subject_nam,"user_type":user_type,"seq_num":seq_num},//提交的数据
+            dataType : "json",
+            success  : function(data){  //返回结果
+                if(data.result=="true"){
+                    layer.closeAll();
+                    layui.use(['table'], function(){
+                        var table = layui.table;
+                        table.reload('subTable', {
+                            url: '/user/table/subject'
+                            ,where: {} //设定异步数据接口的额外参数
+
+                        });
+                    });
+                }
+            },
+            error : function(data){
+                alert("错误");
+            }
+        });
+
+    }
+
+    function cancel_onclick() {
+        layer.closeAll();
+    }
 </script>
 <script type="text/html" id="bar">
-    <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>
-    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+   <!-- <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>-->
+   <!-- <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>-->
     <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
 </script>
 
