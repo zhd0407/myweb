@@ -20,7 +20,9 @@ public class SessionInfo {
         String userNam = "";
         if (!"".equals(Charset.nullToEmpty(userId))){
             user = (Userinfo)session.getAttribute("userInfo");
-            userNam = user.getUserNam();
+            if (user!=null){
+                userNam = user.getUserNam();
+            }
         }else{
             userId = "-1";
         }

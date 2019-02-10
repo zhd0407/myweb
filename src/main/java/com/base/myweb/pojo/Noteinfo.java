@@ -3,7 +3,6 @@ package com.base.myweb.pojo;
 import lombok.Data;
 
 import java.util.Date;
-
 @Data
 public class Noteinfo {
 
@@ -12,7 +11,7 @@ public class Noteinfo {
     private String theme;       //标题
     private String noteType;    //类型：分享/提问/求助/
     private String modelType;   //领域
-    private String keys;        //关键词
+    private String noteKeys;        //关键词
     private String noteBody;    //正文
     private String userId;      //发帖人
     private Date createTime;    //创建时间
