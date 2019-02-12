@@ -3,7 +3,9 @@ package com.base.myweb.controller;
 
 import com.base.myweb.core.SessionInfo;
 import com.base.myweb.mapper.UserInfoMapper;
+import com.base.myweb.pojo.Noteinfo;
 import com.base.myweb.pojo.Userinfo;
+import com.base.myweb.service.serviceImpl.NoteinfoServiceImpl;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,16 +14,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
+import java.util.List;
 import java.util.Map;
 
 @Slf4j
 @Controller
 @RequestMapping("")
 public class IndexController {
-    @Autowired
-    public UserInfoMapper usermapper;
 
-    private Userinfo user;
+    @Autowired
+    NoteinfoServiceImpl noteinfoServiceimpl;
 
     @RequestMapping("/index")
     public ModelAndView index(Map<String,Object> map){
@@ -85,8 +87,9 @@ public class IndexController {
     }
 
     @RequestMapping("/primary")
-    public String primary(Map<String,Object> map){
-
+    public String primary(Model model, HttpSession session){
+        List<Noteinfo> noteList = noteinfoServiceimpl.getNoteList(session);
+        model.addAttribute("noteList",noteList);
         return "primary";
     }
 

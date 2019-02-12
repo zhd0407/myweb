@@ -43,8 +43,10 @@ public class NoteinfoController {
     }
 
     @RequestMapping("/question/detail")
-    public String detail(Map<String ,Object> map){
-
+    public String detail(Model model,@RequestParam(name = "noteId",required = true)String noteId){
+        if(!"".equals(Charset.nullToEmpty(noteId))){
+            model.addAttribute("NoteInfo",noteinfoServiceImpl.getNoteDetailByNoteId(noteId));
+        }
         return "question/detail";
     }
 
@@ -55,7 +57,7 @@ public class NoteinfoController {
     }
 
     @RequestMapping("/noteinfo/add")
-    public JSONObject noteinfoAdd(@RequestParam(name = "theme",required = true)String theme, @RequestParam(name = "noteType",required = true)String noteType,
+    public String noteinfoAdd(@RequestParam(name = "theme",required = true)String theme, @RequestParam(name = "noteType",required = true)String noteType,
                                   @RequestParam(name = "noteBody",required = true)String noteBody,@RequestParam(name = "keys",required = true)String keys,
                                   @RequestParam(name = "modelType",required = true)String modelType,@RequestParam(name = "integrate",required = false)int integrate,
                                   HttpSession session){
@@ -77,8 +79,8 @@ public class NoteinfoController {
         noteinfo.setAccessSta(accessSta);               //审核状态
         noteinfo.setOriginType(origin_type);        //性质，原创、转载
         noteinfo.setIntegrate(integrate);
-        JSONObject noteJo = noteinfoServiceImpl.insertNoteInfo(noteinfo);
-        return noteJo;
+        noteinfoServiceImpl.insertNoteInfo(noteinfo);
+        return "question/detail";
     }
 
 }

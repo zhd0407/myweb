@@ -2,11 +2,15 @@ package com.base.myweb.service.serviceImpl;
 
 
 import com.alibaba.fastjson.JSONObject;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.base.myweb.mapper.NoteInfoMapper;
 import com.base.myweb.pojo.Noteinfo;
 import com.base.myweb.service.NoteinfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import javax.servlet.http.HttpSession;
+import java.util.List;
 
 
 @Service
@@ -21,6 +25,17 @@ public class NoteinfoServiceImpl implements NoteinfoService {
             noteJo.put("result","success");
             noteJo.put("msg","发表成功");
             return noteJo;
+        }
+
+        public List<Noteinfo> getNoteList(HttpSession session){
+            List<Noteinfo> noteList = noteInfoMapper.selectList(null);
+            return noteList;
+        }
+
+        public Noteinfo getNoteDetailByNoteId(String noteId){
+            QueryWrapper queryWrapper = new QueryWrapper();
+            queryWrapper.eq("NOTE_NO",noteId);
+            return noteInfoMapper.selectOne(queryWrapper);
         }
 
 
