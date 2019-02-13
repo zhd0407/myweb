@@ -76,18 +76,14 @@ public class UserController {
     }
 
     /**
-     * @param email 邮箱，登录标志
-     * @param pass 密码
+     * @param username 邮箱，登录标志
+     * @param password 密码
      * */
+    @ResponseBody
     @RequestMapping(value = "/user/auth" , method = RequestMethod.POST , produces="application/json;charset=utf-8")
-    public ModelAndView auth(@RequestParam(name = "email",required = true)String email, @RequestParam(name = "pass",required = true)String pass,HttpSession session){
-        JSONObject authJo = userService.LoginAuth(email,pass,session);
-        if(authJo!=null&&!"".equals(Charset.nullToEmpty((String) authJo.get("result")))){
-            return  new ModelAndView("index","userInfo",authJo);
-        }else{
-            return  new ModelAndView("user/login","userInfo",authJo);
-        }
-
+    public JSONObject auth(@RequestParam(name = "username",required = true)String username, @RequestParam(name = "password",required = true)String password,HttpSession session){
+        JSONObject authJo = userService.LoginAuth(username,password,session);
+       return  authJo;
     }
 
     @RequestMapping(value = "/user/personcenter" , method = RequestMethod.POST , produces="application/json;charset=utf-8")
