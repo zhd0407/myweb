@@ -8,7 +8,9 @@ import lombok.Synchronized;
 
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+ * 该类用于生成用户id，用户注册时进行id生成，如果id没被占用则直接返回，如果被占用了，则重新生成并校验是否被占用
+ * */
 public class UserIdBuilder {
 
     public static List<String> userIdList = new ArrayList<>();

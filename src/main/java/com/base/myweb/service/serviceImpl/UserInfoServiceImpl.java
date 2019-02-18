@@ -3,6 +3,7 @@ package com.base.myweb.service.serviceImpl;
 
 import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.base.myweb.core.RedisUtil;
 import com.base.myweb.core.codeBuilder.UserIdBuilder;
 import com.base.myweb.core.SessionInfo;
 import com.base.myweb.mapper.LoginhistoryMapper;
@@ -11,6 +12,7 @@ import com.base.myweb.pojo.Loginhistory;
 import com.base.myweb.pojo.Userinfo;
 import com.base.myweb.service.UserInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import javax.servlet.http.HttpSession;
 import java.util.Date;
@@ -21,6 +23,9 @@ public class UserInfoServiceImpl implements UserInfoService {
     private UserInfoMapper usermapper;
     @Autowired
     LoginhistoryMapper loginhistoryMapper;
+
+    @Autowired
+    RedisUtil redisUtil;
 
     public String checkEmailIsExist(String email){
         Userinfo user = new Userinfo();
@@ -89,6 +94,12 @@ public class UserInfoServiceImpl implements UserInfoService {
             jo.put("msg","用户名或密码错误");
         }
         return jo;
+    }
+
+    public Boolean signIn(HttpSession session){
+     //  redisUtil
+
+        return true;
     }
 
 }

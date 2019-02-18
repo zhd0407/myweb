@@ -1,6 +1,7 @@
 package com.base.myweb.controller;
 
 import com.alibaba.fastjson.JSONObject;
+import com.base.myweb.core.exception.R;
 import com.base.myweb.core.tools.Charset;
 import com.base.myweb.pojo.Userinfo;
 import com.base.myweb.service.serviceImpl.SubjectServiceImpl;
@@ -132,6 +133,16 @@ public class UserController {
     public JSONObject getModelInfo(){
         JSONObject subjectJo = subjectService.getSubjectInfoFormatTable();
         return subjectJo;
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/sign/in", method = RequestMethod.POST,produces = "application/json;charset=utf-8")
+    public R signIn(HttpSession session){
+        if(userService.signIn(session)){
+            return R.succ("插入数据成功");
+        }else {
+            return R.fail("插入数据失败");
+        }
     }
 
 }
