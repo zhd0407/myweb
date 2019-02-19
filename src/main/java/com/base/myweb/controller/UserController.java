@@ -4,8 +4,10 @@ import com.alibaba.fastjson.JSONObject;
 import com.base.myweb.core.exception.R;
 import com.base.myweb.core.tools.Charset;
 import com.base.myweb.pojo.Userinfo;
+import com.base.myweb.service.serviceImpl.MailServiceImpl;
 import com.base.myweb.service.serviceImpl.SubjectServiceImpl;
 import com.base.myweb.service.serviceImpl.UserInfoServiceImpl;
+import com.sun.org.apache.bcel.internal.generic.RETURN;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -143,6 +145,18 @@ public class UserController {
         }else {
             return R.fail("插入数据失败");
         }
+    }
+
+    @Autowired
+    MailServiceImpl mailService;
+    @ResponseBody
+    @RequestMapping(value = "/user/sendVerCodeToMail" , method = RequestMethod.POST , produces="application/json;charset=utf-8")
+    public JSONObject setVerCodeToMail(@RequestParam(name = "email",required = true)String email){
+        JSONObject jo = new JSONObject();
+        String code = mailService.sendVerCodeToMail(email);
+        jo.put("result","200");
+        jo.put("varCode",code);
+        return jo;
     }
 
 }
