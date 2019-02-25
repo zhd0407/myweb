@@ -16,7 +16,7 @@ public class MailServiceImpl implements MailService {
         themail.setBody(mailbody);
         themail.setTo(email);
         themail.setFrom("272754994@qq.com");
-        themail.setNamePass("272754994@qq.com", ".4131izutnebevol");
+        themail.setNamePass("272754994@qq.com", "");
         themail.sendout();
         return mailbody;
     }

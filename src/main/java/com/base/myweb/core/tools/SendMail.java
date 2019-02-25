@@ -215,30 +215,6 @@ public class SendMail {
         }
         return true;
     }
-    /*public static void main(String[] args) {
-        sendMail themail =new SendMail("smtp.qq.com");
-        String mailbody="发送成功了哦";
-        themail.setNeedAuth(true);
-        themail.setSubject("java发邮件的测试");
-        themail.setBody(mailbody);
-        themail.setTo("595442649@qq.com");
-        themail.setFrom("272754994@qq.com");
-        themail.setNamePass("272754994@qq.com", ".4131izutnebevol");
-        themail.sendout();
-        //System.out.println("");
 
-
-    }
-    public static void sendEmail(String body){
-        SendMail themail =new SendMail("smtp.qq.com");
-        String mailbody=body;
-        themail.setNeedAuth(true);
-        themail.setSubject("举报");
-        themail.setBody(mailbody);
-        themail.setTo("595442649@qq.com");
-        themail.setFrom("272754994@qq.com");
-        themail.setNamePass("272754994@qq.com", ".4131izutnebevol");
-        themail.sendout();
-    }*/
 }
 
