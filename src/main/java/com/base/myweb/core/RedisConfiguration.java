@@ -1,6 +1,6 @@
 package com.base.myweb.core;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
+/*import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
@@ -9,9 +9,9 @@ import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
 
 import java.net.UnknownHostException;
 
-@Configuration
+@Configuration*/
 public class RedisConfiguration {
-
+/*
     @Bean
     public RedisTemplate redisTemplate(RedisConnectionFactory redisConnectionFactory) throws UnknownHostException {
         RedisTemplate<Object, Object> template = new RedisTemplate();
@@ -24,5 +24,5 @@ public class RedisConfiguration {
         template.setValueSerializer(jackson2JsonRedisSerializer);
 
         return template;
-    }
+    }*/
 }

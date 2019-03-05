@@ -1,6 +1,7 @@
 package com.base.myweb.controller;
 
 import com.alibaba.fastjson.JSONObject;
+import com.base.myweb.client.OrderClient;
 import com.base.myweb.core.exception.R;
 import com.base.myweb.pojo.Userinfo;
 import com.base.myweb.service.serviceImpl.MailServiceImpl;
@@ -11,9 +12,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 /*import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.cloud.client.loadbalancer.LoadBalancerClient;*/
+/*import org.springframework.cloud.client.ServiceInstance;
+import org.springframework.cloud.client.loadbalancer.LoadBalancerClient;*/
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-/*import org.springframework.web.client.RestTemplate;*/
+/*import org.springframework.web.client.RestTemplate;
+import org.springframework.web.client.RestTemplate;*/
 import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpSession;
 import java.util.Map;
@@ -160,8 +164,7 @@ public class UserController {
         jo.put("varCode",code);
         return jo;
     }
-/*
-    @Autowired
+   /* @Autowired
     LoadBalancerClient loadBalancerClient;
     @ResponseBody
     @RequestMapping(value = "test" )
@@ -170,6 +173,15 @@ public class UserController {
         ServiceInstance serviceInstance = loadBalancerClient.choose("ORDER");
         String url = String.format("http://%s:%s/order/1",serviceInstance.getHost(),serviceInstance.getPort());
         return restTemplate.getForObject(url,String.class);
-    }*/
+    }
+*/
 
+  /* @Autowired
+    OrderClient orderClient;
+   @ResponseBody
+   @GetMapping("/test1")
+   public String test(){
+       return orderClient.findOrderById(4l);
+   }
+*/
 }
