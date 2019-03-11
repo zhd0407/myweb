@@ -11,30 +11,54 @@
     <script src="/plugins/ECharts/echarts.min.js"></script>
     <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('main'));
 
-        // 指定图表的配置项和数据
-        var option = {
-            title: {
-                text: 'ECharts 入门示例'
-            },
-            tooltip: {},
-            legend: {
-                data:['销量']
-            },
-            xAxis: {
-                data: ["衬衫","羊毛衫","雪纺衫","裤子","高跟鞋","袜子"]
-            },
-            yAxis: {},
-            series: [{
-                name: '销量',
-                type: 'bar',
-                data: [5, 20, 36, 10, 10, 20]
-            }]
-        };
+        $.ajax({
+            type : "GET",//提交方式
+            url  : "/getEchartsInfo",//提交地址
+            data : { },//提交的数据
+            dataType : "json",
+            success  : function(data){  //返回结果
+                var xaxix = data.xAxisData;
+                var xval = data.xVal;
+                var xval1 = data.xVal1;
+                var myChart = echarts.init(document.getElementById('main'));        //main为Echarts绑定的容器
+                // 指定图表的配置项和数据
+                var option = {
+                    title: {
+                        text: 'ECharts集成测试'
+                    },
+                    tooltip: {},
+                    legend: {
+                        data:['销量','闹着玩']
+                    },
+                    xAxis: {
+                        data: xaxix
+                    },
+                    yAxis: {},
+                    series: [{
+                        name: '销量',
+                        type: 'bar',
+                        data: xval
+                    },{
+                        name: '闹着玩',
+                        type: 'line',
+                        data: xval1
+                    }]
+                };
 
-        // 使用刚指定的配置项和数据显示图表。
-        myChart.setOption(option);
+                // 使用刚指定的配置项和数据显示图表。
+                myChart.setOption(option);
+                myChart.on('click', function (params) {
+                    console.log(params);
+                });
+            },
+            error : function(data){
+                alert("错误");
+            }
+        });
+
+
+
     </script>
 </body>
 </html>
