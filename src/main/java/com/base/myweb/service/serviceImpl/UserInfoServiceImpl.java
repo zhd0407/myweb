@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.base.myweb.core.RedisUtil;
 import com.base.myweb.core.codeBuilder.UserIdBuilder;
 import com.base.myweb.core.SessionInfo;
+import com.base.myweb.core.tools.Charset;
 import com.base.myweb.mapper.LoginhistoryMapper;
 import com.base.myweb.mapper.UserInfoMapper;
 import com.base.myweb.pojo.Loginhistory;
@@ -14,6 +15,8 @@ import com.base.myweb.service.UserInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
+
 import javax.servlet.http.HttpSession;
 import java.util.Date;
 
@@ -97,9 +100,21 @@ public class UserInfoServiceImpl implements UserInfoService {
     }
 
     public Boolean signIn(HttpSession session){
-     //  redisUtil
+        //  redisUtil
 
         return true;
     }
 
+
+    public void checkSigned(Model model, HttpSession session){
+        String userId = (String) session.getAttribute("userId");
+        if(!"".equals(Charset.nullToEmpty(userId))){
+
+
+
+
+        }
+
+
+    }
 }

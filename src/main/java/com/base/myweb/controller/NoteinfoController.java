@@ -45,7 +45,8 @@ public class NoteinfoController {
     @RequestMapping("/question/detail")
     public String detail(Model model,@RequestParam(name = "noteId",required = true)String noteId){
         if(!"".equals(Charset.nullToEmpty(noteId))){
-            model.addAttribute("NoteInfo",noteinfoServiceImpl.getNoteDetailByNoteId(noteId));
+            noteinfoServiceImpl.getNoteDetailByNoteId(model,noteId);
+
         }
         return "question/detail";
     }
@@ -79,6 +80,7 @@ public class NoteinfoController {
         noteinfo.setAccessSta(accessSta);               //审核状态
         noteinfo.setOriginType(origin_type);        //性质，原创、转载
         noteinfo.setIntegrate(integrate);
+        noteinfo.setSkinNum(0);
         noteinfoServiceImpl.insertNoteInfo(noteinfo);
         return "question/detail";
     }

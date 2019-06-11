@@ -23,5 +23,6 @@ public class Noteinfo {
     private String oldNoteId;   //原贴编号
     private String cancomment;  //可以评论
     private Integer integrate;  //积分
+    private Integer skinNum;    //浏览量
 
 }

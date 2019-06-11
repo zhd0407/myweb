@@ -2,9 +2,8 @@ package com.base.myweb.controller;
 
 
 import com.base.myweb.core.SessionInfo;
-import com.base.myweb.mapper.UserInfoMapper;
 import com.base.myweb.pojo.Noteinfo;
-import com.base.myweb.pojo.Userinfo;
+import com.base.myweb.service.UserInfoService;
 import com.base.myweb.service.serviceImpl.NoteinfoServiceImpl;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +23,8 @@ public class IndexController {
 
     @Autowired
     NoteinfoServiceImpl noteinfoServiceimpl;
+    @Autowired
+    UserInfoService userInfoServiceimpl;
 
     @RequestMapping("/index")
     public ModelAndView index(Map<String,Object> map){
@@ -80,7 +81,7 @@ public class IndexController {
     }
 
     @RequestMapping("/attendance")
-    public String attendance(Map<String,Object> map){
+    public String attendance(Model model, HttpSession session){
 
 
         return "attendance";

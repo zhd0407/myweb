@@ -342,11 +342,11 @@ layui.define(['layer', 'laytpl', 'form', 'element', 'upload', 'util'], function(
     });
     */
   }
-  $('body').on('click', '#LAY_signin', function(){
+ /* $('body').on('click', '#LAY_signin', function(){
     var othis = $(this);
     if(othis.hasClass(DISABLED)) return;
 
-    fly.json('/sign/in', {
+    fly.json('/user/in', {
       token: signRender.token || 1
     }, function(res){
       signRender(res.data);
@@ -357,7 +357,7 @@ layui.define(['layer', 'laytpl', 'form', 'element', 'upload', 'util'], function(
     });
 
     othis.addClass(DISABLED);
-  });
+  });*/
 
   //签到说明
   elemSigninHelp.on('click', function(){

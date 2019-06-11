@@ -5,9 +5,11 @@ import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.base.myweb.mapper.NoteInfoMapper;
 import com.base.myweb.pojo.Noteinfo;
+import com.base.myweb.pojo.Userinfo;
 import com.base.myweb.service.NoteinfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 
 import javax.servlet.http.HttpSession;
 import java.util.List;
@@ -32,10 +34,11 @@ public class NoteinfoServiceImpl implements NoteinfoService {
             return noteList;
         }
 
-        public Noteinfo getNoteDetailByNoteId(String noteId){
+        public void getNoteDetailByNoteId(Model model,String noteId){
             QueryWrapper queryWrapper = new QueryWrapper();
             queryWrapper.eq("NOTE_NO",noteId);
-            return noteInfoMapper.selectOne(queryWrapper);
+            Noteinfo noteInfo = noteInfoMapper.selectOne(queryWrapper);
+            model.addAttribute("NoteInfo",noteInfo);
         }
 
 

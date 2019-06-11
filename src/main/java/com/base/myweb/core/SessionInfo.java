@@ -37,5 +37,13 @@ public class SessionInfo {
         session.setAttribute("userId",userInfo.getUserId());
     }
 
+    public static Userinfo getUserInfoFromSession(String userId,HttpSession session){
+        Userinfo userinfo = null;
+        if (!"".equals(Charset.nullToEmpty(userId))){
+            userinfo = (Userinfo) session.getAttribute("userInfo");
+        }
+        return userinfo;
+    }
+
 
 }
