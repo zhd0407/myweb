@@ -12,98 +12,13 @@
 </head>
 <body>
 
-<div class="fly-header layui-bg-black">
-  <div class="layui-container">
-    <a class="fly-logo" href="/">
-      <img src="/images/logo.png" alt="layui">
-    </a>
-    <ul class="layui-nav fly-nav layui-hide-xs">
-      <li class="layui-nav-item layui-this">
-        <a href="/"><i class="iconfont icon-jiaoliu"></i>交流</a>
-      </li>
-      <li class="layui-nav-item">
-        <a href="../case/case"><i class="iconfont icon-iconmingxinganli"></i>案例</a>
-      </li>
-      <li class="layui-nav-item">
-        <a href="http://www.layui.com/" target="_blank"><i class="iconfont icon-ui"></i>框架</a>
-      </li>
-    </ul>
-    
-    <ul class="layui-nav fly-nav-user">
-      
-      <!-- 未登入的状态 -->
-      <!--
-      <li class="layui-nav-item">
-        <a class="iconfont icon-touxiang layui-hide-xs" href="login"></a>
-      </li>
-      <li class="layui-nav-item">
-        <a href="login">登入</a>
-      </li>
-      <li class="layui-nav-item">
-        <a href="../user/regisiter">注册</a>
-      </li>
-      <li class="layui-nav-item layui-hide-xs">
-        <a href="/app/qq/" onclick="layer.msg('正在通过QQ登入', {icon:16, shade: 0.1, time:0})" title="QQ登入" class="iconfont icon-qq"></a>
-      </li>
-      <li class="layui-nav-item layui-hide-xs">
-        <a href="/app/weibo/" onclick="layer.msg('正在通过微博登入', {icon:16, shade: 0.1, time:0})" title="微博登入" class="iconfont icon-weibo"></a>
-      </li>
-       -->
-      
-      <!-- 登入后的状态 -->
-      <li class="layui-nav-item">
-        <a class="fly-nav-avatar" href="javascript:;">
-          <cite class="layui-hide-xs">贤心</cite>
-          <i class="iconfont icon-renzheng layui-hide-xs" title="认证信息：layui 作者"></i>
-          <i class="layui-badge fly-badge-vip layui-hide-xs">VIP3</i>
-          <img src="https://tva1.sinaimg.cn/crop.0.0.118.118.180/5db11ff4gw1e77d3nqrv8j203b03cweg.jpg">
-        </a>
-        <dl class="layui-nav-child">
-          <dd><a href="../user/set"><i class="layui-icon">&#xe620;</i>基本设置</a></dd>
-          <dd><a href="../user/message"><i class="iconfont icon-tongzhi" style="top: 4px;"></i>我的消息</a></dd>
-          <dd><a href="../user/home"><i class="layui-icon" style="margin-left: 2px; font-size: 22px;">&#xe68e;</i>我的主页</a></dd>
-          <hr style="margin: 5px 0;">
-          <dd><a href="" style="text-align: center;">退出</a></dd>
-        </dl>
-      </li>
-    </ul>
-  </div>
-</div>
-
-<div class="layui-hide-xs">
-  <div class="fly-panel fly-column">
-    <div class="layui-container">
-      <ul class="layui-clear">
-        <li class="layui-hide-xs"><a href="/">首页</a></li> 
-        <li class="layui-this"><a href="">提问</a></li> 
-        <li><a href="">分享<span class="layui-badge-dot"></span></a></li> 
-        <li><a href="">讨论</a></li> 
-        <li><a href="">建议</a></li> 
-        <li><a href="">公告</a></li> 
-        <li><a href="">动态</a></li> 
-        <li class="layui-hide-xs layui-hide-sm layui-show-md-inline-block"><span class="fly-mid"></span></li> 
-        
-        <!-- 用户登入后显示 -->
-        <li class="layui-hide-xs layui-hide-sm layui-show-md-inline-block"><a href="../user/index">我发表的贴</a></li>
-        <li class="layui-hide-xs layui-hide-sm layui-show-md-inline-block"><a href="../user/index#collection">我收藏的贴</a></li>
-      </ul> 
-      
-      <div class="fly-column-right layui-hide-xs"> 
-        <span class="fly-search"><i class="layui-icon"></i></span> 
-        <a href="add" class="layui-btn">发表新帖</a>
-      </div> 
-      <div class="layui-hide-sm layui-show-xs-block" style="margin-top: -10px; padding-bottom: 10px; text-align: center;"> 
-        <a href="add" class="layui-btn">发表新帖</a>
-      </div> 
-    </div>
-  </div>
-</div>
+<div style="width:100%;height:60px" id="head"></div>
 
 <div class="layui-container">
   <div class="layui-row layui-col-space15">
     <div class="layui-col-md8 content detail">
       <div class="fly-panel detail-box">
-        <h1 th:text="${NoteInfo.getTheme()}"></h1>
+        <h1 th:text="${NoteDetail.getNoteinfo().getTheme()}"></h1>
         <div class="fly-detail-info">
           <!-- <span class="layui-badge">审核中</span> -->
           <span class="layui-badge layui-bg-green fly-detail-column">动态</span>
@@ -125,7 +40,7 @@
           </div>
           <span class="fly-list-nums"> 
             <a href="#comment"><i class="iconfont" title="回答">&#xe60c;</i> 66</a>
-            <i class="iconfont" title="人气">&#xe60b;</i><label th:text="${NoteInfo.getSkinNum()}"></label>
+            <i class="iconfont" title="人气">&#xe60b;</i><label th:text="${NoteDetail.getNoteinfo().getSkinNum()}"></label>
           </span>
         </div>
         <div class="detail-about">
@@ -134,7 +49,7 @@
           </a>
           <div class="fly-detail-user">
             <a href="../user/home" class="fly-link">
-              <cite>贤心</cite>
+              <cite><p th:text="${NoteDetail.getUserinfo().getUserNam()}"></p></cite>
               <i class="iconfont icon-renzheng" title="认证信息：{{ rows.user.approve }}"></i>
               <i class="layui-badge fly-badge-vip">VIP3</i>
             </a>
@@ -146,7 +61,7 @@
           </div>
         </div>
         <div class="detail-body photos">
-          <p th:utext="${NoteInfo.getNoteBody()}">
+          <p th:text="${NoteDetail.getNoteinfo().getNoteBody()}">
 
           </p>
           <p>更新日志：</p>
@@ -156,7 +71,7 @@
 * 全面同步最新的 Fly 社区风格，各种细节得到大幅优化
 * 更友好的响应式适配能力
 </pre>
-          
+
           下载<hr>
           <p>
             官网：<a href="http://www.layui.com/template/fly/" target="_blank">http://www.layui.com/template/fly/</a><br>
@@ -278,64 +193,16 @@
         </div>
       </div>
     </div>
-    <div class="layui-col-md4">
-      <dl class="fly-panel fly-list-one">
-        <dt class="fly-panel-title">本周热议</dt>
-        <dd>
-          <a href="">基于 layui 的极简社区页面模版</a>
-          <span><i class="iconfont icon-pinglun1"></i> 16</span>
-        </dd>
-        <dd>
-          <a href="">基于 layui 的极简社区页面模版</a>
-          <span><i class="iconfont icon-pinglun1"></i> 16</span>
-        </dd>
-        <dd>
-          <a href="">基于 layui 的极简社区页面模版</a>
-          <span><i class="iconfont icon-pinglun1"></i> 16</span>
-        </dd>
-        <dd>
-          <a href="">基于 layui 的极简社区页面模版</a>
-          <span><i class="iconfont icon-pinglun1"></i> 16</span>
-        </dd>
-        <dd>
-          <a href="">基于 layui 的极简社区页面模版</a>
-          <span><i class="iconfont icon-pinglun1"></i> 16</span>
-        </dd>
-        <dd>
-          <a href="">基于 layui 的极简社区页面模版</a>
-          <span><i class="iconfont icon-pinglun1"></i> 16</span>
-        </dd>
-        <dd>
-          <a href="">基于 layui 的极简社区页面模版</a>
-          <span><i class="iconfont icon-pinglun1"></i> 16</span>
-        </dd>
-        <dd>
-          <a href="">基于 layui 的极简社区页面模版</a>
-          <span><i class="iconfont icon-pinglun1"></i> 16</span>
-        </dd>
-        <dd>
-          <a href="">基于 layui 的极简社区页面模版</a>
-          <span><i class="iconfont icon-pinglun1"></i> 16</span>
-        </dd>
-        <dd>
-          <a href="">基于 layui 的极简社区页面模版</a>
-          <span><i class="iconfont icon-pinglun1"></i> 16</span>
-        </dd>
 
-        <!-- 无数据时 -->
-        <!--
-        <div class="fly-none">没有相关数据</div>
-        -->
-      </dl>
 
-      <div class="fly-panel">
-        <div class="fly-panel-title">
-          这里可作为广告区域
+        <div class="layui-col-md4">
+        <!--本周热议-->
+        <dl class="fly-panel fly-list-one" id="currWeekTopic">
+        </dl>
+
+        <!--广告栏-->
+        <div class="fly-panel" id="advert">
         </div>
-        <div class="fly-panel-main">
-          <a href="http://layim.layui.com/?from=fly" target="_blank" class="fly-zanzhu" time-limit="2017.09.25-2099.01.01" style="background-color: #5FB878;">LayIM 3.0 - layui 旗舰之作</a>
-        </div>
-      </div>
 
       <div class="fly-panel" style="padding: 20px 0; text-align: center;">
         <img src="/images/weixin.jpg" style="max-width: 100%;" alt="layui">
@@ -356,7 +223,14 @@
 </div>
 
 <script src="/layui/layui.js"></script>
+<script src="/plugins/JQuery/jquery-3.3.1.min.js"></script>
 <script>
+
+    $(document).ready(function() {
+        $("#head").load("../head");
+        $("#advert").load("/advert");
+        $("#currWeekTopic").load("/currWeekTopic");
+    });
 layui.cache.page = 'jie';
 layui.cache.user = {
   username: '游客'

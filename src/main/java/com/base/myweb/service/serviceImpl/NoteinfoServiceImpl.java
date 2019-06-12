@@ -4,6 +4,7 @@ package com.base.myweb.service.serviceImpl;
 import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.base.myweb.mapper.NoteInfoMapper;
+import com.base.myweb.pojo.NoteDetail;
 import com.base.myweb.pojo.Noteinfo;
 import com.base.myweb.pojo.Userinfo;
 import com.base.myweb.service.NoteinfoService;
@@ -34,11 +35,10 @@ public class NoteinfoServiceImpl implements NoteinfoService {
             return noteList;
         }
 
-        public void getNoteDetailByNoteId(Model model,String noteId){
+        public Noteinfo getNoteDetailByNoteNo( String noteNo){
             QueryWrapper queryWrapper = new QueryWrapper();
-            queryWrapper.eq("NOTE_NO",noteId);
-            Noteinfo noteInfo = noteInfoMapper.selectOne(queryWrapper);
-            model.addAttribute("NoteInfo",noteInfo);
+            queryWrapper.eq("NOTE_NO",noteNo);
+            return noteInfoMapper.selectOne(queryWrapper);
         }
 
 

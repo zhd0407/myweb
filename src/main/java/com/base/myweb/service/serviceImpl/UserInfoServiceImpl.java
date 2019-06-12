@@ -23,7 +23,7 @@ import java.util.Date;
 @Service
 public class UserInfoServiceImpl implements UserInfoService {
     @Autowired
-    private UserInfoMapper usermapper;
+    UserInfoMapper usermapper;
     @Autowired
     LoginhistoryMapper loginhistoryMapper;
 
@@ -103,6 +103,13 @@ public class UserInfoServiceImpl implements UserInfoService {
         //  redisUtil
 
         return true;
+    }
+
+    public Userinfo getUserInfoByUserId(String userId){
+        Userinfo userinfo = null;
+        QueryWrapper qw = new QueryWrapper();
+        qw.eq("USER_ID", userId);
+        return usermapper.selectOne(qw);
     }
 
 

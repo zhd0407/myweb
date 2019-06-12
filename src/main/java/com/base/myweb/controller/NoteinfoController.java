@@ -2,10 +2,13 @@ package com.base.myweb.controller;
 
 import com.alibaba.fastjson.JSONObject;
 import com.base.myweb.core.tools.Charset;
+import com.base.myweb.pojo.NoteDetail;
 import com.base.myweb.pojo.Noteinfo;
 import com.base.myweb.service.QuestionService;
+import com.base.myweb.service.serviceImpl.NoteDetailServiceImpl;
 import com.base.myweb.service.serviceImpl.NoteinfoServiceImpl;
 import com.base.myweb.service.serviceImpl.QuestionServiceImpl;
+import com.base.myweb.service.serviceImpl.UserInfoServiceImpl;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -25,10 +28,16 @@ import java.util.Map;
 public class NoteinfoController {
 
     @Autowired
-    QuestionServiceImpl questionServiceImpl;
+    QuestionServiceImpl questionService;
 
     @Autowired
     NoteinfoServiceImpl noteinfoServiceImpl;
+
+    @Autowired
+    UserInfoServiceImpl userInfoService;
+
+    @Autowired
+    NoteDetailServiceImpl noteDetailService;
 
     @RequestMapping("/question")
     public String question(Map<String ,Object> map){
@@ -38,16 +47,17 @@ public class NoteinfoController {
 
     @RequestMapping("/question/add")
     public String add(Model model, HttpSession session){
-        questionServiceImpl.addNote(model,session);
+        questionService.addNote(model,session);
         return"question/add";
     }
 
     @RequestMapping("/question/detail")
     public String detail(Model model,@RequestParam(name = "noteId",required = true)String noteId){
+        NoteDetail noteDetail = null;
         if(!"".equals(Charset.nullToEmpty(noteId))){
-            noteinfoServiceImpl.getNoteDetailByNoteId(model,noteId);
-
+           noteDetail = noteDetailService.getNoteDetailInfoByNoteId(noteId);
         }
+        model.addAttribute("NoteDetail",noteDetail);
         return "question/detail";
     }
 

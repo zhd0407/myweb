@@ -26,24 +26,26 @@ public class QuestionServiceImpl implements QuestionService {
         String userId = Charset.nullToEmpty((String)session.getAttribute("userId"));
         if (!"".equals(userId)&&!"-1".equals(userId)){
             Userinfo userinfo = (Userinfo)session.getAttribute("userInfo");
-            String userType = userinfo.getIdentityType();
-            QueryWrapper queryWrapper = new QueryWrapper();
-            if (!"".equals(Charset.nullToEmpty(userType))&&"customer".equals(userType)){
-                queryWrapper.eq("user_type",userType);
-            }
-            List<Subject> subjects = subjectMapper.selectList(queryWrapper);
-            JSONArray listJa = new JSONArray();
-            JSONObject tmpJo = new JSONObject();
-            tmpJo.put("code","");
-            tmpJo.put("name","");
-            listJa.add(tmpJo);
-            for (Subject subject:subjects) {
-                tmpJo = new JSONObject();
-                tmpJo.put("code",subject.getSubjectCode());
-                tmpJo.put("name",subject.getSubjectNam());
+            if(userinfo!=null){
+                String userType = userinfo.getIdentityType();
+                QueryWrapper queryWrapper = new QueryWrapper();
+                if (!"".equals(Charset.nullToEmpty(userType))&&"customer".equals(userType)){
+                    queryWrapper.eq("user_type",userType);
+                }
+                List<Subject> subjects = subjectMapper.selectList(queryWrapper);
+                JSONArray listJa = new JSONArray();
+                JSONObject tmpJo = new JSONObject();
+                tmpJo.put("code","");
+                tmpJo.put("name","");
                 listJa.add(tmpJo);
+                for (Subject subject:subjects) {
+                    tmpJo = new JSONObject();
+                    tmpJo.put("code",subject.getSubjectCode());
+                    tmpJo.put("name",subject.getSubjectNam());
+                    listJa.add(tmpJo);
+                }
+                model.addAttribute("subjectInfo",listJa);
             }
-            model.addAttribute("subjectInfo",listJa);
         }
     }
 }
