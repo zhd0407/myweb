@@ -45,5 +45,12 @@ public class SessionInfo {
         return userinfo;
     }
 
+    public static String getUserIdFromSession(HttpSession httpSession){
+        return Charset.nullToEmpty((String) httpSession.getAttribute("userId"));
+    }
+
+    public static String getUserNameFromSession(HttpSession httpSession){
+        return Charset.nullToEmpty((String)httpSession.getAttribute("userNam"));
+    }
 
 }
