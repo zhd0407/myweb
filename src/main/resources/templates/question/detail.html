@@ -72,7 +72,7 @@
         </fieldset>
 
         <ul class="jieda" id="jieda" th:each="message:${NoteDetail.getMsgList()}">
-          <li data-id="111" class="jieda-daan">
+          <li data-id="111" class="jieda-daan" style="border-bottom:1px dotted #DFDFDF;">
             <a name="item-1111111111"></a>
             <div class="detail-about detail-about-reply">
               <a class="fly-avatar" href="">
@@ -113,7 +113,7 @@
               </span>
               <div class="jieda-admin">
                 <span type="edit">编辑</span>
-                <span type="del">删除</span>
+                <span type="del" onclick="deleteMessage(this);" th:value="${message.getMsgNo()}">删除</span>
                 <!-- <span class="jieda-accept" type="accept">采纳</span> -->
               </div>
             </div>
@@ -187,7 +187,60 @@
             dataType : "json",
             success  : function(data){  //返回结果
                 if (data.result=="success"){
-                    layer.msg("评论成功" , {icon: 5});
+                    //layer.msg("评论成功" , {icon: 5});
+                    var htmlStr = document.getElementById("jieda").innerHTML +
+                     "<li data-id=\"111\" class=\"jieda-daan\" style=\"border-bottom:1px dotted #DFDFDF;\">\n" +
+                        "            <a name=\"item-1111111111\"></a>\n" +
+                        "            <div class=\"detail-about detail-about-reply\">\n" +
+                        "              <a class=\"fly-avatar\" href=\"\">\n" +
+                        "                <img src=\"https://tva1.sinaimg.cn/crop.0.0.118.118.180/5db11ff4gw1e77d3nqrv8j203b03cweg.jpg\" alt=\" \">\n" +
+                        "              </a>\n" +
+                        "              <div class=\"fly-detail-user\">\n" +
+                        "                <a href=\"\" class=\"fly-link\">\n" +
+                        "                  <cite>贤心</cite>\n" +
+                        "                  <i class=\"iconfont icon-renzheng\" title=\"认证信息：XXX\"></i>\n" +
+                        "                  <i class=\"layui-badge fly-badge-vip\">VIP3</i>              \n" +
+                        "                </a>\n" +
+                        "                \n" +
+                        "                <span>(楼主)</span>\n" +
+                        "                <!--\n" +
+                        "                <span style=\"color:#5FB878\">(管理员)</span>\n" +
+                        "                <span style=\"color:#FF9E3F\">（社区之光）</span>\n" +
+                        "                <span style=\"color:#999\">（该号已被封）</span>\n" +
+                        "                -->\n" +
+                        "              </div>\n" +
+                        "\n" +
+                        "              <div class=\"detail-hits\">\n" +
+                        "                <span >1111111111</span>\n" +
+                        "              </div>\n" +
+                        "\n" +
+                        "              <i class=\"iconfont icon-caina\" title=\"最佳答案\"></i>\n" +
+                        "            </div>\n" +
+                        "            <div class=\"detail-body jieda-body photos\">\n" +
+                        "              <p >" + content + "</p>\n" +
+                        "            </div>\n" +
+                        "            <div class=\"jieda-reply\">\n" +
+                        "              <span class=\"jieda-zan zanok\" type=\"zan\">\n" +
+                        "                <i class=\"iconfont icon-zan\"></i>\n" +
+                        "                <em >0</em>\n" +
+                        "              </span>\n" +
+                        "              <span type=\"reply\">\n" +
+                        "                <i class=\"iconfont icon-svgmoban53\"></i>\n" +
+                        "                回复\n" +
+                        "              </span>\n" +
+                        "              <div class=\"jieda-admin\">\n" +
+                        "                <span type=\"edit\">编辑</span>\n" +
+                        "                <span type=\"del\" onclick=\"deleteMessage(this);\" value=\""+data.msgNo+"\">删除</span>\n" +
+                        "                <!-- <span class=\"jieda-accept\" type=\"accept\">采纳</span> -->\n" +
+                        "              </div>\n" +
+                        "            </div>\n" +
+                        "          </li>";
+
+                    document.getElementById("jieda").innerHTML = htmlStr;
+                    //document.getElementById("jieda").appendChild(li);
+                    //liInfo.appendTo(document.getElementById(jieda));
+
+
                 }else{
                     layer.msg(data.msg , {icon: 5});
                 }
@@ -196,9 +249,26 @@
                 alert("错误");
             }
         });
+    }
 
-
-
+    function deleteMessage(obj){
+      var msgNo = obj.getAttribute("value");
+        $.ajax({
+            type : "POST",//提交方式
+            url  : "/message/del",//提交地址
+            data : {"msgNo": msgNo},//提交的数据
+            dataType : "json",
+            success  : function(data){  //返回结果
+                if (data.result=="success"){
+                    obj.parentElement.parentElement.parentElement.remove();
+                }else{
+                    layer.msg(data.msg , {icon: 5});
+                }
+            },
+            error : function(data){
+                alert("错误");
+            }
+        });
 
     }
 

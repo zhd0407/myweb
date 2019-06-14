@@ -24,4 +24,12 @@ public class MessageController {
         messageService.addNewMessage( noteNo, content, upMsgNo, session, tmpObj);
         return tmpObj;
     }
+
+    @ResponseBody
+    @RequestMapping("/message/del")
+    public JSONObject delMessage(@RequestParam(name = "msgNo",required = true)String msgNo){
+        JSONObject tmpObj = new JSONObject();
+        messageService.delMessage( msgNo, tmpObj);
+        return tmpObj;
+    }
 }

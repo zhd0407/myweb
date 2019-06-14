@@ -16,6 +16,7 @@ public class Message {
     private int praise;
     private int bad;
     private Date msgTime;
+    private String validSta;
 
     public String getMsgTime(){
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");

@@ -23,6 +23,7 @@ public class MessageServiceImpl implements MessageService {
     public List<Message> getMessageByNoteNo(String noteNo){
         QueryWrapper queryWrapper = new QueryWrapper();
         queryWrapper.eq("NOTE_NO",noteNo);
+        queryWrapper.eq("VALID_STA","Y");
         return messageMapper.selectList(queryWrapper);
     }
 
@@ -40,13 +41,25 @@ public class MessageServiceImpl implements MessageService {
             message.setPraise(0);
             message.setMsgDsc(content);
             message.setMsgTime(new Date());
+            message.setValidSta("Y");
             if(!"".equals(Charset.nullToEmpty(upMsgNo))){
                 message.setUpMsgNo(Integer.parseInt(upMsgNo));
             }
             messageMapper.insert(message);
             tmpObj.put("result","success");
+            tmpObj.put("msgNo",message.getMsgNo());
             tmpObj.put("msg","");
         }
     }
 
+    public void delMessage(String msgNo,JSONObject tmpObj){
+        QueryWrapper queryWrapper = new QueryWrapper();
+        queryWrapper.eq("MSG_NO",msgNo);
+        Message message = messageMapper.selectOne(queryWrapper);
+        message.setValidSta("N");
+        messageMapper.update(message,queryWrapper);
+
+        tmpObj.put("result","success");
+        tmpObj.put("msg","");
+    }
 }
