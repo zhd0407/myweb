@@ -48,6 +48,7 @@ public class MessageServiceImpl implements MessageService {
             messageMapper.insert(message);
             tmpObj.put("result","success");
             tmpObj.put("msgNo",message.getMsgNo());
+            tmpObj.put("msgTime",message.getMsgTime());
             tmpObj.put("msg","");
         }
     }

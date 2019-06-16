@@ -10,16 +10,18 @@ import java.util.Date;
 public class Message {
 
     @TableId(type = IdType.AUTO)
-    private Long msgNo;
-    private int noteNo;
-    private String userId;
-    private int upMsgNo;
-    private String msgDsc;
-    private int praise;
-    private int bad;
-    private Date msgTime;
-    private String validSta;
+    private Long msgNo;             //主键值
+    private int noteNo;             //帖子主键值
+    private String userId;          //发表用户id
+    private int upMsgNo;            //上级评论
+    private String msgDsc;          //评论内容
+    private int praise;             //点赞数
+    private int bad;                //差评数
+    private Date msgTime;           //评论时间
+    private String validSta;        //有效状态、逻辑删除
+    private String acceptFlag;      //采纳标识
 
+    //重写返回时间格式
     public String getMsgTime(){
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
         return  sdf.format(this.msgTime);

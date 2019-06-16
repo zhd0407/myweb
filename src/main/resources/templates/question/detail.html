@@ -71,8 +71,8 @@
           <legend>回帖</legend>
         </fieldset>
 
-        <ul class="jieda" id="jieda" th:each="message:${NoteDetail.getMsgList()}">
-          <li data-id="111" class="jieda-daan" style="border-bottom:1px dotted #DFDFDF;">
+        <ul class="jieda" id="jieda" >
+          <li data-id="111" class="jieda-daan" style="border-bottom:1px dotted #DFDFDF;" th:each="message:${NoteDetail.getMsgList()}">
             <a name="item-1111111111"></a>
             <div class="detail-about detail-about-reply">
               <a class="fly-avatar" href="">
@@ -97,10 +97,11 @@
                 <span th:text="${message.getMsgTime()}"></span>
               </div>
 
-              <i class="iconfont icon-caina" title="最佳答案"></i>
+              <i class="iconfont icon-caina" title="最佳答案" th:style="${message.getAcceptFlag()=='true'}?'':'display:none'"></i>
             </div>
             <div class="detail-body jieda-body photos">
               <p th:text="${message.getMsgDsc()}"></p>
+              <p th:text="${message.getAcceptFlag()}"></p>
             </div>
             <div class="jieda-reply">
               <span class="jieda-zan zanok" type="zan">
@@ -114,7 +115,7 @@
               <div class="jieda-admin">
                 <span type="edit">编辑</span>
                 <span type="del" onclick="deleteMessage(this);" th:value="${message.getMsgNo()}">删除</span>
-                <!-- <span class="jieda-accept" type="accept">采纳</span> -->
+                <span class="jieda-accept" type="accept">采纳</span>
               </div>
             </div>
           </li>
@@ -211,10 +212,10 @@
                         "              </div>\n" +
                         "\n" +
                         "              <div class=\"detail-hits\">\n" +
-                        "                <span >1111111111</span>\n" +
+                        "                <span >" + data.msgTime + "</span>\n" +
                         "              </div>\n" +
                         "\n" +
-                        "              <i class=\"iconfont icon-caina\" title=\"最佳答案\"></i>\n" +
+                        "              <i class=\"iconfont icon-caina\" title=\"最佳答案\" style=\"display: none\"></i>\n" +
                         "            </div>\n" +
                         "            <div class=\"detail-body jieda-body photos\">\n" +
                         "              <p >" + content + "</p>\n" +
