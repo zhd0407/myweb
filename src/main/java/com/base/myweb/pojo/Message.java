@@ -1,14 +1,16 @@
 package com.base.myweb.pojo;
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
 import lombok.Data;
-
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @Data
 public class Message {
 
-    private int msgNo;
+    @TableId(type = IdType.AUTO)
+    private Long msgNo;
     private int noteNo;
     private String userId;
     private int upMsgNo;
