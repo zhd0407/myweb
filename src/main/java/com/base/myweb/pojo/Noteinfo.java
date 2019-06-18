@@ -25,5 +25,6 @@ public class Noteinfo {
     private String cancomment;  //可以评论
     private Integer integrate;  //积分
     private Integer skinNum;    //浏览量
+    private String complete;    //完结
 
 }

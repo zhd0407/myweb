@@ -5,7 +5,9 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.base.myweb.core.SessionInfo;
 import com.base.myweb.core.tools.Charset;
 import com.base.myweb.mapper.MessageMapper;
+import com.base.myweb.mapper.NoteInfoMapper;
 import com.base.myweb.pojo.Message;
+import com.base.myweb.pojo.Noteinfo;
 import com.base.myweb.service.MessageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,6 +21,9 @@ public class MessageServiceImpl implements MessageService {
 
     @Autowired
     MessageMapper messageMapper;
+
+    @Autowired
+    NoteInfoMapper noteInfoMapper;
 
     public List<Message> getMessageByNoteNo(String noteNo){
         QueryWrapper queryWrapper = new QueryWrapper();
@@ -59,6 +64,23 @@ public class MessageServiceImpl implements MessageService {
         Message message = messageMapper.selectOne(queryWrapper);
         message.setValidSta("N");
         messageMapper.update(message,queryWrapper);
+
+        tmpObj.put("result","success");
+        tmpObj.put("msg","");
+    }
+
+    public void acceptMsg(String msgNo,JSONObject tmpObj){
+        QueryWrapper queryWrapper = new QueryWrapper();
+        queryWrapper.eq("MSG_NO",msgNo);
+        Message message = messageMapper.selectOne(queryWrapper);
+        message.setAcceptFlag("Y");
+        messageMapper.update(message,queryWrapper);
+
+        QueryWrapper qw = new QueryWrapper();
+        qw.eq("NOTE_NO",message.getNoteNo());
+        Noteinfo noteinfo = noteInfoMapper.selectOne(qw);
+        noteinfo.setComplete("Y");
+        noteInfoMapper.updateById(noteinfo);
 
         tmpObj.put("result","success");
         tmpObj.put("msg","");

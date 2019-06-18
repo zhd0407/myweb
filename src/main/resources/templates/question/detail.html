@@ -97,11 +97,10 @@
                 <span th:text="${message.getMsgTime()}"></span>
               </div>
 
-              <i class="iconfont icon-caina" title="最佳答案" th:style="${message.getAcceptFlag()=='true'}?'':'display:none'"></i>
+              <i class="iconfont icon-caina" title="最佳答案" th:style="${message.getAcceptFlag()=='Y'}?'':'display:none'" th:id="${'best' + message.getMsgNo()}"></i>
             </div>
             <div class="detail-body jieda-body photos">
               <p th:text="${message.getMsgDsc()}"></p>
-              <p th:text="${message.getAcceptFlag()}"></p>
             </div>
             <div class="jieda-reply">
               <span class="jieda-zan zanok" type="zan">
@@ -113,9 +112,10 @@
                 回复
               </span>
               <div class="jieda-admin">
-                <span type="edit">编辑</span>
-                <span type="del" onclick="deleteMessage(this);" th:value="${message.getMsgNo()}">删除</span>
-                <span class="jieda-accept" type="accept">采纳</span>
+                <span type="edit" style="display: none">编辑</span>
+                <span type="del" onclick="deleteMessage(this);" th:value="${message.getMsgNo()}"
+                      th:if="${userId==message.getUserId()} or${userId ==NoteDetail.getNoteinfo().getUserId()}" th:style="${message.getAcceptFlag()=='Y'}?'display:none':''">删除</span>
+                <span class="jieda-accept" type="accept" th:if="${showAcceptBut=='true'} and ${userId!=message.getUserId()}" th:value="${message.getMsgNo()}" onclick="acceptMsg(this);">采纳</span>
               </div>
             </div>
           </li>
@@ -215,7 +215,7 @@
                         "                <span >" + data.msgTime + "</span>\n" +
                         "              </div>\n" +
                         "\n" +
-                        "              <i class=\"iconfont icon-caina\" title=\"最佳答案\" style=\"display: none\"></i>\n" +
+                        "              <i class=\"iconfont icon-caina\" title=\"最佳答案\" style=\"display: none\" id=\"best+" + data.msgNo + "\"></i>\n" +
                         "            </div>\n" +
                         "            <div class=\"detail-body jieda-body photos\">\n" +
                         "              <p >" + content + "</p>\n" +
@@ -230,7 +230,7 @@
                         "                回复\n" +
                         "              </span>\n" +
                         "              <div class=\"jieda-admin\">\n" +
-                        "                <span type=\"edit\">编辑</span>\n" +
+                        "                <span type=\"edit\" style='display: none;'>编辑</span>\n" +
                         "                <span type=\"del\" onclick=\"deleteMessage(this);\" value=\""+data.msgNo+"\">删除</span>\n" +
                         "                <!-- <span class=\"jieda-accept\" type=\"accept\">采纳</span> -->\n" +
                         "              </div>\n" +
@@ -270,7 +270,25 @@
                 alert("错误");
             }
         });
-
+    }
+    function acceptMsg(obj){
+        var msgNo = obj.getAttribute("value");
+        $.ajax({
+            type : "POST",//提交方式
+            url  : "/message/acceptMsg",//提交地址
+            data : {"msgNo": msgNo},//提交的数据
+            dataType : "json",
+            success  : function(data){  //返回结果
+                if (data.result=="success"){
+                    document.getElementById("best"+data.msgNo).style.display="";
+                }else{
+                    layer.msg(data.msg , {icon: 5});
+                }
+            },
+            error : function(data){
+                alert("错误");
+            }
+        });
     }
 
 layui.config({

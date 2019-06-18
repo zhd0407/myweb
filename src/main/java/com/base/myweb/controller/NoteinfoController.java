@@ -52,10 +52,13 @@ public class NoteinfoController {
     }
 
     @RequestMapping("/question/detail")
-    public String detail(Model model,@RequestParam(name = "noteId",required = true)String noteId){
+    public String detail(Model model,@RequestParam(name = "noteId",required = true)String noteId,HttpSession httpSession){
         NoteDetail noteDetail = null;
         if(!"".equals(Charset.nullToEmpty(noteId))){
            noteDetail = noteDetailService.getNoteDetailInfoByNoteId(noteId);
+           if(noteDetail!=null){
+               noteDetailService.getOtherInfoByNoteDetail(model,noteDetail,httpSession);
+           }
         }
         model.addAttribute("NoteDetail",noteDetail);
         return "question/detail";

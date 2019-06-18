@@ -32,4 +32,12 @@ public class MessageController {
         messageService.delMessage( msgNo, tmpObj);
         return tmpObj;
     }
+
+    @ResponseBody
+    @RequestMapping("/message/acceptMsg")
+    public JSONObject acceptMsg(@RequestParam(name = "msgNo",required = true)String msgNo){
+        JSONObject tmpObj = new JSONObject();
+        messageService.acceptMsg( msgNo, tmpObj);
+        return tmpObj;
+    }
 }
