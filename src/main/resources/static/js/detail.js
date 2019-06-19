@@ -1,6 +1,7 @@
 $(document).ready(function() {
     $("#head").load("../head");
     $("#advert").load("/advert");
+    $("#footer").load("/footer");
     $("#currWeekTopic").load("/currWeekTopic");
 });
 layui.config({
