@@ -1,6 +1,7 @@
 package com.base.myweb.pojo;
 
 import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import lombok.Data;
 import java.text.SimpleDateFormat;
@@ -20,6 +21,8 @@ public class Message {
     private Date msgTime;           //评论时间
     private String validSta;        //有效状态、逻辑删除
     private String acceptFlag;      //采纳标识
+    @TableField(exist = false)
+    private Userinfo userinfo;
 
     //重写返回时间格式
     public String getMsgTime(){

@@ -80,7 +80,7 @@ public class MessageServiceImpl implements MessageService {
         qw.eq("NOTE_NO",message.getNoteNo());
         Noteinfo noteinfo = noteInfoMapper.selectOne(qw);
         noteinfo.setComplete("Y");
-        noteInfoMapper.updateById(noteinfo);
+        noteInfoMapper.update(noteinfo,qw);
 
         tmpObj.put("result","success");
         tmpObj.put("msg","");

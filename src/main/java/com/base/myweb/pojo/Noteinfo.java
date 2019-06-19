@@ -1,7 +1,9 @@
 package com.base.myweb.pojo;
 
+import com.base.myweb.core.tools.Charset;
 import lombok.Data;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 @Data
 public class Noteinfo {
@@ -27,4 +29,13 @@ public class Noteinfo {
     private Integer skinNum;    //浏览量
     private String complete;    //完结
 
+    //重写返回时间格式
+    public String getChangeTime(){
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        if(changeTime!=null){
+            return sdf.format(this.changeTime);
+        }else{
+            return  sdf.format(this.createTime);
+        }
+    }
 }

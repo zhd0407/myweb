@@ -1,5 +1,6 @@
 package com.base.myweb.service.serviceImpl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.base.myweb.core.tools.Charset;
 import com.base.myweb.pojo.Message;
 import com.base.myweb.pojo.NoteDetail;
@@ -36,7 +37,13 @@ public class NoteDetailServiceImpl implements NoteDetailService {
                 noteDetail.setUserinfo(userinfo);
             }
             List<Message> msgList = messageService.getMessageByNoteNo(noteNo);
+            for(Message message:msgList){
+                QueryWrapper qw = new QueryWrapper();
+                message.setUserinfo(userInfoService.getUserInfoByUserId(message.getUserId()));
+            }
             noteDetail.setMsgList(msgList);
+
+
         }
         return noteDetail;
     }
