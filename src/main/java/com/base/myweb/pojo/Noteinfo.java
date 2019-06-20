@@ -1,5 +1,6 @@
 package com.base.myweb.pojo;
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.base.myweb.core.tools.Charset;
 import lombok.Data;
 
@@ -14,7 +15,6 @@ public class Noteinfo {
     private String noteType;    //类型：分享/提问/求助/
     private String modelType;   //领域
     private String noteKeys;        //关键词
-
     private String noteBody;    //正文
     private String userId;      //发帖人
     private Date createTime;    //创建时间
@@ -28,6 +28,12 @@ public class Noteinfo {
     private Integer integrate;  //积分
     private Integer skinNum;    //浏览量
     private String complete;    //完结
+
+    @TableField(exist = false)
+    private int msgNum;
+
+    @TableField(exist = false)
+    private String userName;
 
     //重写返回时间格式
     public String getChangeTime(){

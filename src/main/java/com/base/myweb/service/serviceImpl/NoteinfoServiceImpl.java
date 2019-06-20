@@ -3,7 +3,9 @@ package com.base.myweb.service.serviceImpl;
 
 import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.base.myweb.mapper.MessageMapper;
 import com.base.myweb.mapper.NoteInfoMapper;
+import com.base.myweb.mapper.UserInfoMapper;
 import com.base.myweb.pojo.NoteDetail;
 import com.base.myweb.pojo.Noteinfo;
 import com.base.myweb.pojo.Userinfo;
@@ -22,6 +24,12 @@ public class NoteinfoServiceImpl implements NoteinfoService {
         @Autowired
         NoteInfoMapper noteInfoMapper;
 
+        @Autowired
+        UserInfoMapper userInfoMapper;
+
+        @Autowired
+        MessageMapper messageMapper;
+
         public JSONObject insertNoteInfo(Noteinfo noteinfo){
             JSONObject noteJo = new JSONObject();
             noteInfoMapper.insert(noteinfo);
@@ -32,6 +40,19 @@ public class NoteinfoServiceImpl implements NoteinfoService {
 
         public List<Noteinfo> getNoteList(HttpSession session){
             List<Noteinfo> noteList = noteInfoMapper.selectList(null);
+            for(Noteinfo noteinfo:noteList){
+                //获取发帖人名称
+                QueryWrapper qw = new QueryWrapper();
+                qw.eq("USER_ID",noteinfo.getUserId());
+                Userinfo userinfo = userInfoMapper.selectOne(qw);
+                noteinfo.setUserName(userinfo.getUserNam());
+
+                //获取评论数
+                qw = new QueryWrapper();
+                qw.eq("NOTE_NO",noteinfo.getNoteNo());
+                qw.eq("VALID_STA","Y");
+                noteinfo.setMsgNum(messageMapper.selectCount(qw));
+            }
             return noteList;
         }
 
