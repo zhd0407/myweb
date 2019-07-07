@@ -25,25 +25,27 @@ public class NoteDetailServiceImpl implements NoteDetailService {
     @Autowired
     MessageServiceImpl messageService;
 
+    /**
+     * 根据帖子主键值查询对应的帖子详情
+     * */
     public NoteDetail getNoteDetailInfoByNoteId(String noteNo){
         NoteDetail noteDetail = new NoteDetail();
         Noteinfo noteinfo = noteinfoService.getNoteDetailByNoteNo(noteNo);
-
         if(noteinfo!=null){
+            //设置帖子信息
             noteDetail.setNoteinfo(noteinfo);
-            String userId = noteinfo.getUserId();
-            Userinfo userinfo = userInfoService.getUserInfoByUserId(userId);
+            //获取发帖人信息
+            Userinfo userinfo = userInfoService.getUserInfoByUserId(noteinfo.getUserId());
             if (userinfo!=null){
                 noteDetail.setUserinfo(userinfo);
             }
+            //获取评论列表
             List<Message> msgList = messageService.getMessageByNoteNo(noteNo);
             for(Message message:msgList){
-                QueryWrapper qw = new QueryWrapper();
+                //获取评论人信息
                 message.setUserinfo(userInfoService.getUserInfoByUserId(message.getUserId()));
             }
             noteDetail.setMsgList(msgList);
-
-
         }
         return noteDetail;
     }

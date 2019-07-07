@@ -1,6 +1,8 @@
 package com.base.myweb.pojo;
 
+import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.base.myweb.core.tools.Charset;
 import lombok.Data;
 
@@ -9,6 +11,7 @@ import java.util.Date;
 @Data
 public class Noteinfo {
 
+    @TableId(type = IdType.AUTO)
     private Integer noteNo;     //主键值
     private String noteId;      //编号
     private String theme;       //标题

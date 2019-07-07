@@ -39,7 +39,6 @@ public class MessageServiceImpl implements MessageService {
             tmpObj.put("result","fail");
             tmpObj.put("msg","请先登录");
         }else{
-            String currUserName = SessionInfo.getUserNameFromSession(httpSession);
             message.setNoteNo(Integer.parseInt(noteNo));
             message.setUserId(currUserId);
             message.setBad(0);
@@ -59,30 +58,43 @@ public class MessageServiceImpl implements MessageService {
     }
 
     public void delMessage(String msgNo,JSONObject tmpObj){
-        QueryWrapper queryWrapper = new QueryWrapper();
-        queryWrapper.eq("MSG_NO",msgNo);
-        Message message = messageMapper.selectOne(queryWrapper);
-        message.setValidSta("N");
-        messageMapper.update(message,queryWrapper);
-
-        tmpObj.put("result","success");
-        tmpObj.put("msg","");
+        Message message = messageMapper.selectById(msgNo);
+        if(message!=null){
+            message.setValidSta("N");
+            int count = messageMapper.updateById(message);
+            if(count>0){
+                tmpObj.put("result","success");
+                tmpObj.put("msg","");
+            }else{
+                tmpObj.put("result","faile");
+                tmpObj.put("msg","操作失败，请重试或联系系统管理员");
+            }
+        }else{
+            tmpObj.put("result","faile");
+            tmpObj.put("msg","未获取到消息记录");
+        }
     }
 
     public void acceptMsg(String msgNo,JSONObject tmpObj){
-        QueryWrapper queryWrapper = new QueryWrapper();
-        queryWrapper.eq("MSG_NO",msgNo);
-        Message message = messageMapper.selectOne(queryWrapper);
-        message.setAcceptFlag("Y");
-        messageMapper.update(message,queryWrapper);
+        String success = "success";
+        Message message = messageMapper.selectById(msgNo);
+        if(message!=null){
+            message.setAcceptFlag("Y");
+            int count = messageMapper.updateById(message);
+            if(count<1){
+                success = "fail";
+            }
+        }
 
-        QueryWrapper qw = new QueryWrapper();
-        qw.eq("NOTE_NO",message.getNoteNo());
-        Noteinfo noteinfo = noteInfoMapper.selectOne(qw);
-        noteinfo.setComplete("Y");
-        noteInfoMapper.update(noteinfo,qw);
-
-        tmpObj.put("result","success");
+        Noteinfo noteinfo = noteInfoMapper.selectById(message.getNoteNo());
+        if(noteinfo!=null){
+            noteinfo.setComplete("Y");
+            int count = noteInfoMapper.updateById(noteinfo);
+            if(count<1){
+                success = "fail";
+            }
+        }
+        tmpObj.put("result",success);
         tmpObj.put("msg","");
     }
 }

@@ -57,9 +57,7 @@ public class NoteinfoServiceImpl implements NoteinfoService {
         }
 
         public Noteinfo getNoteDetailByNoteNo( String noteNo){
-            QueryWrapper queryWrapper = new QueryWrapper();
-            queryWrapper.eq("NOTE_NO",noteNo);
-            return noteInfoMapper.selectOne(queryWrapper);
+            return noteInfoMapper.selectById(noteNo);
         }
 
 

@@ -14,12 +14,12 @@ import com.baomidou.mybatisplus.generator.config.rules.NamingStrategy;
  */
 public class MyGenerator {
 
-
-    /**
+/*
+    *//**
      * <p>
      * MySQL 生成演示
      * </p>
-     */
+     *//*
     public static void main(String[] args) {
         AutoGenerator mpg = new AutoGenerator();
 
@@ -89,5 +89,5 @@ public class MyGenerator {
 
         // 执行生成
         mpg.execute();
-    }
+    }*/
 }

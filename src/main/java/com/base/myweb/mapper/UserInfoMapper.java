@@ -10,7 +10,6 @@ import org.apache.ibatis.annotations.Select;
 import java.util.List;
 import java.util.Map;
 
-@Mapper
 public interface UserInfoMapper extends BaseMapper<Userinfo> {
 
     @Select("select * from userinfo")

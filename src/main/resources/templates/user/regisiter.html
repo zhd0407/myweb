@@ -11,10 +11,8 @@
   <link rel="stylesheet" href="/css/global.css">
 </head>
 <body>
-
     <div class="fly-header layui-bg-black" id="header">
     </div>
-
   <div class="layui-container fly-marginTop">
     <div class="fly-panel fly-panel-user" pad20>
       <div class="layui-tab layui-tab-brief" lay-filter="user">
@@ -82,12 +80,7 @@
             ,experience: 83
             ,sex: '男'
         };
-        layui.config({
-            version: "3.0.0"
-            ,base: '/mods/'
-        }).extend({
-            fly: 'index'
-        }).use('fly');
+
         layui.use(['form'], function() {
             var form = layui.form;
             //监听提交

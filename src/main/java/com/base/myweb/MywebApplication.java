@@ -9,7 +9,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 import org.springframework.cloud.openfeign.EnableFeignClients;*/
 
 @SpringBootApplication
-@MapperScan("com.base.yweb.mapper")
+@MapperScan("com.base.myweb.mapper")
 /*
 @EnableEurekaClient
 @EnableFeignClients

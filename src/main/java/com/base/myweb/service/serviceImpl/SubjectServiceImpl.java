@@ -43,9 +43,7 @@ public class SubjectServiceImpl implements SubjectService {
    }
 
     public void delSubjectInfo(String subject_no){
-        QueryWrapper qw = new QueryWrapper();
-        qw.eq("subject_no",subject_no);
-        subjectMapper.delete(qw);
+        subjectMapper.deleteById(subject_no);
     }
 
 }

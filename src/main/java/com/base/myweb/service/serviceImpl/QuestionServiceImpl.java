@@ -21,6 +21,7 @@ public class QuestionServiceImpl implements QuestionService {
     @Autowired
     SubjectMapper subjectMapper;
 
+    //
     public void addNote(Model model,HttpSession session){
         SessionInfo.setUserInfoToModelBySession(model,session);
         String userId = Charset.nullToEmpty((String)session.getAttribute("userId"));

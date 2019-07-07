@@ -50,14 +50,13 @@ public class UserInfoServiceImpl implements UserInfoService {
     }
 
     public Userinfo regInfo(String email, String username, String pass, HttpSession session){
-
-        Userinfo user = new Userinfo();
-        user.setEmail(email);
         QueryWrapper qw = new QueryWrapper();
-        qw.eq("EMAIL", user.getEmail());
+        qw.eq("EMAIL", email);
         int mailCount = usermapper.selectCount(qw);
         Userinfo currUser = null;
         if (mailCount<=0){
+            Userinfo user = new Userinfo();
+            user.setEmail(email);
             String userId = UserIdBuilder.createUserId(usermapper);
             user.setUserId(userId);
             user.setUserNam(username);
