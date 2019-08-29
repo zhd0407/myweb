@@ -16,16 +16,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http
+       /* http
                 .authorizeRequests()
                 .antMatchers("/css/**", "/index","/images/**","/js/**","/layui/**","/mods/**","/plugins/**").permitAll()
                 .antMatchers("/user/**").hasRole("USER")
                 .antMatchers("/question/**").hasRole("USER")
                 .and()
-                .formLogin().loginPage("/login").failureUrl("/login-error")
+                .formLogin().usernameParameter("email").passwordParameter("pass").loginPage("/login").failureUrl("/login-error")
                 .and()
                 .exceptionHandling().accessDeniedPage("/401");
-        http.logout().logoutSuccessUrl("/");
+
+        http.logout().logoutSuccessUrl("/");*/
     }
 
     @Autowired
@@ -33,7 +34,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(userDetailsService);
+      /*  //auth.userDetailsService(userDetailsService);
+        auth.inMemoryAuthentication().withUser("272754994@qq.com").password("1234").roles("VIP1")
+                .and()
+                .withUser("angle").password("123456").roles("VIP1", "VIP2")
+                .and()
+                .withUser("god").password("123456").roles("VIP1", "VIP2", "VIP3");*/
     }
 
 }
