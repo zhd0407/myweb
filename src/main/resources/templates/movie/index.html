@@ -1,24 +1,36 @@
 <!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>电影点播</title>
+
+    <style>
+        .movieTyp{
+            width: 100px;
+            border: 1px solid white;
+            background-color: #00CCFF;
+            cursor: pointer;
+        }
+
+    </style>
 </head>
 <body>
-    <div id="videoDiv" width="100%">
-        <video id="vid" width="98%" height="90%" autoplay="autoplay" controls="controls" >
-            <source src="/movie/21BF294A0AFC9E780ADE99C0E838A284.mp4" type="video/ogg">
-            <source src="/movie/21BF294A0AFC9E780ADE99C0E838A284.mp4" type="video/mp4">
-            Your browser does not support the video tag.
-        </video>
-<!--        <div align="center">
-            <button onclick="playPause()">播放/暂停</button>
-            <button onclick="makeBig()">大</button>
-            <button onclick="makeNormal()">中</button>
-            <button onclick="makeSmall()">小</button>
-        </div>-->
-    </div>
+        <div style="width: 98%;" align="center">
+            <table style="width: 100%;">
+                <tbody>
+                    <tr style="width: 100%;" th:each="moviecol:${MovieColInfo}">
+                        <td style="width: 200px;" th:text="${moviecol.mcolName}"></td>
+                        <td class="movieTyp" th:each="moviegroup:${moviecol.moviegroups}" th:text="${moviegroup.groupName}" th:id="${moviegroup.groupCode}" onclick="moviegroup_onclick(this);">栏目A</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div style="width: 98%;">
+            <iframe id="frameList" style="border: 0px;" src="/movie/movieList?code=all" ></iframe>
 
+
+        </div>
 </body>
 <script src="/plugins/JQuery/jquery-3.3.1.min.js"></script>
 <script src="/js/movie/movie.js"></script>

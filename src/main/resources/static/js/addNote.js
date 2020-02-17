@@ -15,3 +15,4 @@ layui.use(['form'], function() {
     form.on('submit(addNewNoteInfo)', function(data){
     });
 });
+

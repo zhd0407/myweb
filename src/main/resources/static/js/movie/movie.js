@@ -29,3 +29,7 @@ function makeNormal()
     $("#vid").height($("videoDiv").height()*0.3);
     $("#vid").width($("videoDiv").width()*0.3);
 }
+
+function moviegroup_onclick(obj) {
+    document.getElementById("frameList").src="/movie/movieList?code="+obj.id;
+}
