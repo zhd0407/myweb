@@ -33,6 +33,13 @@ public class IndexController {
         return  new ModelAndView("index");
     }
 
+    @RequestMapping("/menu")
+    public String menu(Map<String,Object> map){
+
+
+        return "Menu";
+    }
+
     @RequestMapping("/head")
     public String head(Model model,HttpSession session){
         SessionInfo.setUserInfoToModelBySession(model,session);
