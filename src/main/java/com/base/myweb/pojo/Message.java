@@ -11,16 +11,26 @@ import java.util.Date;
 public class Message {
 
     @TableId(type = IdType.UUID)
-    private Long msgNo;             //主键值
-    private int noteNo;             //帖子主键值
-    private String userId;          //发表用户id
-    private int upMsgNo;            //上级评论
-    private String msgDsc;          //评论内容
-    private int praise;             //点赞数
-    private int bad;                //差评数
-    private Date msgTime;           //评论时间
-    private String validSta;        //有效状态、逻辑删除
-    private String acceptFlag;      //采纳标识
+    //主键值
+    private Long msgNo;
+    //帖子主键值
+    private int noteNo;
+    //发表用户id
+    private String userId;
+    //上级评论
+    private int upMsgNo;
+    //评论内容
+    private String msgDsc;
+    //点赞数
+    private int praise;
+    //差评数
+    private int bad;
+    //评论时间
+    private Date msgTime;
+    //有效状态、逻辑删除
+    private String validSta;
+    //采纳标识
+    private String acceptFlag;
     @TableField(exist = false)
     private Userinfo userinfo;
 

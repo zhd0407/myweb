@@ -1,6 +1,5 @@
-package com.base.myweb.service.serviceImpl;
+package com.base.myweb.service.serviceimpl;
 
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.base.myweb.core.tools.Charset;
 import com.base.myweb.pojo.Message;
 import com.base.myweb.pojo.NoteDetail;
@@ -53,13 +52,17 @@ public class NoteDetailServiceImpl implements NoteDetailService {
     public void getOtherInfoByNoteDetail(Model model, NoteDetail noteDetail, HttpSession httpSession){
         String userId = (String) httpSession.getAttribute("userId");
         //获取当前登录人
-        String signFlag = "true";       //登录状态
-        String showAcceptBut = "false";        //是否显示采纳操作
-        if("".equals(Charset.nullToEmpty(userId))){     //当前登录人为空，则设置标志位为未登录
+        //登录状态
+        String signFlag = "true";
+        //是否显示采纳操作
+        String showAcceptBut = "false";
+        //当前登录人为空，则设置标志位为未登录
+        if("".equals(Charset.nullToEmpty(userId))){
             signFlag = "false";
         }
         //如果帖子完结，不显示采纳操作
-        if("Y".equals(noteDetail.getNoteinfo().getComplete())){
+        String complete = noteDetail.getNoteinfo().getComplete();
+        if("Y".equals(Charset.nullToEmpty(complete))){
             showAcceptBut = "false";
         }else{
             if (!"".equals(Charset.nullToEmpty(userId))&&userId.equals(noteDetail.getNoteinfo().getUserId())){

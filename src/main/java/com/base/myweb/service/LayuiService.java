@@ -5,5 +5,8 @@ import com.alibaba.fastjson.JSONObject;
 
 public interface LayuiService {
 
-    JSONObject initLayIM();
+    /**
+     *
+     * */
+    JSONObject initLayIm();
 }

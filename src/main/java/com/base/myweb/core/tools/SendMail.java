@@ -60,8 +60,9 @@ public class SendMail {
     private void setSmtpHost(String hostName) {
         // TODO Auto-generated method stub
         //System.out.println("设置系统属性：mail.smtp.host=" + hostName);
-        if(props==null)
+        if(props==null){
             props = System.getProperties();
+        }
         props.put("mail.smtp.host", hostName);
 
     }

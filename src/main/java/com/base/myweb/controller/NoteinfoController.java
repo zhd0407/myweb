@@ -1,22 +1,18 @@
 package com.base.myweb.controller;
 
-import com.alibaba.fastjson.JSONObject;
 import com.base.myweb.core.tools.Charset;
 import com.base.myweb.pojo.NoteDetail;
 import com.base.myweb.pojo.Noteinfo;
-import com.base.myweb.service.QuestionService;
-import com.base.myweb.service.serviceImpl.NoteDetailServiceImpl;
-import com.base.myweb.service.serviceImpl.NoteinfoServiceImpl;
-import com.base.myweb.service.serviceImpl.QuestionServiceImpl;
-import com.base.myweb.service.serviceImpl.UserInfoServiceImpl;
+import com.base.myweb.service.serviceimpl.NoteDetailServiceImpl;
+import com.base.myweb.service.serviceimpl.NoteinfoServiceImpl;
+import com.base.myweb.service.serviceimpl.QuestionServiceImpl;
+import com.base.myweb.service.serviceimpl.UserInfoServiceImpl;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 import javax.servlet.http.HttpSession;
 import java.util.Date;
@@ -77,7 +73,7 @@ public class NoteinfoController {
                                   HttpSession session){
         String accessSta = "";
         String noteId = "";
-        String origin_type = "origin";
+        String originType = "origin";
         if("".equals(Charset.nullToEmpty(String.valueOf(integrate)))){
             integrate = 0;
         }
@@ -91,7 +87,7 @@ public class NoteinfoController {
         noteinfo.setUserId((String) session.getAttribute("userId"));        //发帖人
         noteinfo.setCreateTime(new Date());             //发帖时间
         noteinfo.setAccessSta(accessSta);               //审核状态
-        noteinfo.setOriginType(origin_type);        //性质，原创、转载
+        noteinfo.setOriginType(originType);        //性质，原创、转载
         noteinfo.setIntegrate(integrate);
         noteinfo.setSkinNum(0);
         noteinfoServiceImpl.insertNoteInfo(noteinfo);

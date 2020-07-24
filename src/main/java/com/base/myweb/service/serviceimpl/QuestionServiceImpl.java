@@ -1,4 +1,4 @@
-package com.base.myweb.service.serviceImpl;
+package com.base.myweb.service.serviceimpl;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
@@ -21,7 +21,7 @@ public class QuestionServiceImpl implements QuestionService {
     @Autowired
     SubjectMapper subjectMapper;
 
-    //
+    @Override
     public void addNote(Model model,HttpSession session){
         SessionInfo.setUserInfoToModelBySession(model,session);
         String userId = Charset.nullToEmpty((String)session.getAttribute("userId"));
@@ -30,7 +30,8 @@ public class QuestionServiceImpl implements QuestionService {
             if(userinfo!=null){
                 String userType = userinfo.getIdentityType();
                 QueryWrapper queryWrapper = new QueryWrapper();
-                if (!"".equals(Charset.nullToEmpty(userType))&&"customer".equals(userType)){
+                userType = Charset.nullToEmpty(userType);
+                if ("customer".equals(userType)){
                     queryWrapper.eq("user_type",userType);
                 }
                 List<Subject> subjects = subjectMapper.selectList(queryWrapper);

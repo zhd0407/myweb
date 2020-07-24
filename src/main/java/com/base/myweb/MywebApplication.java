@@ -15,7 +15,7 @@ import org.springframework.cloud.openfeign.EnableFeignClients;*/
 @EnableFeignClients
 */
 @EnableSwagger2
-/**/
+
 public class MywebApplication {
 
     public static void main(String[] args) {

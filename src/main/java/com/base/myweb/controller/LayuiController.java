@@ -2,7 +2,7 @@ package com.base.myweb.controller;
 
 
 import com.alibaba.fastjson.JSONObject;
-import com.base.myweb.service.serviceImpl.LayuiServiceImpl;
+import com.base.myweb.service.serviceimpl.LayuiServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,7 +18,7 @@ public class LayuiController {
 
     @ResponseBody
     @RequestMapping(value = "/layIM/init" , method = RequestMethod.GET , produces="application/json;charset=utf-8")
-    public JSONObject initLayIMByUserId(){
-        return layuiService.initLayIM();
+    public JSONObject initLayImByUserId(){
+        return layuiService.initLayIm();
     }
 }

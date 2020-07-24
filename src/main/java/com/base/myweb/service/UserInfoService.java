@@ -13,7 +13,7 @@ public interface UserInfoService {
 
     Userinfo regInfo(String email, String username, String pass, HttpSession session);
 
-    JSONObject LoginAuth(String email,String pass,HttpSession session);
+    JSONObject loginAuth(String email,String pass,HttpSession session);
 
     void checkSigned(Model model, HttpSession session);
 }

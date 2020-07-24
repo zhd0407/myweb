@@ -1,4 +1,4 @@
-package com.base.myweb.service.serviceImpl;
+package com.base.myweb.service.serviceimpl;
 
 
 import com.alibaba.fastjson.JSONObject;
@@ -6,13 +6,11 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.base.myweb.mapper.MessageMapper;
 import com.base.myweb.mapper.NoteInfoMapper;
 import com.base.myweb.mapper.UserInfoMapper;
-import com.base.myweb.pojo.NoteDetail;
 import com.base.myweb.pojo.Noteinfo;
 import com.base.myweb.pojo.Userinfo;
 import com.base.myweb.service.NoteinfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.ui.Model;
 
 import javax.servlet.http.HttpSession;
 import java.util.List;

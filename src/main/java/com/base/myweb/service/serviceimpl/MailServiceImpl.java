@@ -1,4 +1,4 @@
-package com.base.myweb.service.serviceImpl;
+package com.base.myweb.service.serviceimpl;
 
 import com.base.myweb.core.tools.SendMail;
 import com.base.myweb.service.MailService;

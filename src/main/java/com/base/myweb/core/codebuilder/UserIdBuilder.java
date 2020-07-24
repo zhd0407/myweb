@@ -1,4 +1,4 @@
-package com.base.myweb.core.codeBuilder;
+package com.base.myweb.core.codebuilder;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.base.myweb.core.tools.Charset;

@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -7,22 +8,12 @@
 <body>
 <div id="videoDiv" width="100%">
     <video id="vid" width="98%" height="90%" autoplay="autoplay" controls="controls" >
-        <source src="/movie/21BF294A0AFC9E780ADE99C0E838A284.mp4" type="video/ogg">
-        <source src="/movie/21BF294A0AFC9E780ADE99C0E838A284.mp4" type="video/mp4">
-        Your browser does not support the video tag.
+        <source th:src="${moviePath}" type="video/ogg">
+        <source th:src="${moviePath}" type="video/mp4">
     </video>
-    <!--        <div align="center">
-                <button onclick="playPause()">播放/暂停</button>
-                <button onclick="makeBig()">大</button>
-                <button onclick="makeNormal()">中</button>
-                <button onclick="makeSmall()">小</button>
-            </div>-->
 </div>
 
 </body>
 <script src="/plugins/JQuery/jquery-3.3.1.min.js"></script>
 <script src="/js/movie/movie.js"></script>
-<script>
-
-</script>
 </html>

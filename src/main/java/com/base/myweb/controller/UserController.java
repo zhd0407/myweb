@@ -1,12 +1,11 @@
 package com.base.myweb.controller;
 
 import com.alibaba.fastjson.JSONObject;
-import com.base.myweb.client.OrderClient;
 import com.base.myweb.core.exception.R;
 import com.base.myweb.pojo.Userinfo;
-import com.base.myweb.service.serviceImpl.MailServiceImpl;
-import com.base.myweb.service.serviceImpl.SubjectServiceImpl;
-import com.base.myweb.service.serviceImpl.UserInfoServiceImpl;
+import com.base.myweb.service.serviceimpl.MailServiceImpl;
+import com.base.myweb.service.serviceimpl.SubjectServiceImpl;
+import com.base.myweb.service.serviceimpl.UserInfoServiceImpl;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 /*import org.springframework.cloud.client.ServiceInstance;
@@ -91,7 +90,7 @@ public class UserController {
     @ResponseBody
     @RequestMapping(value = "/user/auth" , method = RequestMethod.POST , produces="application/json;charset=utf-8")
     public JSONObject auth(@RequestParam(name = "username",required = true)String username, @RequestParam(name = "password",required = true)String password,HttpSession session){
-        JSONObject authJo = userService.LoginAuth(username,password,session);
+        JSONObject authJo = userService.loginAuth(username,password,session);
        return  authJo;
     }
 

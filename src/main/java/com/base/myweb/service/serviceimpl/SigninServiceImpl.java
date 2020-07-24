@@ -1,4 +1,4 @@
-package com.base.myweb.service.serviceImpl;
+package com.base.myweb.service.serviceimpl;
 
 import com.alibaba.fastjson.JSONObject;
 import com.base.myweb.core.tools.Charset;

@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <html lang="en">
+<link rel="stylesheet" href="/layui/css/layui.css">
 <head>
     <meta charset="UTF-8">
     <title>电影点播</title>
@@ -12,29 +13,58 @@
             background-color: #00CCFF;
             cursor: pointer;
         }
-
+        .movieContainer{
+            width: 98%;
+            MAX-WIDTH: 1200PX;
+        }
+        .movieListClass{
+            width: 100%;
+            min-height: 600px;
+            border: 0px;
+            overflow: hidden;
+        }
+        .movieBtnClass{
+            width: 25px;
+            height: 25px;
+        }
     </style>
 </head>
-<body>
-        <div style="width: 98%;" align="center">
-            <table style="width: 100%;">
-                <tbody>
-                    <tr style="width: 100%;" th:each="moviecol:${MovieColInfo}">
-                        <td style="width: 200px;" th:text="${moviecol.mcolName}"></td>
-                        <td class="movieTyp" th:each="moviegroup:${moviecol.moviegroups}" th:text="${moviegroup.groupName}" th:id="${moviegroup.groupCode}" onclick="moviegroup_onclick(this);">栏目A</td>
+<body align="center">
+        <div style="width: 98%;margin-top: 25px;" align="center">
+            <div class="movieContainer">
+                <table style="width: 100%;margin-top: 10px;margin-bottom: 10px;">
+                    <tbody>
+                        <tr style="width: 100%;" th:each="moviecol:${MovieColInfo}">
+                            <td style="width: 100px;" th:text="${moviecol.mcolName}"></td>
+                            <td class="movieTyp" th:each="moviegroup:${moviecol.moviegroups}" th:text="${moviegroup.groupName}" th:id="${moviegroup.groupCode}" onclick="moviegroup_onclick(this);">栏目A</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <table class="layui-table" lay-even="" lay-skin="nob" style="margin-top: 10px;margin-bottom: 10px;">
+                    <colgroup>
+                        <col style="width: 20%;">
+                        <col style="width: 50%;">
+                        <col style="width: 20%;">
+                        <col style="width: 10%;">
+                    </colgroup>
+
+                    <tbody>
+                    <tr th:each="movieInfo:${movieList}">
+                        <td th:text="${movieInfo.getMovieName()}"> </td>
+                        <td th:text="${movieInfo.getTitle()}"></td>
+                        <td th:text="${movieInfo.getTime()}"></td>
+                        <td> <img class="movieBtnClass" src="/images/movie/play.jpg" th:onclick="'javascript:openWeb(\''+${movieInfo.getMovieId()}+'\')'"/></td>
                     </tr>
-                </tbody>
-            </table>
-        </div>
-        <div style="width: 98%;">
-            <iframe id="frameList" style="border: 0px;" src="/movie/movieList?code=all" ></iframe>
-
-
+                    </tbody>
+                </table>
+            </div>
         </div>
 </body>
 <script src="/plugins/JQuery/jquery-3.3.1.min.js"></script>
 <script src="/js/movie/movie.js"></script>
 <script>
-
+    function openWeb(movieId){
+        window.open("/movie/play?movieId="+movieId);
+    }
 </script>
 </html>

@@ -4,7 +4,7 @@ package com.base.myweb.controller;
 import com.base.myweb.core.SessionInfo;
 import com.base.myweb.pojo.Noteinfo;
 import com.base.myweb.service.UserInfoService;
-import com.base.myweb.service.serviceImpl.NoteinfoServiceImpl;
+import com.base.myweb.service.serviceimpl.NoteinfoServiceImpl;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -31,13 +31,6 @@ public class IndexController {
 
 
         return  new ModelAndView("index");
-    }
-
-    @RequestMapping("/menu")
-    public String menu(Map<String,Object> map){
-
-
-        return "Menu";
     }
 
     @RequestMapping("/head")
@@ -81,7 +74,7 @@ public class IndexController {
     }
 
     @RequestMapping("/LAY_replyRank")
-    public String LAY_replyRank(Map<String,Object> map){
+    public String layReplyRank(Map<String,Object> map){
 
 
         return "LAY_replyRank";

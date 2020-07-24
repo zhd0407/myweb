@@ -1,4 +1,4 @@
-package com.base.myweb.service.serviceImpl;
+package com.base.myweb.service.serviceimpl;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
@@ -11,8 +11,9 @@ import org.springframework.stereotype.Service;
 public class LayuiServiceImpl implements LayuiService {
 
 
-    public  JSONObject initLayIM(){
-        JSONObject layIM = LayuiUtil.instance();
+    @Override
+    public  JSONObject initLayIm(){
+        JSONObject layIm = LayuiUtil.instance();
         JSONObject data = new JSONObject();
 
         JSONObject myInfo = new JSONObject();
@@ -52,8 +53,8 @@ public class LayuiServiceImpl implements LayuiService {
             groupArr.add(groupJo);
         }
         data.put("group",groupArr);
-        layIM.put("data",data);
-        return layIM;
+        layIm.put("data",data);
+        return layIm;
     }
 
 

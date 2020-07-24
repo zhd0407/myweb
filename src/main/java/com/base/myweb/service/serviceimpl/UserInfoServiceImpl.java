@@ -1,10 +1,10 @@
-package com.base.myweb.service.serviceImpl;
+package com.base.myweb.service.serviceimpl;
 
 
 import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.base.myweb.core.RedisUtil;
-import com.base.myweb.core.codeBuilder.UserIdBuilder;
+import com.base.myweb.core.codebuilder.UserIdBuilder;
 import com.base.myweb.core.SessionInfo;
 import com.base.myweb.core.tools.Charset;
 import com.base.myweb.mapper.LoginhistoryMapper;
@@ -13,7 +13,6 @@ import com.base.myweb.pojo.Loginhistory;
 import com.base.myweb.pojo.Userinfo;
 import com.base.myweb.service.UserInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
@@ -30,6 +29,7 @@ public class UserInfoServiceImpl implements UserInfoService {
     @Autowired
     RedisUtil redisUtil;
 
+    @Override
     public String checkEmailIsExist(String email){
         Userinfo user = new Userinfo();
         user.setEmail(email);
@@ -49,6 +49,7 @@ public class UserInfoServiceImpl implements UserInfoService {
         return ja.toString();
     }
 
+    @Override
     public Userinfo regInfo(String email, String username, String pass, HttpSession session){
         QueryWrapper qw = new QueryWrapper();
         qw.eq("EMAIL", email);
@@ -73,7 +74,8 @@ public class UserInfoServiceImpl implements UserInfoService {
         return currUser;
     }
 
-    public JSONObject LoginAuth(String email,String pass,HttpSession session){
+    @Override
+    public JSONObject loginAuth(String email,String pass,HttpSession session){
         JSONObject jo = new JSONObject();
         QueryWrapper qw = new QueryWrapper();
         //根据邮箱登录
@@ -112,6 +114,7 @@ public class UserInfoServiceImpl implements UserInfoService {
     }
 
 
+    @Override
     public void checkSigned(Model model, HttpSession session){
         String userId = (String) session.getAttribute("userId");
         if(!"".equals(Charset.nullToEmpty(userId))){
