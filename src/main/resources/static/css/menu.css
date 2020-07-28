@@ -1,0 +1,13 @@
+body{background: #D5DED9;font-family: "微软雅黑";}
+h1, h2, h3, h4, h5, h6{font-family: "微软雅黑";}
+p{line-height: 140%;font-size: 90%;}
+#accordion{margin: 100px 200px 100px 300px;}
+#accordion article{-webkit-transform: perspective(900px) rotateY(60deg);-webkit-transition: all 0.7s ease-in-out;background: #fff;border: 1px solid #f3f3f3;box-shadow: 0px 5px 15px gray;float: left;height: 420px;margin-left: -180px;padding: 20px;width: 220px;}
+#accordion article:first-child{margin-left: 0px;}
+#accordion article img{float: left;padding: 0 10px 5px 0;}
+#accordion article:hover{-webkit-transform: perspective(0) rotateY(-10deg);margin: 0 140px 0 -60px;}
+.clearfix:after{visibility:hidden;display:block;font-size:0;content:" ";clear:both;height:0}
+article a{color: #000;text-decoration: none;}
+article a:hover{color: blue;}
+article:hover{cursor: pointer;}
+article:hover a{color: blue;}
