@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html >
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
   <meta charset="utf-8">
   <title >自娱自乐</title>
@@ -14,6 +15,7 @@
     <div style="width:100%;height:60px" id="head"></div>
     <div class="layui-container">
         <div class="layui-row layui-col-space15">
+            <div> 姓名： ${#authentication.name}</div>
             <div class="layui-col-md8" id="primary">
 
             </div>

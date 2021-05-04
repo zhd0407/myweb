@@ -1,3 +1,4 @@
+
 # DataSource Config
 spring:
   datasource:
@@ -22,3 +23,4 @@ spring:
  # global-config:
   #  db-config:
   #    id-type: id_worker
+#debug: true

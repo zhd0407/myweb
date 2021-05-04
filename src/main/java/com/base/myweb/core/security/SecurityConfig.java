@@ -1,5 +1,4 @@
 package com.base.myweb.core.security;
-/*
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -7,28 +6,36 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.core.userdetails.UserDetailsService;*/
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
-//@EnableWebSecurity
-//@Configuration
-//@EnableGlobalMethodSecurity(prePostEnabled = true)
-public class SecurityConfig // extends WebSecurityConfigurerAdapter
- {
+@EnableWebSecurity
+@EnableGlobalMethodSecurity(prePostEnabled = true)
+public class SecurityConfig  extends WebSecurityConfigurerAdapter {
 
-   /* @Override
+    @Override
     protected void configure(HttpSecurity http) throws Exception {
-      *//*  http
-                .authorizeRequests()
-                .antMatchers("/css/**", "/index","/images/**","/js/**","/layui/**","/mods/**","/plugins/**").permitAll()
-                .antMatchers("/user/**").hasRole("USER")
-                .antMatchers("/question/**").hasRole("USER")
-                .and()
-                .formLogin().usernameParameter("email").passwordParameter("pass")//.loginPage("/login").failureUrl("/login-error")
-                .and()
-                .exceptionHandling().accessDeniedPage("/401");
 
-        http.logout().logoutSuccessUrl("/");*//*
-        http.headers().frameOptions().sameOrigin(); //解决iframe嵌入子页面时跨域问题
+        http.authorizeRequests()
+            .antMatchers("/").permitAll()
+            .antMatchers("/level1/**").hasRole("VIP1")
+            .antMatchers("/level2/**").hasRole("VIP2")
+            .antMatchers("/level3/**").hasRole("VIP3");
+        http.formLogin().loginPage("/userlogin").usernameParameter("user").passwordParameter("pwd");
+
+        http.logout().logoutSuccessUrl("/level");
+
+        http.rememberMe().rememberMeParameter("rb");
+
+                /*.antMatchers("/user/**").hasRole("VIP1")*/
+        /*.antMatchers("/question/**").hasRole("USER")
+                .and()
+                .formLogin().//..failureUrl("/login-error")
+                .and()
+                .exceptionHandling().accessDeniedPage("/401")*/
+       /*
+        http.headers().frameOptions().sameOrigin(); //解决iframe嵌入子页面时跨域问题*/
     }
 
     @Autowired
@@ -36,13 +43,19 @@ public class SecurityConfig // extends WebSecurityConfigurerAdapter
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-      *//*  //auth.userDetailsService(userDetailsService);
-        auth.inMemoryAuthentication().withUser("272754994@qq.com").password("1234").roles("VIP1")
+
+        auth.inMemoryAuthentication().passwordEncoder(new BCryptPasswordEncoder())
+                .withUser("zhangsan").password(new BCryptPasswordEncoder().encode("1234")).roles("VIP1","VIP2")
                 .and()
+                .withUser("lisi").password(new BCryptPasswordEncoder().encode("1234")).roles("VIP2","VIP3")
+                .and()
+                .withUser("wangwu").password(new BCryptPasswordEncoder().encode("1234")).roles("VIP3","VIP1");
+               /* .and()
                 .withUser("angle").password("123456").roles("VIP1", "VIP2")
                 .and()
-                .withUser("god").password("123456").roles("VIP1", "VIP2", "VIP3");*//*
+                .withUser("god").password("123456").roles("VIP1", "VIP2", "VIP3")*/
+
+        //auth.userDetailsService(userDetailsService);
     }
-*/
 
 }

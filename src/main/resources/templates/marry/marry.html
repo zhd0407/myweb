@@ -3,23 +3,266 @@
 <head>
     <meta charset="UTF-8">
     <title>结婚倒计时</title>
+    <link rel="stylesheet" href="/css/marry.css">
+    <link rel="stylesheet" href="/layui/css/layui.css">
 </head>
-    <style>
-        .ContainerClass{
-            background-image: url("/images/marry/total.jpg");
-        }
 
-    </style>
-<body>
-      <div style="width: 100%;height: 800px;">
-          <div style="width: 39%; height: 100%;border: 1px solid black;position: absolute;background-image: url('/images/marry/total.jpg');">
+<body overflow="hidden">
+   <!-- <div style="width: 100%;" overflow="hidden">
+        <div class="countDownDiv" align="center">
+            <div id="timeDiv" style="width:100%x;height: 100px;margin-top: 95%;">
+               <table style="width: 100%;height: 100%;" align="center">
+                   <tr style="width: 100%;background-color: #f443369c;">
+                       <td  class="countDownTd" >
+                           <label id="days"></label>
+                       </td>
+                       <td class="countDownTd"> 天 </td>
+                       <td class="countDownTd" >
+                           <label id="hours"></label>
+                       </td>
+                       <td class="countDownTd"> 小时 </td>
+                       <td class="countDownTd" >
+                           <label id="min"></label>
+                       </td>
+                       <td class="countDownTd"> 分钟 </td>
+                       <td class="countDownTd" >
+                           <label id="sec"></label>
+                       </td>
+                       <td class="countDownTd"> 秒 </td>
+                   </tr>
+               </table>
+            </div>
+        </div>
+        <div class="leftDiv" >
+            <div style="width: 9width: 9%;height: 50%;">
+                <div class="palyerDiv">
+                    <div id="videoDiv" width="100%;">
+                        <video id="vid" width="100%" autoplay="autoplay" controls="controls" >
+                            <source type="video/ogg">
+                            <source type="video/mp4">
+                        </video>
+                    </div>
 
+                </div>
+                <div class="movieListDiv">
+                    <ul style="list-sytle:none;">
+                        <li onclick="playMovie('/movie/aq/8e84d4f538dca082d5dadd78cdf68867.mp4')" class="movieListClass">
+                            <img src="/images/marry/baby/秀禾.png" style="width: 100%;" title="我家宝贝">
+                        </li>
+                        <li onclick="playMovie('/movie/aq/8e84d4f538dca082d5dadd78cdf68867.mp4')" class="movieListClass">
+                            <img src="/images/marry/baby/秀禾.png" style="width: 100%;" title="我家宝贝">
+                        </li>
+                        <li onclick="playMovie('/movie/aq/8e84d4f538dca082d5dadd78cdf68867.mp4')" class="movieListClass">
+                            <img src="/images/marry/baby/秀禾.png" style="width: 100%;" title="我家宝贝">
+                        </li>
+                        <li onclick="playMovie('/movie/aq/8e84d4f538dca082d5dadd78cdf68867.mp4')" class="movieListClass">
+                            <img src="/images/marry/baby/秀禾.png" style="width: 100%;" title="我家宝贝">
+                        </li>
+                    </ul>
 
+                </div>
+
+            </div>
+            <div style="width: 9width: 9%;height: 4width: 9%;">
+                <div id="accordion" class="clearfix">
+                  &lt;!&ndash;&ndash;&gt;
+                    <article >
+                        <h2>最爱的小仙女</h2>
+                        <img src="/images/marry/baby/秀禾.png" style="width: 100%;" title="我家宝贝">
+                  </article>
+                  <article >
+                      <h2>最爱的小仙女</h2>
+                      <img src="/images/marry/baby/秀禾.png" style="width: 100%;" title="我家宝贝">
+                  </article>
+                  <article >
+                      <h2>最爱的小仙女</h2>
+                      <img src="/images/marry/baby/秀禾.png" style="width: 100%;" title="我家宝贝">
+                  </article>
+                  <article >
+                      <h2>最爱的小仙女</h2>
+                      <img src="/images/marry/baby/秀禾.png" style="width: 100%;" title="我家宝贝">
+                  </article>
+              </div>
           </div>
-          <div style="width: 59%;height: 100%;border: 1px solid black;position: absolute;float: left;margin-left: 40%;">
+        </div>
+    </div>-->
+    <div style="width: 100%;height: 400px;margin-top: 20px;">
+        <table style="width: 100%;">
+            <tr>
+                <td style="width: 9%"></td>
+                <td style="width: 9%"></td>
+                <td style="width: 9%"> </td>
+                <td style="width: 9%"> <img src="/images/marry/baby/秀禾.png" class="heartImgClass" onclick="bigImage(this)"></td>
+                <td style="width: 9%"> <img src="/images/marry/baby/秀禾.png" class="heartImgClass" onclick="bigImage(this)"></td>
 
+                <td style="width: 9%"></td>
 
-          </div>
-      </div>
+                <td style="width: 9%"> <img src="/images/marry/baby/秀禾.png" class="heartImgClass" onclick="bigImage(this)"></td>
+                <td style="width: 9%"> <img src="/images/marry/baby/秀禾.png" class="heartImgClass" onclick="bigImage(this)"></td>
+                <td style="width: 9%"></td>
+                <td style="width: 9%"></td>
+                <td style="width: 9%"></td>
+            </tr>
+            <tr>
+                <td style="width: 9%"></td>
+                <td style="width: 9%"></td>
+                <td style="width: 9%"> <img src="/images/marry/baby/秀禾.png" class="heartImgClass" onclick="bigImage(this)"></td>
+                <td style="width: 9%"> <img src="/images/marry/baby/秀禾.png" class="heartImgClass" onclick="bigImage(this)"></td>
+                <td style="width: 9%"> <img src="/images/marry/baby/秀禾.png" class="heartImgClass" onclick="bigImage(this)"></td>
+
+                <td style="width: 9%"> <img src="/images/marry/baby/秀禾.png" class="heartImgClass" onclick="bigImage(this)"></td>
+
+                <td style="width: 9%"> <img src="/images/marry/baby/秀禾.png" class="heartImgClass" onclick="bigImage(this)"></td>
+                <td style="width: 9%"> <img src="/images/marry/baby/秀禾.png" class="heartImgClass" onclick="bigImage(this)"></td>
+                <td style="width: 9%"> <img src="/images/marry/baby/秀禾.png" class="heartImgClass" onclick="bigImage(this)"></td>
+                <td style="width: 9%"></td>
+                <td style="width: 9%"></td>
+            </tr>
+            <tr>
+                <td style="width: 9%"></td>
+                <td style="width: 9%"></td>
+                <td style="width: 9%"> <img src="/images/marry/baby/秀禾.png" class="heartImgClass" onclick="bigImage(this)"></td>
+                <td style="width: 9%"> <img src="/images/marry/baby/秀禾.png" class="heartImgClass" onclick="bigImage(this)"></td>
+                <td style="width: 9%"> <img src="/images/marry/baby/秀禾.png" class="heartImgClass" onclick="bigImage(this)"></td>
+
+                <td style="width: 9%"> <img src="/images/marry/baby/秀禾.png" class="heartImgClass" onclick="bigImage(this)"></td>
+
+                <td style="width: 9%"> <img src="/images/marry/baby/秀禾.png" class="heartImgClass" onclick="bigImage(this)"></td>
+                <td style="width: 9%"> <img src="/images/marry/baby/秀禾.png" class="heartImgClass" onclick="bigImage(this)"></td>
+                <td style="width: 9%"> <img src="/images/marry/baby/秀禾.png" class="heartImgClass" onclick="bigImage(this)"></td>
+                <td style="width: 9%"></td>
+                <td style="width: 9%"></td>
+            </tr>
+            <tr>
+                <td style="width: 9%"></td>
+                <td style="width: 9%"></td>
+                <td style="width: 9%"> <img src="/images/marry/baby/秀禾.png" class="heartImgClass" onclick="bigImage(this)"></td>
+                <td style="width: 9%"> <img src="/images/marry/baby/秀禾.png" class="heartImgClass" onclick="bigImage(this)"></td>
+                <td style="width: 9%"> <img src="/images/marry/baby/秀禾.png" class="heartImgClass" onclick="bigImage(this)"></td>
+
+                <td style="width: 9%"> <img src="/images/marry/baby/秀禾.png" class="heartImgClass" onclick="bigImage(this)"></td>
+
+                <td style="width: 9%"> <img src="/images/marry/baby/秀禾.png" class="heartImgClass" onclick="bigImage(this)"></td>
+                <td style="width: 9%"> <img src="/images/marry/baby/秀禾.png" class="heartImgClass" onclick="bigImage(this)"></td>
+                <td style="width: 9%"> <img src="/images/marry/baby/秀禾.png" class="heartImgClass" onclick="bigImage(this)"></td>
+                <td style="width: 9%"></td>
+                <td style="width: 9%"></td>
+            </tr>
+            <tr>
+                <td style="width: 9%"></td>
+                <td style="width: 9%"></td>
+                <td style="width: 9%"> <img src="/images/marry/baby/秀禾.png" class="heartImgClass" onclick="bigImage(this)"></td>
+                <td style="width: 9%"> <img src="/images/marry/baby/秀禾.png" class="heartImgClass" onclick="bigImage(this)"></td>
+                <td style="width: 9%"> <img src="/images/marry/baby/秀禾.png" class="heartImgClass" onclick="bigImage(this)"></td>
+
+                <td style="width: 9%"> <img src="/images/marry/baby/秀禾.png" class="heartImgClass" onclick="bigImage(this)"></td>
+
+                <td style="width: 9%"> <img src="/images/marry/baby/秀禾.png" class="heartImgClass" onclick="bigImage(this)"></td>
+                <td style="width: 9%"> <img src="/images/marry/baby/秀禾.png" class="heartImgClass" onclick="bigImage(this)"></td>
+                <td style="width: 9%"> <img src="/images/marry/baby/秀禾.png" class="heartImgClass" onclick="bigImage(this)"></td>
+                <td style="width: 9%"></td>
+                <td style="width: 9%"></td>
+            </tr>
+            <tr>
+                <td style="width: 9%"></td>
+                <td style="width: 9%"></td>
+                <td style="width: 9%"></td>
+                <td style="width: 9%"> <img src="/images/marry/baby/秀禾.png" class="heartImgClass" onclick="bigImage(this)"></td>
+                <td style="width: 9%"> <img src="/images/marry/baby/秀禾.png" class="heartImgClass" onclick="bigImage(this)"></td>
+
+                <td style="width: 9%"> <img src="/images/marry/baby/秀禾.png" class="heartImgClass" onclick="bigImage(this)"></td>
+
+                <td style="width: 9%"> <img src="/images/marry/baby/秀禾.png" class="heartImgClass" onclick="bigImage(this)"></td>
+                <td style="width: 9%"> <img src="/images/marry/baby/秀禾.png" class="heartImgClass" onclick="bigImage(this)"></td>
+                <td style="width: 9%"></td>
+                <td style="width: 9%"></td>
+                <td style="width: 9%"></td>
+            </tr>
+            <tr>
+                <td style="width: 9%"></td>
+                <td style="width: 9%"></td>
+                <td style="width: 9%"></td>
+                <td style="width: 9%"></td>
+                <td style="width: 9%"> <img src="/images/marry/baby/秀禾.png" class="heartImgClass" onclick="bigImage(this)"></td>
+
+                <td style="width: 9%"> <img src="/images/marry/baby/秀禾.png" class="heartImgClass" onclick="bigImage(this)"></td>
+
+                <td style="width: 9%"> <img src="/images/marry/baby/秀禾.png" class="heartImgClass" onclick="bigImage(this)"></td>
+                <td style="width: 9%"></td>
+                <td style="width: 9%"></td>
+                <td style="width: 9%"></td>
+                <td style="width: 9%"></td>
+            </tr>
+            <tr>
+                <td style="width: 9%"></td>
+                <td style="width: 9%"></td>
+                <td style="width: 9%"></td>
+                <td style="width: 9%"></td>
+                <td style="width: 9%"></td>
+
+                <td style="width: 9%"> <img src="/images/marry/baby/秀禾.png" class="heartImgClass" onclick="bigImage(this)"></td>
+
+                <td style="width: 9%"></td>
+                <td style="width: 9%"></td>
+                <td style="width: 9%"></td>
+                <td style="width: 9%"></td>
+                <td style="width: 9%"></td>
+            </tr>
+        </table>
+    </div>
 </body>
+
+<script src="/layui/layui.all.js"></script>
+<script src="/plugins/JQuery/jquery-3.3.1.min.js"></script>
+<script src="/js/movie/movie.js"></script>
+
+<script>
+
+    /*setInterval(function(){
+        var date = new Date();
+        var ms = new Date("2020-10-02").getTime() - date.getTime();
+        var days=Math.floor(ms/(24*3600*1000))
+
+        var days=Math.floor(ms/(24*3600*1000));
+        document.getElementById("days").innerHTML = days;
+        /!*$("#days").val(days);*!/
+        //计算出小时数
+        var leave1=ms%(24*3600*1000)    //计算天数后剩余的毫秒数
+        var hours=Math.floor(leave1/(3600*1000));
+        /!*$("#hours").val(hours);*!/
+        document.getElementById("hours").innerHTML = hours;
+
+        //计算相差分钟数
+        var leave2=leave1%(3600*1000)        //计算小时数后剩余的毫秒数
+        var minutes=Math.floor(leave2/(60*1000));
+        /!*$("#min").val(minutes);*!/
+        document.getElementById("min").innerHTML = minutes;
+        //计算相差秒数
+        var leave3=leave2%(60*1000)  ;    //计算分钟数后剩余的毫秒数
+        var seconds=Math.round(leave3/1000);
+        /!*$("#sec").val(seconds);*!/
+        document.getElementById("sec").innerHTML = seconds;
+
+    },1000);
+
+    function playMovie(path){
+        let player = document.querySelector('#vid')
+        player.src = path;
+        player.play();
+    }
+*/
+    function bigImage(obj) {
+        layer.open({
+            title: false,
+            btn:[],
+            content: '<img src="' + obj.src + '" style="width: 98%;">',
+            shade:0.7,
+            shadeClose:true,
+            type:0,
+            closeBtn:0,
+            area: ['800px']
+        });
+    }
+
+</script>
 </html>

@@ -1,0 +1,71 @@
+.countDownDiv{
+    width: 39%;
+    height: 99%;
+    position: absolute;
+    background-image: url('/images/marry/total.jpg');
+}
+.countDownTd{
+    width: 12.5%;
+    border-radius: 10px;
+    text-align: center;
+    color:white;
+    font-family:"微软雅黑";
+    font-size:40px;
+}
+.leftDiv{
+    width: 59%;
+    height: 99%;
+    position: absolute;
+    float: left;
+    margin-left: 40%;
+}
+.movieListDiv{
+    width: 20%;
+    height: 99%;
+    position: absolute;
+    float: left;
+    margin-left: 80%;
+}
+.palyerDiv{
+    width: 80%;
+    height: 99%;
+    position: absolute;
+}
+ul li{
+    list-style-type:none;
+}
+.movieListClass{
+    cursor: pointer;
+}
+
+body{background: #D5DED9;font-family: "微软雅黑";}
+h1, h2, h3, h4, h5, h6{font-family: "微软雅黑";}
+p{line-height: 140%;font-size: 90%;}
+#accordion{ margin: 60px 100px 40px 100px;}
+#accordion article{-webkit-transform: perspective(900px) rotateY(60deg);-webkit-transition: all 0.7s ease-in-out;background: #fff;border: 1px solid #f3f3f3;box-shadow: 0px 5px 15px gray;float: left;height: 420px;margin-left: -180px;padding: 20px;width: 220px;}
+#accordion article:first-child{margin-left: 0px;}
+#accordion article img{float: left;padding: 0 10px 5px 0;}
+#accordion article:hover{-webkit-transform: perspective(0) rotateY(-10deg);margin: 0 140px 0 -60px;}
+.clearfix:after{visibility:hidden;display:block;font-size:0;content:" ";clear:both;height:0}
+article a{color: #000;text-decoration: none;}
+article a:hover{color: blue;}
+article:hover{cursor: pointer;}
+article:hover a{color: blue;}
+
+.heartImgClass{
+    width: 100%;
+    cursor: pointer;
+    transition: all 1s;
+}
+.heartImgClass:hover{
+    cursor: pointer;
+    transform: scale(1.5);
+}
+
+.bigPhoto{
+    width: 500px;
+    position: absolute;
+    float: left;
+    left: 20%;
+    top: 20%;
+}

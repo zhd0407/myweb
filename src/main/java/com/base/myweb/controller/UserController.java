@@ -42,10 +42,10 @@ public class UserController {
      *
      */
 
-    @RequestMapping("/login")
+    @RequestMapping("/userlogin")
     public String login(Map<String ,Object> map){
 
-        return "user/login";
+        return "userlogin";
     }
 
     /**
