@@ -11,8 +11,10 @@ import com.base.myweb.pojo.Userinfo;
 import com.base.myweb.service.NoteinfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -36,8 +38,20 @@ public class NoteinfoServiceImpl implements NoteinfoService {
             return noteJo;
         }
 
-        public List<Noteinfo> getNoteList(HttpSession session){
+        public void getNoteList(Model model){
+
             List<Noteinfo> noteList = noteInfoMapper.selectList(null);
+            getMessage(noteList);
+            model.addAttribute("noteList",noteList);
+
+            QueryWrapper topqw = new QueryWrapper();
+            topqw.eq("TOP","Y");
+            List<Noteinfo> topNoteList = noteInfoMapper.selectList(topqw);
+            getMessage(topNoteList);
+            model.addAttribute("topNoteList",topNoteList);
+        }
+
+        private void getMessage(List<Noteinfo> noteList){
             for(Noteinfo noteinfo:noteList){
                 //获取发帖人名称
                 QueryWrapper qw = new QueryWrapper();
@@ -51,7 +65,7 @@ public class NoteinfoServiceImpl implements NoteinfoService {
                 qw.eq("VALID_STA","Y");
                 noteinfo.setMsgNum(messageMapper.selectCount(qw));
             }
-            return noteList;
+
         }
 
         public Noteinfo getNoteDetailByNoteNo( String noteNo){

@@ -35,7 +35,7 @@ public class NoteinfoController {
     @Autowired
     NoteDetailServiceImpl noteDetailService;
 
-    @RequestMapping("/question")
+    @RequestMapping(value = {"/question","/question/index"})
     public String question(Map<String ,Object> map){
 
         return "question/index";
@@ -58,12 +58,6 @@ public class NoteinfoController {
         }
         model.addAttribute("NoteDetail",noteDetail);
         return "question/detail";
-    }
-
-    @RequestMapping("/question/index")
-    public String index(Map<String ,Object> map){
-
-        return "question/index";
     }
 
     @RequestMapping("/noteinfo/add")

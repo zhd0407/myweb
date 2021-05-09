@@ -10,14 +10,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class EchartsController {
 
 
-    @RequestMapping("EchartsPage")
+    @RequestMapping("/EchartsPage")
     public String goToEchartsPage(){
 
-        return "EchartsPage";
+        return "/ignore/ECharts/EchartsPage";
     }
 
     @ResponseBody
-    @RequestMapping("getEchartsInfo")
+    @RequestMapping("/ignore/getEchartsInfo")
     public JSONObject getEchartsInfo(){
         JSONObject jo = new JSONObject();
         JSONArray xAxisDataJa = new JSONArray();

@@ -135,6 +135,18 @@ public class UserController {
         return "/user/model";
     }
 
+    @RequestMapping("/user/activate")
+    public String activate(Map<String ,Object> map){
+
+        return "/user/activate";
+    }
+
+    @RequestMapping("/user/forget")
+    public String forget(Map<String ,Object> map){
+
+        return "/user/forget";
+    }
+
     @ResponseBody
     @RequestMapping(value = "/user/table/subject" , method = RequestMethod.GET , produces="application/json;charset=utf-8")
     public JSONObject getModelInfo(){

@@ -1,6 +1,5 @@
-package com.base.myweb.core.security;
+package com.base.myweb.config;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -8,26 +7,26 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
-public class SecurityConfig  extends WebSecurityConfigurerAdapter {
+public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 
         http.authorizeRequests()
-            .antMatchers("/").permitAll()
-            .antMatchers("/level1/**").hasRole("VIP1")
+            .antMatchers("/","/index","/resource/**","/userlogin","/ignore/**").permitAll()
+             .antMatchers("/level1/**").hasRole("VIP1")
             .antMatchers("/level2/**").hasRole("VIP2")
-            .antMatchers("/level3/**").hasRole("VIP3");
-        http.formLogin().loginPage("/userlogin").usernameParameter("user").passwordParameter("pwd");
+            .antMatchers("/level3/**").hasRole("VIP3")
+            .anyRequest()        // 任何请求,登录后可以访问
+            .authenticated()
+        ;
 
-        http.logout().logoutSuccessUrl("/level");
-
+        http.formLogin().loginPage("/userlogin").usernameParameter("user").passwordParameter("pwd").defaultSuccessUrl("/");
+        http.logout().logoutSuccessUrl("/");
         http.rememberMe().rememberMeParameter("rb");
-
                 /*.antMatchers("/user/**").hasRole("VIP1")*/
         /*.antMatchers("/question/**").hasRole("USER")
                 .and()

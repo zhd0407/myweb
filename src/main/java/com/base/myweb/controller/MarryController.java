@@ -10,6 +10,6 @@ public class MarryController {
 
     @RequestMapping(value = "/marry" )
     public String marry(){
-        return "marry/marry";
+        return "/ignore/marry/marry";
     }
 }

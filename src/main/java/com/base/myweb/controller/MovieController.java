@@ -28,21 +28,14 @@ public class MovieController {
         model.addAttribute("MovieColInfo",list);
         List<Movieinfo> movieList = movieService.getMovieList("");
         model.addAttribute("movieList",movieList);
-        return "movie/index";
+        return "/ignore/movie/index";
     }
 
     @RequestMapping("/play")
     public String play( Model model,@RequestParam(name = "movieId",required = true)String movieId){
         String path = movieService.getMoviePathByMovieId(movieId);
         model.addAttribute("moviePath",path);
-        return "movie/play";
+        return "/ignore/movie/play";
     }
 
-    @RequestMapping("/movieList")
-    public String movieList(Model model, @RequestParam(name = "code",required = true)String code){
-        List<Moviecol> list = movieService.getMovieColInfo();
-        model.addAttribute("MovieColInfo",list);
-        model.addAttribute("code",code);
-        return "movie/movieList";
-    }
 }

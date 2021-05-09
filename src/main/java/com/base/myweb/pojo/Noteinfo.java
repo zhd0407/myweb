@@ -17,7 +17,7 @@ public class Noteinfo {
     private String theme;       //标题
     private String noteType;    //类型：分享/提问/求助/
     private String modelType;   //领域
-    private String noteKeys;        //关键词
+    private String noteKeys;    //关键词
     private String noteBody;    //正文
     private String userId;      //发帖人
     private Date createTime;    //创建时间
@@ -31,6 +31,7 @@ public class Noteinfo {
     private Integer integrate;  //积分
     private Integer skinNum;    //浏览量
     private String complete;    //完结
+    private String top;
 
     @TableField(exist = false)
     private int msgNum;

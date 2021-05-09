@@ -4,6 +4,7 @@ package com.base.myweb.controller;
 import com.base.myweb.core.SessionInfo;
 import com.base.myweb.pojo.Noteinfo;
 import com.base.myweb.service.UserInfoService;
+import com.base.myweb.service.serviceimpl.NoteDetailServiceImpl;
 import com.base.myweb.service.serviceimpl.NoteinfoServiceImpl;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,51 +27,10 @@ public class IndexController {
     @Autowired
     UserInfoService userInfoServiceimpl;
 
-    @RequestMapping("/index")
-    public ModelAndView index(Map<String,Object> map){
-
-
-        return  new ModelAndView("index");
-    }
-
-    @RequestMapping("/head")
-    public String head(Model model,HttpSession session){
-        SessionInfo.setUserInfoToModelBySession(model,session);
-        return "common/column";
-    }
-
-    @RequestMapping("/advert")
-    public String advert(Map<String,Object> map){
-
-
-        return "advert";
-    }
-
-    @RequestMapping("/footer")
-    public String footer(Map<String,Object> map){
-
-
-        return "common/footer";
-    }
-
-    @RequestMapping("/friendlink")
-    public String friendlink(Map<String,Object> map){
-
-        return "friendlink";
-    }
-
-    @RequestMapping("/fastpassway")
-    public String fastpassway(Map<String,Object> map){
-
-
-        return "fastpassway";
-    }
-
-    @RequestMapping("/setTop")
-    public String setTop(Map<String,Object> map){
-
-
-        return "setTop";
+    @RequestMapping(value={"/","/index"})
+    public String index(Model model ){
+        noteinfoServiceimpl.getNoteList(model);
+        return  "index";
     }
 
     @RequestMapping("/LAY_replyRank")
@@ -87,23 +47,33 @@ public class IndexController {
         return "attendance";
     }
 
-    @RequestMapping("/primary")
-    public String primary(Model model, HttpSession session){
-        List<Noteinfo> noteList = noteinfoServiceimpl.getNoteList(session);
-        model.addAttribute("noteList",noteList);
-        return "primary";
+    @RequestMapping("/catalog")
+    public String catalog(Model model, HttpSession session){
+
+
+        return "/ignore/catalog";
     }
 
-    @RequestMapping("/header")
-    public String header(Model model, HttpSession session){
-        SessionInfo.setUserInfoToModelBySession(model,session);
-        return "common/header";
+    @RequestMapping("/other/notice")
+    public String notice(Model model, HttpSession session){
+
+
+        return "/ignore/other/notice";
     }
 
-    @RequestMapping("/currWeekTopic")
-    public String currWeekTopic(Map<String,Object> map){
+    @RequestMapping("/other/404")
+    public String notfound(Model model, HttpSession session){
 
-        return "currWeekTopic";
+
+        return "/ignore/other/404";
     }
+
+    @RequestMapping("/other/tips")
+    public String tips(Model model, HttpSession session){
+
+
+        return "/ignore/other/tips";
+    }
+
 
 }
