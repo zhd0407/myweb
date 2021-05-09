@@ -2,7 +2,7 @@
     width: 39%;
     height: 99%;
     position: absolute;
-    background-image: url('/images/marry/total.jpg');
+    background-image: url('/static/resource/images/marry/total.jpg');
 }
 .countDownTd{
     width: 12.5%;

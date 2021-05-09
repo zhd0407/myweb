@@ -17,10 +17,13 @@ spring:
  # client:
   #  service-url:
    #   defaultZone: http://localhost:8761/eureka/
-#mybatis-plus:
-  #configuration:
-  #  log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+ybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
  # global-config:
   #  db-config:
   #    id-type: id_worker
 #debug: true
+logging:
+  level:
+    com.base.myweb.mapper: debug

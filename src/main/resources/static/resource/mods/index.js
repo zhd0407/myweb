@@ -253,7 +253,7 @@ layui.define(['layer', 'laytpl', 'form', 'element', 'upload', 'util'], function(
         //新消息通知
         ,newmsg: function(){
             var elemUser = $('.fly-nav-user');
-            if(layui.cache.user.uid !== -1 && elemUser[0]){
+            /*if(layui.cache.user.uid !== -1 && elemUser[0]){
                 fly.json('/message/nums/', {
                     _: new Date().getTime()
                 }, function(res){
@@ -277,7 +277,7 @@ layui.define(['layer', 'laytpl', 'form', 'element', 'upload', 'util'], function(
                         })
                     }
                 });
-            }
+            }*/
             return arguments.callee;
         }
 

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <html lang="en">
-<link rel="stylesheet" href="/layui/css/layui.css">
+<link rel="stylesheet" href="/resource/layui/css/layui.css">
 <head>
     <meta charset="UTF-8">
     <title>电影点播</title>
@@ -53,15 +53,15 @@
                         <td th:text="${movieInfo.getMovieName()}"> </td>
                         <td th:text="${movieInfo.getTitle()}"></td>
                         <td th:text="${movieInfo.getTime()}"></td>
-                        <td> <img class="movieBtnClass" src="/images/movie/play.jpg" th:onclick="'javascript:openWeb(\''+${movieInfo.getMovieId()}+'\')'"/></td>
+                        <td> <img class="movieBtnClass" src="/resource/images/movie/play.jpg" th:onclick="'javascript:openWeb(\''+${movieInfo.getMovieId()}+'\')'"/></td>
                     </tr>
                     </tbody>
                 </table>
             </div>
         </div>
 </body>
-<script src="/plugins/JQuery/jquery-3.3.1.min.js"></script>
-<script src="/js/movie/movie.js"></script>
+<script src="/resource/plugins/JQuery/jquery-3.3.1.min.js"></script>
+<script src="/resource/js/movie/movie.js"></script>
 <script>
     function openWeb(movieId){
         window.open("/movie/play?movieId="+movieId);

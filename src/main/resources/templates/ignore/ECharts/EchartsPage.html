@@ -2,19 +2,19 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>ECharts</title>
 </head>
 <body>
     <div id="main" style="width: 600px;height:400px;"></div>
 
-    <script src="/plugins/JQuery/jquery-3.3.1.min.js"></script>
-    <script src="/plugins/ECharts/echarts.min.js"></script>
+    <script src="/resource/plugins/JQuery/jquery-3.3.1.min.js"></script>
+    <script src="/resource/plugins/ECharts/echarts.min.js"></script>
     <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
 
         $.ajax({
             type : "GET",//提交方式
-            url  : "/getEchartsInfo",//提交地址
+            url  : "/ignore/getEchartsInfo",//提交地址
             data : { },//提交的数据
             dataType : "json",
             success  : function(data){  //返回结果
