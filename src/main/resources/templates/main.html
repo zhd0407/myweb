@@ -4,16 +4,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <title>layout 管理系统大布局 - Layui</title>
     <link rel="stylesheet" href="/resource/layui/css/layui.css">
+
+    <style>
+        .frameClass{
+        　　margin-bottom: 45px;
+        }
+
+    </style>
 </head>
-<body>
+<body style="overflow: hidden">
 <div class="layui-layout layui-layout-admin">
     <div class="layui-header">
         <div class="layui-logo layui-hide-xs layui-bg-black">
             <a th:href="@{/index}" style="color: white;">金陵民大</a>
         </div>
         <!-- 头部区域（可配合layui 已有的水平导航） -->
-        <ul class="layui-nav layui-layout-left">
-            <!-- 移动端显示 -->
+       <!-- <ul class="layui-nav layui-layout-left">
+            &lt;!&ndash; 移动端显示 &ndash;&gt;
             <li class="layui-nav-item layui-show-xs-inline-block layui-hide-sm" lay-header-event="menuLeft">
                 <i class="layui-icon layui-icon-spread-left"></i>
             </li>
@@ -29,7 +36,7 @@
                     <dd><a href="">menu 33</a></dd>
                 </dl>
             </li>
-        </ul>
+        </ul>-->
         <ul class="layui-nav layui-layout-right">
             <li class="layui-nav-item layui-hide layui-show-md-inline-block">
                 <a href="javascript:;">
@@ -54,12 +61,43 @@
         <div class="layui-side-scroll">
             <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
             <ul class="layui-nav layui-nav-tree" >
+                <li class="layui-nav-item">
+                    <a href="javascript:;" data-type="tabAdd" id="/user/home">
+                        <i class="layui-icon">&#xe609;</i>
+                         <span>我的主页</span>
+                    </a>
+                </li>
+                <li class="layui-nav-item ">
+                    <a href="javascript:;" data-type="tabAdd" id="/user/index">
+                        <i class="layui-icon">&#xe612;</i>
+                        <span>用户中心</span>
+                    </a>
+                </li>
+                <li class="layui-nav-item">
+                    <a href="javascript:;" data-type="tabAdd" id="/user/set">
+                        <i class="layui-icon">&#xe620;</i>
+                        <span>基本设置</span>
+                    </a>
+                </li>
+                <li class="layui-nav-item">
+                    <a href="javascript:;" data-type="tabAdd" id="/user/message">
+                        <i class="layui-icon">&#xe611;</i>
+                        <span>我的消息</span>
+                    </a>
+                </li>
+                <li class="layui-nav-item">
+                    <a href="javascript:;" data-type="tabAdd" id="/user/model">
+                        <i class="layui-icon"></i>
+                        <span>栏目</span>
+                    </a>
+                </li>
+
                 <li class="layui-nav-item layui-nav-itemed">
                     <a class="" href="javascript:;">menu group 1</a>
                     <dl class="layui-nav-child">
-                        <dd><a  href="javascript:;" data-type="tabAdd" id="新增Tab项">新增Tab项</a></dd>
-                        <dd><a href="javascript:;"  data-type="tabAdd" id="菜单1-2">menu 2</a></dd>
-                        <dd><a href="javascript:;"  data-type="tabAdd">menu 3</a></dd>
+                        <dd><a  href="javascript:;" data-type="tabAdd" id="/question/add">发表新帖</a></dd>
+                        <dd><a href="javascript:;"  data-type="tabAdd" id="/user/index">用户主页</a></dd>
+                        <dd><a href="javascript:;"  data-type="tabAdd" >menu 3</a></dd>
                         <dd><a href=""  data-type="tabAdd">the links</a></dd>
                     </dl>
                 </li>
@@ -80,18 +118,10 @@
     <div class="layui-body" >
         <div class="layui-tab" lay-filter="demo" lay-allowclose="true" style="margin: 0px;">
             <ul class="layui-tab-title">
-                <li class="layui-this" lay-id="11">网站设置</li>
-                <li lay-id="22">用户管理</li>
-                <li lay-id="33">权限分配</li>
-                <li lay-id="44">商品管理</li>
-                <li lay-id="55">订单管理</li>
+                <li class="layui-this" lay-id="11">主页</li>
             </ul>
             <div class="layui-tab-content">
                 <div class="layui-tab-item layui-show">内容1</div>
-                <div class="layui-tab-item">内容2</div>
-                <div class="layui-tab-item">内容3</div>
-                <div class="layui-tab-item">内容4</div>
-                <div class="layui-tab-item">内容5</div>
             </div>
         </div>
     </div>
@@ -130,23 +160,19 @@
         //触发事件
         var active = {
             tabAdd: function(obj){
-
-
-
+                debugger;
                 var id = new Date().getTime();
                 element.tabAdd('demo', {
-
-                    title: '新选项'+ (Math.random()*1000|0) //用于演示
-                    ,content: obj.context.id
+                    title: obj.context.children[1].innerText //用于演示
+                    ,content: '<iframe src= '+ obj.context.id+' height="92%" width="99%" frameborder="0" class="frameClass">  </iframe>'
                     ,id: new Date().getTime() //实际使用一般是规定好的id，这里以时间戳模拟下
-                })
-                element.tabChange('demo', id);
+                });
+                setTimeout(function(){element.tabChange('demo', id);},200);
+
             }
             ,tabDelete: function(othis){
                 //删除指定Tab项
                 element.tabDelete('demo', '44'); //删除：“商品管理”
-
-
                 othis.addClass('layui-btn-disabled');
             }
             ,tabChange: function(dom){
@@ -155,6 +181,11 @@
                 element.tabChange('demo', '22'); //切换到：用户管理
             }
         }
+        element.on('tab(demo)', function(data){
+            console.log(this); //当前Tab标题所在的原始DOM元素
+            console.log(data.index); //得到当前Tab的所在下标
+            console.log(data.elem); //得到当前的Tab大容器
+        });
         $('a').on('click', function(){
             var othis = $(this), type = othis.data('type');
             active[type] ? active[type].call(this, othis) : '';

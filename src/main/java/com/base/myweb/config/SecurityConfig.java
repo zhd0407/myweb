@@ -33,8 +33,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .formLogin().//..failureUrl("/login-error")
                 .and()
                 .exceptionHandling().accessDeniedPage("/401")*/
-       /*
-        http.headers().frameOptions().sameOrigin(); //解决iframe嵌入子页面时跨域问题*/
+
+        http.headers().frameOptions().sameOrigin(); //解决iframe嵌入子页面时跨域问题
     }
 
     @Autowired

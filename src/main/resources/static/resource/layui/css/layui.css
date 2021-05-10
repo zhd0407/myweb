@@ -935,7 +935,7 @@ a cite{font-style: normal; *cursor:pointer;}
 .laytable-cell-checkbox,
 .laytable-cell-radio,
 .laytable-cell-space,
-.laytable-cell-numbers{padding: 0; text-align: center;}
+.laytable-cell-numbers{padding: 3px; text-align: center;}
 
 .layui-table-body{position: relative; overflow: auto; margin-right: -1px; margin-bottom: -1px;}
 .layui-table-body .layui-none{line-height: 26px; padding: 30px 15px; text-align: center; color: #999;}
