@@ -39,7 +39,7 @@
 
     <ul class="layui-nav fly-nav-user" sec:authorize="isAuthenticated()">99
         <li class="layui-nav-item" style="margin-left: 10px;margin-right: 10px;">
-            <a href="">控制台<span class="layui-badge">9</span></a>
+            <a th:href="@{main}">控制台<span class="layui-badge">9</span></a>
         </li>
         <li class="layui-nav-item" style="margin-left: 10px;margin-right: 10px;">
             <a href="/user/index">个人中心<span class="layui-badge-dot"></span></a>

@@ -62,7 +62,7 @@
             <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
             <ul class="layui-nav layui-nav-tree" >
                 <li class="layui-nav-item">
-                    <a href="javascript:;" data-type="tabAdd" id="/user/home">
+                    <a href="javascript:;" data-type="tabAdd" id="/user/home" >
                         <i class="layui-icon">&#xe609;</i>
                          <span>我的主页</span>
                     </a>
@@ -95,7 +95,7 @@
                 <li class="layui-nav-item layui-nav-itemed">
                     <a class="" href="javascript:;">menu group 1</a>
                     <dl class="layui-nav-child">
-                        <dd><a  href="javascript:;" data-type="tabAdd" id="/question/add">发表新帖</a></dd>
+                        <dd><a  href="javascript:;" data-type="tabAdd" id="/question/add" >发表新帖</a></dd>
                         <dd><a href="javascript:;"  data-type="tabAdd" id="/user/index">用户主页</a></dd>
                         <dd><a href="javascript:;"  data-type="tabAdd" >menu 3</a></dd>
                         <dd><a href=""  data-type="tabAdd">the links</a></dd>
@@ -117,11 +117,13 @@
 
     <div class="layui-body" >
         <div class="layui-tab" lay-filter="demo" lay-allowclose="true" style="margin: 0px;">
-            <ul class="layui-tab-title">
+            <ul class="layui-tab-title" id="titleDiv">
                 <li class="layui-this" lay-id="11">主页</li>
             </ul>
-            <div class="layui-tab-content">
-                <div class="layui-tab-item layui-show">内容1</div>
+            <div class="layui-tab-content" id="contentDiv">
+                <div class="layui-tab-item">
+                    <iframe height="92%" width="99%" frameborder="0" class="frameClass" path="/index" id="11"></iframe>
+                </div>
             </div>
         </div>
     </div>
@@ -161,14 +163,28 @@
         var active = {
             tabAdd: function(obj){
                 debugger;
-                var id = new Date().getTime();
-                element.tabAdd('demo', {
-                    title: obj.context.children[1].innerText //用于演示
-                    ,content: '<iframe src= '+ obj.context.id+' height="92%" width="99%" frameborder="0" class="frameClass">  </iframe>'
-                    ,id: new Date().getTime() //实际使用一般是规定好的id，这里以时间戳模拟下
-                });
-                setTimeout(function(){element.tabChange('demo', id);},200);
+                var id = "";
+                var src = obj.context.id;
+                var contentDiv = document.getElementById("contentDiv");
+                for(var i=0;i<contentDiv.children.length;i++){
+                    var path =  contentDiv.children[i].children[0].getAttribute("path");
+                    if(path==src){
+                        id = contentDiv.children[i].children[0].id;
+                        break;
+                    }
+                }
+                if(!id){
+                    id = new Date().getTime();
+                    element.tabAdd('demo', {
+                        title: obj.context.children[1].innerText //用于演示
+                        ,content: '<iframe src= '+ obj.context.id+' height="92%" width="99%" frameborder="0" class="frameClass" path="'+obj.context.id+'" id="' + id  + '">  </iframe>'
+                        ,id:id  //实际使用一般是规定好的id，这里以时间戳模拟下
+                    });
+                }
 
+                if(id){
+                    setTimeout(function(){element.tabChange('demo', id);},200);
+                }
             }
             ,tabDelete: function(othis){
                 //删除指定Tab项
