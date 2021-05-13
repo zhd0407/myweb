@@ -36,7 +36,7 @@ public class AdminController {
 
     @ResponseBody
     @RequestMapping(value = "/admin/delSubjectInfo" , method = RequestMethod.POST , produces="application/json;charset=utf-8")
-    public JSONObject head(@RequestParam(name = "subject_no",required = true)String subjectNo){
+    public JSONObject head(@RequestParam(name = "subject_no",required = true)int subjectNo){
         subjectService.delSubjectInfo(subjectNo);
         JSONObject jo = new JSONObject();
         jo.put("result","true");

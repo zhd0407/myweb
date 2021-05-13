@@ -86,7 +86,7 @@
                     </a>
                 </li>
                 <li class="layui-nav-item">
-                    <a href="javascript:;" data-type="tabAdd" id="/user/model">
+                    <a href="javascript:;" data-type="tabAdd" id="/user/models">
                         <i class="layui-icon"></i>
                         <span>栏目</span>
                     </a>
@@ -162,7 +162,6 @@
         //触发事件
         var active = {
             tabAdd: function(obj){
-                debugger;
                 var id = "";
                 var src = obj.context.id;
                 var contentDiv = document.getElementById("contentDiv");
@@ -170,6 +169,7 @@
                     var path =  contentDiv.children[i].children[0].getAttribute("path");
                     if(path==src){
                         id = contentDiv.children[i].children[0].id;
+                        contentDiv.children[i].children[0].src = path;
                         break;
                     }
                 }

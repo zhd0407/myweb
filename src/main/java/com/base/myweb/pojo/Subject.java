@@ -11,5 +11,5 @@ public class Subject {
     private String subjectCode;
     private String subjectNam;
     private String userType;
-    private int seqNum;
+    private Integer seqNum;
 }

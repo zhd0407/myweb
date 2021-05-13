@@ -2,6 +2,7 @@ package com.base.myweb.service.serviceimpl;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.base.myweb.mapper.SubjectMapper;
 import com.base.myweb.pojo.Subject;
 import com.base.myweb.service.SubjectService;
@@ -41,8 +42,26 @@ public class SubjectServiceImpl implements SubjectService {
         subjectMapper.insert(subject);
    }
 
-    public void delSubjectInfo(String subjectNo){
+    public void delSubjectInfo(int subjectNo){
         subjectMapper.deleteById(subjectNo);
+    }
+
+    public List<Subject> getSubject(){
+        QueryWrapper qw = new QueryWrapper();
+        qw.orderByAsc("SEQ_NUM");
+        return subjectMapper.selectList(qw);
+    }
+
+    public void addSubject(Subject subject){
+        subjectMapper.insert(subject);
+    }
+
+    public Subject getSubjectById(int id){
+        return subjectMapper.selectById(id);
+    }
+
+    public void updateSubjectById(Subject subject) {
+        subjectMapper.updateById(subject);
     }
 
 }

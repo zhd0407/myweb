@@ -2,6 +2,7 @@ package com.base.myweb.controller;
 
 import com.alibaba.fastjson.JSONObject;
 import com.base.myweb.core.exception.R;
+import com.base.myweb.pojo.Subject;
 import com.base.myweb.pojo.Userinfo;
 import com.base.myweb.service.serviceimpl.MailServiceImpl;
 import com.base.myweb.service.serviceimpl.SubjectServiceImpl;
@@ -15,10 +16,12 @@ import org.springframework.cloud.client.loadbalancer.LoadBalancerClient;*/
 import org.springframework.cloud.client.loadbalancer.LoadBalancerClient;*/
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.ui.Model;
 /*import org.springframework.web.client.RestTemplate;
 import org.springframework.web.client.RestTemplate;*/
 import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpSession;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -129,11 +132,44 @@ public class UserController {
         return "/user/set";
     }
 
-    @RequestMapping("/user/model")
-    public String model(Map<String ,Object> map){
-
+    @GetMapping("/user/models")
+    public String models(Model model){
+        List<Subject> list = subjectService.getSubject();
+        model.addAttribute("subList",list);
         return "/user/model";
     }
+
+    @GetMapping("/user/model")
+    public String model(Model model){
+
+        return "/user/addModel";
+    }
+
+    @GetMapping("/user/model/{id}")
+    public String editModel(Model model,@PathVariable("id") Integer id){
+        Subject subject = subjectService.getSubjectById(id);
+        model.addAttribute("subject",subject);
+        return "/user/addModel";
+    }
+
+    @DeleteMapping("/user/model/{id}")
+    public String deleteSubject(@PathVariable("id")int id){
+        subjectService.delSubjectInfo(id);
+        return "redirect:/user/models";
+    }
+
+    @PostMapping("/user/model")
+    public String addSubject(Subject subject){
+        subjectService.addSubject(subject);
+        return "redirect:/user/models";
+    }
+
+    @PutMapping("/user/model")
+    public String updateSubject(Subject subject){
+        subjectService.updateSubjectById(subject);
+        return "redirect:/user/models";
+    }
+
 
     @RequestMapping("/user/activate")
     public String activate(Map<String ,Object> map){

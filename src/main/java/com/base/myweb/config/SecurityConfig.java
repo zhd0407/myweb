@@ -16,10 +16,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
 
         http.authorizeRequests()
-            .antMatchers("/","/index","/resource/**","/userlogin","/ignore/**","/main").permitAll()
+            .antMatchers("/","/index","/resource/**","/userlogin","/ignore/**","/main","/welcome").permitAll()
              .antMatchers("/level1/**").hasRole("VIP1")
             .antMatchers("/level2/**").hasRole("VIP2")
             .antMatchers("/level3/**").hasRole("VIP3")
+            .antMatchers("/admin/**").hasRole("admin")
             .anyRequest()        // 任何请求,登录后可以访问
             .authenticated()
         ;
@@ -44,11 +45,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
 
         auth.inMemoryAuthentication().passwordEncoder(new BCryptPasswordEncoder())
-                .withUser("zhangsan").password(new BCryptPasswordEncoder().encode("1234")).roles("VIP1","VIP2")
+                .withUser("zhangsan").password(new BCryptPasswordEncoder().encode("1234")).roles("VIP1","VIP2","admin")
                 .and()
-                .withUser("lisi").password(new BCryptPasswordEncoder().encode("1234")).roles("VIP2","VIP3")
+                .withUser("lisi").password(new BCryptPasswordEncoder().encode("1234")).roles("VIP2","VIP3","admin")
                 .and()
-                .withUser("wangwu").password(new BCryptPasswordEncoder().encode("1234")).roles("VIP3","VIP1");
+                .withUser("wangwu").password(new BCryptPasswordEncoder().encode("1234")).roles("VIP3","VIP1","admin");
                /* .and()
                 .withUser("angle").password("123456").roles("VIP1", "VIP2")
                 .and()

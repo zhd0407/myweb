@@ -5,14 +5,11 @@
         <img src="/resource/images/logo.png" alt="layui">
     </a>
     <ul class="layui-nav fly-nav layui-hide-xs">
+         <li class="layui-nav-item">
+            <a th:href="@{/welcome}"><i class="iconfont icon-iconmingxinganli"></i>欢迎页面</a>
+        </li>
         <li class="layui-nav-item layui-this">
-            <a href="/"><i class="iconfont icon-jiaoliu"></i>交流</a>
-        </li>
-        <li class="layui-nav-item">
-            <a href="../../../resources/templates/case"><i class="iconfont icon-iconmingxinganli"></i>案例</a>
-        </li>
-        <li class="layui-nav-item">
-            <a href="http://www.layui.com/" target="_blank"><i class="iconfont icon-ui"></i>框架 </span></a>
+            <a th:href="@{main}"><i class="iconfont icon-jiaoliu"></i>个人中心</a>
         </li>
     </ul>
 

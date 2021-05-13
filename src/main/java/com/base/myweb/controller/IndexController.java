@@ -39,6 +39,11 @@ public class IndexController {
         return  "main";
     }
 
+    @RequestMapping("/welcome")
+    public String welcome(Model model ){
+
+        return  "welcome";
+    }
     @RequestMapping("/LAY_replyRank")
     public String layReplyRank(Map<String,Object> map){
 

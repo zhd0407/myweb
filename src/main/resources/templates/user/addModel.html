@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<!--suppress ALL -->
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>帐号设置</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="fly,layui,前端社区">
+    <meta name="description" content="Fly社区是模块化前端UI框架Layui的官网社区，致力于为web开发提供强劲动力">
+    <link rel="stylesheet" href="/resource/layui/css/layui.css">
+    <link rel="stylesheet" href="/resource/css/global.css">
+    <style>
+        .custom-container{
+            width: 99%;
+        }
+    </style>
+</head>
+<body>
+<div class="layui-container fly-marginTop fly-user-main custom-container">
+    <form class="layui-form" th:action="@{/user/model}" method="post">
+        <input type="hidden" name="_method" value="put" th:if="${subject!=null}">
+        <input type="hidden" name="subjectNo" th:value="${subject!=null}?${subject.subjectNo}" th:if="${subject!=null}">
+        <div class="layui-form-item">
+            <label class="layui-form-label">编码</label>
+            <div class="layui-input-block">
+                <input type="text" name="subjectCode" lay-verify="title" autocomplete="off"  class="layui-input" th:value="${subject!=null}?${subject.subjectCode}">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">名称</label>
+            <div class="layui-input-block">
+                <input type="text" name="subjectNam" lay-verify="required"  placeholder="请输入" autocomplete="off" class="layui-input" th:value="${subject!=null}?${subject.subjectNam}">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">类型</label>
+            <div class="layui-input-block">
+                <input type="text" name="userType"   placeholder="请输入" autocomplete="off" class="layui-input" th:value="${subject!=null}?${subject.userType}">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">排序</label>
+            <div class="layui-input-block">
+                <input type="text" name="seqNum"  placeholder="请输入" autocomplete="off" class="layui-input" th:value="${subject!=null}?${subject.seqNum}">
+            </div>
+        </div>
+        <button type="submit" class="layui-btn layui-btn-normal" th:text="${subject!=null}?'修改':'添加'"></button>
+    </form>
+</div>
+<form id="deleteSubject" method="post">
+    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+    <input type="hidden" name="_method" value="delete">
+</form>
+<script src="/resource/plugins/JQuery/jquery-3.3.1.min.js"></script>
+<script src="/resource/layui/layui.js"></script>
+
+</body>
+</html>
