@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class TreeGridController {
 
-    @RequestMapping("TreeGridInfo")
+    @RequestMapping("/TreeGridInfo")
     public String getTreeGridInfo(){
         JSONObject treeGrid = new JSONObject();
 

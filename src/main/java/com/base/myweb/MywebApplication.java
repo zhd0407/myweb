@@ -14,7 +14,7 @@ import org.springframework.cloud.openfeign.EnableFeignClients;*/
 @EnableEurekaClient
 @EnableFeignClients
 */
-@EnableSwagger2
+//@EnableSwagger2
 
 public class MywebApplication {
 
