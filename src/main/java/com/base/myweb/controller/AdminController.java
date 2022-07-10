@@ -3,7 +3,7 @@ package com.base.myweb.controller;
 
 import com.alibaba.fastjson.JSONObject;
 import com.base.myweb.pojo.Subject;
-import com.base.myweb.service.serviceimpl.SubjectServiceImpl;
+import com.base.myweb.service.SubjectServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;

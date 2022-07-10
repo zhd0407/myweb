@@ -13,6 +13,6 @@ import java.util.Map;
 public interface UserInfoMapper extends BaseMapper<Userinfo> {
 
     @Select("select * from userinfo")
-    List<Map<String,Object>> getUserSignSta(Page<Map<String,Object>> page, String userId);
+    List<Map<String,Object>> getUserSignSta(Page<Map<String, Object>> page, String userId);
 
 }

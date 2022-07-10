@@ -232,4 +232,35 @@ map.centerAndZoom(new BMapGL.Point(116.404, 39.928), 15);
 map.enableScrollWheelZoom(true);
 map.addEventListener('tilesloaded', function () {
     alert('地图加载完成！');
+<<<<<<< HEAD
 });*/
+var fullscreen = false;
+function test(){
+    let fullarea = document.getElementById('container')
+    if (fullscreen) {       // 退出全屏
+        if (document.exitFullscreen) {
+            document.exitFullscreen();
+        } else if (document.webkitCancelFullScreen) {
+            document.webkitCancelFullScreen();
+        } else if (document.mozCancelFullScreen) {
+            document.mozCancelFullScreen();
+        } else if (document.msExitFullscreen) {
+            document.msExitFullscreen();
+        }
+    } else {        // 进入全屏
+        if (fullarea.requestFullscreen) {
+            fullarea.requestFullscreen();
+        } else if (fullarea.webkitRequestFullScreen) {
+            fullarea.webkitRequestFullScreen();
+        } else if (fullarea.mozRequestFullScreen) {
+            fullarea.mozRequestFullScreen();
+        } else if (fullarea.msRequestFullscreen) {
+            // IE11
+            fullarea.msRequestFullscreen();
+        }
+    }
+    fullscreen = !fullscreen;
+}
+=======
+});*/
+>>>>>>> origin/master

@@ -1,11 +1,12 @@
-
 # DataSource Config
 spring:
   datasource:
-    driver-class-name: com.mysql.jdbc.Driver
+    driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/zhd
     username: root
     password: root
+  thymeleaf:
+    cache: false
  # redis:
   #  host: 59.110.241.109
    # port: 6379
@@ -17,7 +18,7 @@ spring:
  # client:
   #  service-url:
    #   defaultZone: http://localhost:8761/eureka/
-ybatis-plus:
+mybatis-plus:
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
  # global-config:

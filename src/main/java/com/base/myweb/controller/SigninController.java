@@ -1,7 +1,7 @@
 package com.base.myweb.controller;
 
 import com.alibaba.fastjson.JSONObject;
-import com.base.myweb.service.serviceimpl.SigninServiceImpl;
+import com.base.myweb.service.SigninServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

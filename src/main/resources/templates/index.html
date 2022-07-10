@@ -5,8 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="keywords" content="fly,layui,前端社区">
   <meta name="description" content="Fly社区是模块化前端UI框架Layui的官网社区，致力于为web开发提供强劲动力">
-  <link rel="stylesheet" href="/resource/layui/css/layui.css">
-  <link rel="stylesheet" href="/resource/css/global.css">
+  <link rel="stylesheet" href="/layui/css/layui.css">
+  <link rel="stylesheet" href="/css/global.css">
 </head>
 <body>
     <!--头部 -->
@@ -220,14 +220,14 @@
     <div class="fly-footer" th:insert="common::footer">
     </div>
  
-    <script src="/resource/layui/layui.js"></script>
-    <script type="application/javascript" src="/resource/mods/index.js"></script>
-    <script src="/resource/plugins/JQuery/jquery-3.3.1.min.js"></script>
+    <script src="/layui/layui.js"></script>
+    <script type="application/javascript" src="/mods/index.js"></script>
+    <script src="/plugins/JQuery/jquery-3.3.1.min.js"></script>
 
     <script>
     layui.config({
       version: "3.0.0"\
-      ,base: '/resource/mods/' //这里实际使用时，建议改成绝对路径
+      ,base: '/mods/' //这里实际使用时，建议改成绝对路径
     }).extend({
       fly: 'index'
     }).use('fly');

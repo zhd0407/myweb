@@ -10,7 +10,8 @@ import java.util.Date;
 @Data
 public class Message {
 
-    @TableId(type = IdType.UUID)
+    @TableId(type = IdType.AUTO)
+
     //主键值
     private Long msgNo;
     //帖子主键值

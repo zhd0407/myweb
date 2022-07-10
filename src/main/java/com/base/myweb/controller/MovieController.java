@@ -3,7 +3,7 @@ package com.base.myweb.controller;
 
 import com.base.myweb.pojo.movie.Moviecol;
 import com.base.myweb.pojo.movie.Movieinfo;
-import com.base.myweb.service.serviceimpl.MovieServiceImpl;
+import com.base.myweb.service.MovieServiceImpl;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
