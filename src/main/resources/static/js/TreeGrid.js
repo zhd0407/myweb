@@ -1,5 +1,10 @@
 var treeGridInfo =  {
-    "Panel":{"Copy":"7"},
+    "Panel":{"Copy":"7","Width":"110","Formula":"GetRowPanel(Grid,Row,Col)","OnClickPanelEdit":"EditFile(Row)" ,"OnClickPanelShow":"DisplayFile(Row)",
+        "PanelSelectTip":"选择" ,"PanelCopyTip":"复制行","PanelDeleteTip":"删除行"
+    },
+    "LeftCols":[
+        {"Type":"Text","CanEdit":"1","Width":80,"Name":"WBS_SHORT_NAME"},
+        {"Type":"Text","CanEdit":"1","Width":250,"Name":"WBS_NAME"}],
     "Cols":[
         {"Enum":"|是|否","Type":"Enum","CanEdit":"1","EnumKeys":"|Y|N","Width":80,"Name":"IS_TASK"},
         {"Type":"Text","CanEdit":"1","Width":80,"Name":"SCH_CNT"},
@@ -21,19 +26,37 @@ var treeGridInfo =  {
             "GanttCorrectDependencies":"0","GanttStart":"PLAN_START_DTM","GanttHeader2":"M#MMM","GanttHeader1":"M3#MMMMM. yyyy",
             "GanttBackground":";M3#1/1/2008","GanttComplete":"COMPLETE_CNT","GanttEnd":"PLAN_END_DTM","GanttPagingFixed":"1",
             "GanttChartRound":"M6","GanttWidth":"40"}],
+    "Head":{"Filter":{"Spanned":0,"IS_TASK":""}},
     "Header":{"WBS_NAME":"任务名称","COMPLETE_CNT":"完成比","WEIGHT_CNT":"权重","PARENT_WBS_ID":"上级节点","Align":"center","SEQ_NUM":"排序",
             "PLAN_END_DTM":"计划完成日期","PLAN_START_DTM":"计划开始日期","ACT_END_DTM":"实际完成日期","Spanned":"1","MILESTONE_TYP":"里程碑",
             "IS_TASK":"作业项","ZXCST_TYP":"任务执行部门","TASK_TYP":"任务类型","Kind":"Header","WBS_SHORT_NAME":"任务编码",
             "ACT_START_DTM":"实际开始日期","FZUSR_ID":"负责人","SCH_CNT":"工期"},
-    "Def":[{"Calculated":"1","Name":"parent"}],
+    "Def":[{"Calculated":"1","Name":"parent"},
+        { "Name":"R" ,"Panel":"Select,Delete,Copy,Edit,Show" ,"PanelEditWidth":"19","PanelEmptyWidt":"19","PanelEdit":"/images/TreeGrid/add_eps.png",
+            "PanelEditTip":"添加eps","PanelShow":"/images/TreeGrid/add_wbs.png","PanelShowTip":"添加wbs"},
+        {"Name":"Dir","Panel":"Select,Delete,Copy" ,"PanelFormula":"",
+            "PanelPanelSelectTip":"Select directory","PanelPanelCopyTip":"Insert new file into the directory","PanelPanelDeleteTip":"Delete directory"},
+        { "Name":"C","LocaleCompare":"1","CaseSensitive":"0"}
+        ],
     "Cfg":{"FastGantt":"0","MainCol":"WBS_NAME","Editing":"1","ChildPartLength":"10","Selecting":"1","NumberId":"1",
         "IdChars":"0123456789","Sorting":"0","ChildPaging":"3","RemoveCollapsed":"2","Dragging":"1","Style":"White",
-        "id":"PROJWBS","FullId":"0","Deleting":"1","ChildParts":"2"},
-    "LeftCols":[
-        {"Type":"Text","CanEdit":"1","Width":80,"Name":"WBS_SHORT_NAME"},
-        {"Type":"Text","CanEdit":"1","Width":250,"Name":"WBS_NAME"}],
+        "id":"PROJWBS","FullId":"0","Deleting":"1","ChildParts":"2","FilterEmpty":"1"},
+
     "Toolbar":{"Cells":"ExpandAll,CollapseAll,Columns,Export,Reload"},
+    "Languages":{"Code":"CNY"},
+
     "Body":body.Body
+}
+
+function EditFile(Row) {
+
+}
+
+function DisplayFile(Row) {
+
+}
+function GetRowPanel(G,row,col){
+    return "Select,Delete,Copy,Edit,Show";
 }
 
 TreeGrid({Debug:'',Data:{Data: treeGridInfo}},"customTreeGrid");

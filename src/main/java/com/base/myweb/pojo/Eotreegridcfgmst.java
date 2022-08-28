@@ -14,7 +14,7 @@ import java.util.Date;
 public class Eotreegridcfgmst {
 
     @TableId(type = IdType.AUTO)
-    private int gridNo;
+    private Integer gridNo;
     private String gridId;
     private String gridName;
     private String pgmId;

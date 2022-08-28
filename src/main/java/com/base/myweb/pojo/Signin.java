@@ -9,10 +9,10 @@ import java.util.Date;
 @Data
 public class Signin {
     @TableId(type = IdType.AUTO)
-    private int signinNo;
+    private Integer signinNo;
     private String userId;
     private Date signTime;
-    private int integral;
+    private Integer integral;
     private String origin;
 
 }

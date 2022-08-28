@@ -7,7 +7,7 @@ import lombok.Data;
 @Data
 public class Subject {
     @TableId(type = IdType.AUTO)
-    private int subjectNo;
+    private Subject subjectNo;
     private String subjectCode;
     private String subjectNam;
     private String userType;

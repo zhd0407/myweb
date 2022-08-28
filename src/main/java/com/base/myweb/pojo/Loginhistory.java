@@ -9,7 +9,7 @@ import java.util.Date;
 public class Loginhistory {
 
     @TableId(type = IdType.AUTO)
-    private int historyNo;
+    private Integer historyNo;
     private String userId;
     private Date loginTime;
     private String ip;
