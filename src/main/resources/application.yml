@@ -28,3 +28,5 @@ mybatis-plus:
 logging:
   level:
     com.base.myweb.mapper: debug
+server:
+  port: 8081

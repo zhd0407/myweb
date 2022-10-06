@@ -25,7 +25,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             .authenticated()
         ;
 
-        http.formLogin().loginPage("/login").usernameParameter("user").passwordParameter("pwd").defaultSuccessUrl("/");
+        http.formLogin().loginPage("/login").usernameParameter("userName").passwordParameter("password").defaultSuccessUrl("/");
         http.logout().logoutSuccessUrl("/");
         http.rememberMe().rememberMeParameter("rb");
                 /*.antMatchers("/user/**").hasRole("VIP1")*/
@@ -38,9 +38,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.headers().frameOptions().sameOrigin(); //解决iframe嵌入子页面时跨域问题
         http.cors().and().csrf().disable();
     }
-
-    @Autowired
-    UserDetailsService userDetailsService;
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
