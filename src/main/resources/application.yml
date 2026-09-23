@@ -2,15 +2,15 @@
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/zhd
+    url: jdbc:mysql://localhost:3306/admin
     username: root
     password: root
   thymeleaf:
     cache: false
  # redis:
-  #  host: 59.110.241.109
+  #  host: localhost
    # port: 6379
-   # password: 88888888.
+   # password: 12345678
    # database: 10
   #application:
    # name: test
